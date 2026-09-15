@@ -1,2 +1,2 @@
-# minigames-
+# minigames
 RS School MiniGames project
