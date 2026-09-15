@@ -1,123 +1,145 @@
-# MiniGames Story 1 — implementation plan
+# MiniGames — план реализации
 
-Status: **draft for review**. Do not implement application code until this plan is approved.
+Рабочий план для репозитория [`Bogagree/minigames`](https://github.com/Bogagree/minigames).  
+Сначала ревью этого файла, затем выполнение шагов по порядку. Менять план можно прямо в чекбоксах и в блоке «Решения на ревью».
 
-- Task: [MiniGames Story 1](https://github.com/rolling-scopes-school/qualifying-stage/blob/main/tasks/minigames/story-1.md)
-- Common rules: [common-project-requirements.md](https://github.com/rolling-scopes-school/qualifying-stage/blob/main/tasks/minigames/common-project-requirements.md)
-- Layout rules: [common-layout-requirements.md](https://github.com/rolling-scopes-school/qualifying-stage/blob/main/tasks/minigames/common-layout-requirements.md)
-- Figma: [MiniGames](https://www.figma.com/design/4MnLizE59gZI2DDxaSgZqi/MiniGames?node-id=0-1)
-- Assets: `tasks/assets` in qualifying-stage
-- Mock data: `tasks/mock-data` in qualifying-stage (optional this story; leaderboard may use static mock rows)
-- Repo: `Bogagree/minigames`
-- Total: **294 points**
+Источники:
 
-Previous cloud session: [bc-760e6a47-9e0f-43db-88c5-557818c1f4d1](https://cursor.com/agents/bc-760e6a47-9e0f-43db-88c5-557818c1f4d1). Transcript was not available in this workspace (no `cursor-cloud` / `batch-fetch-details` tool; agent page requires Cursor login). This document is reconstructed from the official Story 1 criteria.
+- [Story 1](https://github.com/rolling-scopes-school/qualifying-stage/blob/main/tasks/minigames/story-1.md) — **294 балла**, детали доступны
+- [Overview](https://github.com/rolling-scopes-school/qualifying-stage/blob/main/tasks/minigames/README.md)
+- [Common project requirements](https://github.com/rolling-scopes-school/qualifying-stage/blob/main/tasks/minigames/common-project-requirements.md)
+- [Common layout requirements](https://github.com/rolling-scopes-school/qualifying-stage/blob/main/tasks/minigames/common-layout-requirements.md)
+- [Figma](https://www.figma.com/design/4MnLizE59gZI2DDxaSgZqi/MiniGames)
+- [Git convention](https://rs.school/docs/git-convention)
+- [PR requirements](https://rs.school/docs/short-track/pull-request-requirements)
 
----
-
-## 0. Goal of this story
-
-1. Repository, tooling (bundler, TypeScript, ESLint, Prettier, Husky), Sass tokens.
-2. Adaptive Home page at 375 / 768 / 1920 and fluid in between.
-3. Auth dialog layout (unauthenticated only).
-
-Backend integration is **out of scope**. Auth is UI only (open/close, login/register switch). No real API, no session.
+Stories 2–4 в этом документе описаны каркасно: подробные критерии ещё закрыты курсом.
 
 ---
 
-## 1. Hard constraints (penalties)
+## Как пользоваться этим файлом
 
-| Risk | Penalty |
-| --- | --- |
-| Cross-check URL is not a PR link | −20 |
-| Changes after deadline | −40 |
-| Wrong main/base branch name vs workflow | −20 |
-| Cross-check PR merged into target | −30 |
-| All work in one branch, no task branches | −50 |
-| Forbidden libraries (React, Vue, Angular, Bootstrap, Tailwind, jQuery, Swiper, etc.) | −200 |
-| Layout blocks as screenshots/images | −90 |
-| `console.log` | −10 each, max −30 |
-| Commits / PR description not RS style | −30 |
-| Magic CSS instead of tokens | −10 each, max −50 |
-| ESLint / Prettier errors | −5 each |
-| Explicit `any` | −5 each |
-| Large task in 1–2 bulk commits | course expulsion risk |
-
-Also:
-
-- TypeScript is required.
-- Chrome latest is the check browser.
-- `reset.css` is not recommended.
-- Source must stay readable (no minify/obfuscation of student code).
-- Pixel Perfect: ±10px, PerfectPixel scale 1, OS/browser zoom 100%.
-- No horizontal scrollbar from 375px up. Below 375px is not checked.
-- ≥1921px: desktop layout stays centered; only side spacing grows.
-- Hover must not “stick” in mobile device type.
+1. Пройти блок **«Решения на ревью»** и отметить согласие / правки.
+2. Выполнять шаги сверху вниз. Один шаг = одна feature-ветка = один PR в `story-1`.
+3. Не пропускать git-процесс: за него стоят штрафы до −50.
+4. Не начинать вёрстку, пока не закрыты tooling, токены и SPA-каркас.
 
 ---
 
-## 2. Recommended stack (subject to review)
+## Решения на ревью
 
-Vanilla TypeScript SPA, no UI frameworks.
+Предложения по умолчанию. Если не согласен — напиши альтернативу в комментарии к PR.
 
-| Area | Choice | Why |
+| Тема | Предложение | Ок? |
 | --- | --- | --- |
-| Bundler | **Vite** | Dev + production, Sass plugin, simple SPA |
-| Language | TypeScript `strict` + `noImplicitAny` | RSS-QS-1-2-2 |
-| Lint | ESLint + typescript-eslint + **eslint-plugin-unicorn**, `noInlineConfig: true`, `no-explicit-any` | RSS-QS-1-2-3 |
-| Format | Prettier | RSS-QS-1-2-4 |
-| Hooks | Husky: `commit-msg` (RS git convention), `pre-push` (ESLint + Prettier, fail on error **or warning**) | RSS-QS-1-2-5 |
-| Styles | Sass + tokens/mixins/functions, no Tailwind/Bootstrap | RSS-QS-1-2-6 |
-| Deploy | GitHub Pages (or Netlify/Vercel) from `story-1` build | required public URL |
-| Commit lint | commitlint or a small script matching [RS git convention](https://rs.school/docs/git-convention) | reject bad `commit-msg` |
+| Bundler | **Vite** (dev + production build), не Webpack | [ ] |
+| Стили | **Sass/SCSS**: токены как CSS custom properties + mixins | [ ] |
+| Структура | **Page-first** (как в примере RSS-QS-1-1-2) | [ ] |
+| CSS-нейминг | **BEM** (`header__logo`, `btn--primary`) | [ ] |
+| SPA в Story 1 | Весь DOM из TypeScript. В `index.html` пустой `body` + один `#app` и `script` | [ ] |
+| Роутер в Story 1 | Тонкий интерфейс `Router`, пока только Home. History API — в Story 4 | [ ] |
+| Данные Story 1 | Статика + `leaderboard.json` из mock-data. Полный API не трогаем | [ ] |
+| Деплой | **GitHub Pages** из production-сборки Vite (`base: '/minigames/'`) | [ ] |
+| Feature-ветки | kebab-case: `feat/header-unauthenticated` | [ ] |
+| Объединение задач | Мелкие соседние критерии можно в одной ветке, см. шаги ниже | [ ] |
+| Этот план в репо | Оставляем `docs/implementation-plan.md` до конца курса | [ ] |
 
-Alternative bundlers (Webpack/Parcel/Rollup) are allowed by the rubric. Prefer Vite unless review asks otherwise.
+Другие варианты, если нужно сменить:
 
----
-
-## 3. Git / PR workflow (mandatory)
-
-From [common-project-requirements](https://github.com/rolling-scopes-school/qualifying-stage/blob/main/tasks/minigames/common-project-requirements.md):
-
-1. `main` stays the default branch (already exists).
-2. Create long-lived **`story-1`** from `main`.
-3. Each logical group of tasks → feature branch from `story-1` → PR **into `story-1`** → **merge** those PRs.
-4. When Story 1 is done: PR **`story-1` → `main`**. **Do not merge.** That unmerged PR is the Cross-Check link.
-5. Later stories: `story-N` from `story-(N-1)`; final PR `story-N` → `story-(N-1)`, also unmerged.
-
-This docs file may live on `cursor/implementation-plan-f4d1` (or another docs branch) for review. After approval, either merge the plan into `story-1` or keep it as a working note; it is not a scoring item.
-
-Commit messages: RS School style (`feat:`, `fix:`, `docs:`, `chore:`, …) with a step-by-step history. Do not squash a whole criterion into one giant commit if the work is large.
-
-PR descriptions: official RS PR template as the base (RSS-QS-1-1-3). Extra sections allowed; required sections must stay.
+- Деплой: Vercel / Netlify (проще для будущего History API, без `base` path).
+- Структура: feature-first вместо page-first.
 
 ---
 
-## 4. Folder structure (RSS-QS-1-1-2)
+## Жёсткие ограничения
 
-Page-first SPA, aligned with the official example (names may vary if consistent):
+Делать:
+
+- TypeScript
+- Vanilla HTML/SCSS/TS, без UI-фреймворков
+- Google Chrome latest
+- Семантические теги
+- Pixel Perfect на **375 / 768 / 1920**, допуск ±10px
+- Адаптив от 375px и выше без горизонтального скролла
+- Выше 1920px: макет по центру, не растягивается
+- Коммиты по [RS Git convention](https://rs.school/docs/git-convention), история по шагам, не 1–2 огромных коммита
+
+Не делать:
+
+- React / Vue / Angular / Svelte
+- Bootstrap / Tailwind
+- jQuery, Swiper и готовые UI-библиотеки (**−200**)
+- Вёрстка скриншотами (**−90**)
+- `reset.css` (не рекомендуется)
+- Backend / реальный API в Story 1
+- `console.log` (**−10** за уникальный вызов, до −30)
+- Явный `any` (**−5** за каждый)
+- Magic values вместо токенов (**−10** за случай, до −50)
+
+---
+
+## Git-процесс на весь курс
+
+Это не «приятно иметь», а критерии и штрафы.
 
 ```text
-.
-├── .github/pull_request_template.md
+main
+ └── story-1                    ← база Story 1, сюда мержим фичи
+      ├── feat/...
+      └── PR story-1 → main     ← сдать на cross-check, НЕ мержить (−30 если смержен)
+
+ story-2 ветвится от story-1
+ └── PR story-2 → story-1       ← сдать, НЕ мержить
+
+ story-3 от story-2
+ story-4 от story-3
+```
+
+Шаблон описания PR:
+
+1. Task: https://github.com/rolling-scopes-school/qualifying-stage/blob/main/tasks/minigames/story-1.md
+2. Screenshot:
+   <!-- drag-and-drop -->
+3. Deployment: https://bogagree.github.io/minigames/
+4. Done DD.MM.YYYY / deadline DD.MM.YYYY
+5. Score: ___ / 294
+
+Предлагаемая структура репозитория
+
+```text
+minigames/
+├── .github/
+│   └── pull_request_template.md
 ├── .husky/
-├── docs/implementation-plan.md
-├── public/                 # favicon, static files copied as-is
+│   ├── commit-msg
+│   └── pre-push
+├── docs/
+│   └── implementation-plan.md      ← этот файл
+├── public/
+│   └── favicon.ico
 ├── src/
 │   ├── app/
-│   │   ├── index.ts        # bootstrap
-│   │   └── router.ts       # SPA routes (Home only this story)
+│   │   ├── index.ts                # bootstrap
+│   │   └── router.ts               # заглушка SPA-роутера
 │   ├── pages/
-│   │   └── home/
+│   │   ├── home/
+│   │   │   ├── home-page.ts
+│   │   │   └── home-page.scss
+│   │   └── library/                # заготовка, контент в Story 2
 │   ├── components/
 │   │   ├── header/
 │   │   ├── footer/
-│   │   └── dialogs/        # auth-dialog
-│   ├── features/
-│   │   └── slider/         # static carousel layout
-│   ├── services/           # later API; stub/storage optional
-│   ├── state/              # later; skip real auth state this story
+│   │   ├── burger-menu/
+│   │   ├── hero/
+│   │   ├── slider/
+│   │   ├── leaderboard/
+│   │   ├── game-dev/
+│   │   └── dialogs/
+│   │       └── auth-dialog/
+│   ├── services/                   # позже: api, storage
+│   ├── state/                      # позже: auth, ui
 │   ├── utils/
+│   │   └── dom.ts
 │   ├── styles/
 │   │   ├── tokens.scss
 │   │   ├── mixins.scss
@@ -126,157 +148,45 @@ Page-first SPA, aligned with the official example (names may vary if consistent)
 │   └── assets/
 │       ├── icons/
 │       └── images/
-├── index.html              # empty body except one script tag
+├── index.html                      # пустой body + #app + script
 ├── package.json
 ├── tsconfig.json
-├── eslint.config.*
+├── vite.config.ts
+├── eslint.config.js
 ├── .prettierrc
+├── .gitignore
 └── README.md
 ```
 
-SPA (RSS-QS-1-2-7): all visible HTML is created in JS/TS. Static `index.html`: empty `body`, or `body` with only the bundler `<script>`. One script tag may sit in `head` or `body`.
+После ревью плана:
 
----
+```text
+main
+└── story-1
+    ├── feat/repo-setup
+    ├── feat/folder-structure
+    ├── feat/pr-template
+    ├── feat/bundler-typescript        # B1+B2
+    ├── feat/eslint-prettier-scripts   # B3+B4+B5
+    ├── feat/husky-hooks
+    ├── feat/sass-tokens
+    ├── feat/spa-architecture
+    ├── feat/header-unauthenticated
+    ├── feat/burger-menu
+    ├── feat/hero-section
+    ├── feat/carousel-layout
+    ├── feat/leaderboard-gamedev       # C5+C6
+    ├── feat/footer
+    ├── feat/auth-dialog               # D1–D5, много коммитов
+    └── feat/favicon-and-qa
+```
 
-## 5. Implementation steps (PRs)
+Что не входит в первый спринт после ревью
+Не делать, пока этот план не подтверждён:
 
-Work **after plan approval**. Suggested feature PRs into `story-1`. Small related tasks may share a branch (allowed by the course).
-
-### PR A — Repository hygiene (25 pts)
-
-**Branch:** `feat/repo-setup`  
-**Criteria:** RSS-QS-1-1-1, 1-1-2, 1-1-3
-
-1. Expand README: project name, stack, scripts, deploy link (placeholder until first deploy).
-2. Node/Vite `.gitignore` (`node_modules`, `dist`, OS/editor junk).
-3. Add official RS pull request template under `.github/`.
-4. Document the folder map in README (short).
-
-Do not add app UI here beyond empty `index.html` if the bundler PR follows immediately.
-
-### PR B — Tooling (63 + 10 pts)
-
-**Branch:** `feat/dev-environment`  
-**Criteria:** RSS-QS-1-2-1 … 1-2-7, 1-3-1, 1-3-2
-
-1. Vite + `dev` / `build` / `preview`.
-2. TypeScript: `strict`, `noImplicitAny`; typed params/returns; interfaces; no `any`. Enums/generics/utility types where they earn their keep.
-3. ESLint: typescript-eslint, unicorn, `noInlineConfig: true`, `no-explicit-any`.
-4. Prettier config.
-5. Scripts: `lint` (ESLint over `src`), `format` / `format:check` (Prettier).
-6. Husky:
-   - `commit-msg` → RS commit convention.
-   - `pre-push` → ESLint + Prettier; abort on errors **and warnings**.
-7. Sass wired into Vite. Tokens file: colors, sizes, shadows, radii, button sizes, font family/size/weight, breakpoints. Mixins/functions in separate files. No magic values without a comment that Pixel Perfect needed a calc.
-8. SPA bootstrap: empty body, JS mounts `#app` (or equivalent created in JS — if a root node is required, create it in TS, do not leave markup in HTML). Home route only; other routes can stub-redirect to Home.
-
-### PR C — Design tokens + global chrome shell
-
-**Branch:** `feat/styles-tokens` (may merge with B if small)
-
-1. Duplicate Figma file to drafts (student account) before measuring.
-2. Copy allowed assets (icons, pictures) from `tasks/assets`, not screenshots of UI chrome.
-3. Favicon on the implemented page (4 pts, story global).
-
-### PR D — Header + burger (40 pts)
-
-**Branch:** `feat/header-unauthenticated`  
-**Criteria:** RSS-QS-1-4-1 (15), RSS-QS-1-4-2 (25)
-
-Unauthenticated only.
-
-Header:
-
-- Semantic tags (`header`, `nav`, …), not a `div` soup.
-- Nav links → Home.
-- Sign-in opens Auth dialog (wire after PR F exists; until then a stub callback is OK).
-- Breakpoints 375 / 768 / 1920 + fluid, no overflow.
-
-Burger (≤768px, hidden on desktop):
-
-- Full-screen menu, animated open/close.
-- Burger morphs to × with animation.
-- Links → Home; Login/Sign up opens Auth and **closes the menu**.
-- Close via × and `Esc`.
-- No horizontal scrollbar during animation.
-
-### PR E — Home sections (115 pts)
-
-**Branch:** `feat/home-layout` (or split hero/carousel vs rest if PRs get huge)  
-**Criteria:** 1-4-3 … 1-4-7
-
-| Block | Pts | Notes |
-| --- | --- | --- |
-| Hero | 15 | Button styled, **no action** |
-| Carousel (static) | 25 | Arrows/dots **non-functional**. Cards ≥288px: overlay (title, likes, rating); title one line + ellipsis. Cards &lt;288px: **image only**, no overlay |
-| Leaderboard | 15 | Static mock data; **no** interactive styles |
-| Game developer CTA | 15 | Button styled, **no action** |
-| Footer | 20 | Nav + social → Home; RS School course URL as in mockup/task; GitHub profile link (`Bogagree`) per mockup |
-
-Every block: common layout requirements (semantics, PP ±10px, states, cursor, no overflow, centered ≥1921px).
-
-### PR F — Auth dialog (50 pts)
-
-**Branch:** `feat/auth-dialog`  
-**Criteria:** RSS-QS-1-5-1 … 1-5-5
-
-1. Trigger: header Login/Sign up; mobile menu Login/Sign up (closes menu). Centered dialog + dimmed backdrop.
-2. Open/close animation. Close: backdrop click, `Esc`. Works for both login and register. No layout/scroll breakage.
-3. Login / Registration switcher with distinct active/inactive. Animated block switch. Inline Register/Login links do the same. No reload; dialog stays open.
-4. Semantic `form`; `email` / `password` (and other correct types). Style guide states except **validation errors** (later story).
-5. Responsive quality: desktop/tablet dialog **width 420px**, PP ±10px. Common layout requirements.
-
-No backend, no real submit.
-
-### PR G — Global verification + deploy (16 pts + process)
-
-**Branch:** `feat/story-1-qa`  
-**Criteria:** RSS-QS-1-6-1 (12) + favicon (4)
-
-1. HTML validity (W3C Direct Input):
-   - Home (default)
-   - Auth dialog open
-   - Burger open (≤768px)  
-   Target: no errors and no warnings. Info messages ignored.  
-   Course text says View Page Source; for SPA generated DOM, also validate **outerHTML of the live document** if source stays empty — confirm with mentor/review if needed, but keep static `index.html` valid too.
-2. PerfectPixel at 375, 768, 1920; fluid drag 1920→375; no horizontal scroll.
-3. Deploy public URL; README updated; works in incognito.
-4. Open **unmerged** PR `story-1` → `main` with RS template. Submit that PR URL in RS App Cross-Check.
-
----
-
-## 6. Scoring map
-
-| Group | Points |
-| --- | --- |
-| Repository setup | 25 |
-| Dev environment | 63 |
-| Scripts | 10 |
-| Home adaptive layout | 130 |
-| Auth dialog | 50 |
-| Global layout + favicon | 16 |
-| **Total** | **294** |
-
----
-
-## 7. Explicitly not in Story 1
-
-- Authenticated header / profile menu
-- Carousel drag, autoplay, working arrows
-- Form validation / error states
-- Real login/register API
-- Library / other pages (routing stubs only if needed)
-- React/Vue/etc.
-
----
-
-## 8. Review checklist (before coding)
-
-- [ ] Vite vs Webpack is OK
-- [ ] Page-first folders vs feature-first
-- [ ] GitHub Pages vs another host
-- [ ] Leaderboard: copy mock JSON into `src` vs inline constants
-- [ ] How many feature PRs (A–G vs fewer combined branches)
-- [ ] Confirm W3C check method for SPA (page source vs live DOM)
-
-After this file is approved, start from **PR A** on branch `story-1`.
+код приложения
+установку зависимостей сверх того, что нужно шагу
+Story 2–4 UI
+API / Firebase
+unit-тесты
+Первый шаг после approve: создать story-1 от main и выполнить A1.
