@@ -1,7 +1,18 @@
+import { createRouter, type Router } from './router';
+import { createHomePage } from '../pages/home/home-page';
+import { requireElement } from '../utils/dom';
 import '../styles/globals.scss';
 
-const root: HTMLElement | null = document.querySelector('#app');
+const root: HTMLElement = requireElement('#app');
 
-if (root === null) {
-  throw new Error('Root element #app is missing');
-}
+const router: Router = createRouter(
+  [
+    {
+      path: '/',
+      createPage: createHomePage,
+    },
+  ],
+  '/',
+);
+
+router.render(root);
