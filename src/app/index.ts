@@ -4,7 +4,7 @@ import '../styles/globals.scss';
 
 const root: HTMLElement = document.createElement('div');
 root.id = 'app';
-document.body.prepend(root);
+document.body.append(root);
 
 const router: Router = createRouter(
   [
