@@ -1,3 +1,5 @@
+import '../styles/globals.scss';
+
 const root: HTMLElement | null = document.querySelector('#app');
 
 if (root === null) {
