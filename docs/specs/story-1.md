@@ -17,7 +17,7 @@
 | Header                 | [unauthenticated](./header.md), по нашему драфту | есть (RSS-QS-1-4-1)      |
 | Burger                 | [mobile menu](./burger-menu.md)                  | есть (RSS-QS-1-4-2)      |
 | Hero                   | [секция Home](./hero.md)                         | есть (RSS-QS-1-4-3)      |
-| Carousel               | layout слайдера игр                              | todo                     |
+| Carousel               | [layout слайдера](./carousel.md)                 | есть (RSS-QS-1-4-4)      |
 | Leaderboard + Game Dev | секции Home                                      | todo                     |
 | Footer                 |                                                  | todo                     |
 | Auth dialog            | RSS-QS-1-5-1 … 1-5-5                             | todo                     |

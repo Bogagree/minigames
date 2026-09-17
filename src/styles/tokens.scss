@@ -32,6 +32,24 @@ $breakpoint-desktop: 1920px;
   --hero-height-tablet: 383px;
   --hero-height-desktop: 627px;
 
+  /* Figma New Games Section (draft nodes 2:383 / 2:134 / 1:36) */
+  --slider-height-mobile: 283px;
+  --slider-height-tablet: 400px;
+  --slider-height-desktop: 556px;
+  --slider-gap-mobile: var(--size-1);
+  --slider-gap-tablet: var(--size-1);
+  --slider-gap-desktop: var(--size-1);
+  --slider-card-height-mobile: 200px;
+  --slider-card-height-tablet: 280px;
+  --slider-card-height-desktop: 384px;
+  --slider-card-peek-mobile: 56px;
+  --slider-card-featured-mobile: 218px;
+  --slider-card-peek-tablet: 105px;
+  --slider-card-featured-tablet: 448px;
+  --slider-card-peek-desktop: 120px;
+  --slider-card-side-desktop: 288px;
+  --slider-card-featured-desktop: 816px;
+
   --line-height-body: 1.5;
 
   --size-0: 0;
