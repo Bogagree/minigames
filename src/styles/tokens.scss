@@ -25,6 +25,14 @@ $breakpoint-desktop: 1920px;
 
   --z-index-burger-menu: 100;
   --z-index-header-burger: 110;
+  --z-index-hero-content: 1;
+
+  /* Figma Hero Section frame heights (draft nodes 2:376 / 2:127 / 1:29) */
+  --hero-height-mobile: 331px;
+  --hero-height-tablet: 383px;
+  --hero-height-desktop: 627px;
+
+  --line-height-body: 1.5;
 
   --size-0: 0;
   --size-1: 8px;

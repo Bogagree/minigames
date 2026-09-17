@@ -7,23 +7,23 @@
 
 ## Measurements (live − draft frame)
 
-| Breakpoint | Metric            | Draft | Live | Δ    |
-| ---------- | ----------------- | ----: | ---: | ---: |
-| 375        | hero section h    |   331 |  328 | −3   |
-| 375        | content padding   |   n/a |   24 | —    |
-| 375        | content gap       |   n/a |   16 | —    |
-| 375        | title font-size   |   n/a |   24 | —    |
-| 375        | button h          |   n/a |   41 | —    |
-| 768        | hero section h    |   383 |  364 | **−19** |
-| 768        | content padding   |   n/a |   32 | —    |
-| 768        | content margin-x  |   n/a |   40 | —    |
-| 768        | title font-size   |   n/a |   32 | —    |
-| 1920       | hero section h    |   627 |  604 | **−23** |
-| 1920       | content padding   |   n/a |   40 | —    |
-| 1920       | content margin-l  |   n/a |   80 | —    |
-| 1920       | content gap       |   n/a |   24 | —    |
-| 1920       | title font-size   |   n/a |   40 | —    |
-| 1920       | button h          |   n/a |   48 | —    |
+| Breakpoint | Metric           | Draft | Live |       Δ |
+| ---------- | ---------------- | ----: | ---: | ------: |
+| 375        | hero section h   |   331 |  328 |      −3 |
+| 375        | content padding  |   n/a |   24 |       — |
+| 375        | content gap      |   n/a |   16 |       — |
+| 375        | title font-size  |   n/a |   24 |       — |
+| 375        | button h         |   n/a |   41 |       — |
+| 768        | hero section h   |   383 |  364 | **−19** |
+| 768        | content padding  |   n/a |   32 |       — |
+| 768        | content margin-x |   n/a |   40 |       — |
+| 768        | title font-size  |   n/a |   32 |       — |
+| 1920       | hero section h   |   627 |  604 | **−23** |
+| 1920       | content padding  |   n/a |   40 |       — |
+| 1920       | content margin-l |   n/a |   80 |       — |
+| 1920       | content gap      |   n/a |   24 |       — |
+| 1920       | title font-size  |   n/a |   40 |       — |
+| 1920       | button h         |   n/a |   48 |       — |
 
 Draft Hero frames in cached metadata are leaf nodes (no expanded children), so card width/padding/font targets could not be measured from Figma this run — section height is the hard pixel-check.
 
