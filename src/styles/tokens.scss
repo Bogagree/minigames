@@ -12,10 +12,16 @@ $breakpoint-desktop: 1920px;
   --color-white: #ffffff;
   --color-black: #111111;
   --color-outline: #e5e7eb;
+  --color-bg-footer: #1e1b3a;
+  --color-bg-footer-low: #2a264f;
+  --color-on-bg-footer: #b9b5c9;
 
   --color-background: var(--color-bg);
   --color-foreground: var(--color-on-primary);
   --color-muted: var(--color-on-bg);
+
+  --duration-menu: 300ms;
+  --easing-menu: ease;
 
   --size-0: 0;
   --size-1: 8px;
@@ -51,6 +57,7 @@ $breakpoint-desktop: 1920px;
   --font-size-xs: 12px;
   --font-size-label-large: 14px;
   --font-size-title-xx-small: 16px;
+  --font-size-title-xxx-small: 18px;
   --font-size-headline-small: 20px;
   --font-size-headline-medium: 24px;
   --font-size-sm: var(--font-size-label-large);

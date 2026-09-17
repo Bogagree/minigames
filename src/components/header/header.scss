@@ -128,6 +128,7 @@
   }
 
   &__burger {
+    position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -143,6 +144,34 @@
     display: block;
     width: var(--size-4);
     height: var(--size-4);
+    transition:
+      opacity var(--duration-menu) var(--easing-menu),
+      transform var(--duration-menu) var(--easing-menu);
+
+    &--burger {
+      opacity: 1;
+      transform: rotate(0deg) scale(1);
+    }
+
+    &--close {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transform: rotate(-90deg) scale(0.8);
+      pointer-events: none;
+    }
+  }
+
+  &__burger--open {
+    .header__burger-icon--burger {
+      opacity: 0;
+      transform: rotate(90deg) scale(0.8);
+    }
+
+    .header__burger-icon--close {
+      opacity: 1;
+      transform: rotate(0deg) scale(1);
+    }
   }
 
   @include tablet-up {

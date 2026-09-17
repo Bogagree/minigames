@@ -15,8 +15,8 @@
 | SPA                    | bootstrap, тонкий router, Home stub              | есть (stub; UI по шагам) |
 | Deploy                 | GitHub Pages preview                             | есть                     |
 | Header                 | [unauthenticated](./header.md), по нашему драфту | есть (RSS-QS-1-4-1)      |
-| Burger                 | mobile menu                                      | todo ← Next              |
-| Hero                   | секция Home                                      | todo                     |
+| Burger                 | [mobile menu](./burger-menu.md)                  | есть (RSS-QS-1-4-2)      |
+| Hero                   | секция Home                                      | todo ← Next              |
 | Carousel               | layout слайдера игр                              | todo                     |
 | Leaderboard + Game Dev | секции Home                                      | todo                     |
 | Footer                 |                                                  | todo                     |
