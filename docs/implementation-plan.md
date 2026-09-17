@@ -39,7 +39,7 @@ Stories 2–4 в этом документе описаны каркасно: п
 | SPA в Story 1 | Весь DOM из TypeScript. В `index.html` пустой `body` + один `#app` и `script` | [ ] |
 | Роутер в Story 1 | Тонкий интерфейс `Router`, пока только Home. History API — в Story 4 | [ ] |
 | Данные Story 1 | Статика + `leaderboard.json` из mock-data. Полный API не трогаем | [ ] |
-| Деплой | **GitHub Pages** из production-сборки Vite (`base: '/minigames/'`) | [ ] |
+| Деплой | **GitHub Pages** из production-сборки Vite (`base: '/minigames/'`). Подключаем после SPA, до вёрстки | [ ] |
 | Feature-ветки | kebab-case: `feat/header-unauthenticated` | [ ] |
 | Объединение задач | Мелкие соседние критерии можно в одной ветке, см. шаги ниже | [ ] |
 | Этот план в репо | Оставляем `docs/implementation-plan.md` до конца курса | [ ] |
@@ -171,6 +171,7 @@ main
     ├── feat/husky-hooks
     ├── feat/sass-tokens
     ├── feat/spa-architecture
+    ├── feat/github-pages              # публичный превью, дальше UI смотрим по ссылке
     ├── feat/header-unauthenticated
     ├── feat/burger-menu
     ├── feat/hero-section
