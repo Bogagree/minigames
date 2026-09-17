@@ -8,23 +8,23 @@
 
 ## Measurements (live − draft frame)
 
-| Breakpoint | Metric           | Draft | Live |  Δ |
-| ---------- | ---------------- | ----: | ---: | -: |
-| 375        | hero section h   |   331 |  331 |  0 |
-| 375        | content padding  |   n/a |   24 |  — |
-| 375        | content gap      |   n/a |   16 |  — |
-| 375        | title font-size  |   n/a |   24 |  — |
-| 375        | button h         |   n/a |   41 |  — |
-| 768        | hero section h   |   383 |  383 |  0 |
-| 768        | content padding  |   n/a |   32 |  — |
-| 768        | content margin-x |   n/a |   40 |  — |
-| 768        | title font-size  |   n/a |   32 |  — |
-| 1920       | hero section h   |   627 |  627 |  0 |
-| 1920       | content padding  |   n/a |   40 |  — |
-| 1920       | content margin-l |   n/a |   80 |  — |
-| 1920       | content gap      |   n/a |   24 |  — |
-| 1920       | title font-size  |   n/a |   40 |  — |
-| 1920       | button h         |   n/a |   48 |  — |
+| Breakpoint | Metric           | Draft | Live |   Δ |
+| ---------- | ---------------- | ----: | ---: | --: |
+| 375        | hero section h   |   331 |  331 |   0 |
+| 375        | content padding  |   n/a |   24 |   — |
+| 375        | content gap      |   n/a |   16 |   — |
+| 375        | title font-size  |   n/a |   24 |   — |
+| 375        | button h         |   n/a |   41 |   — |
+| 768        | hero section h   |   383 |  383 |   0 |
+| 768        | content padding  |   n/a |   32 |   — |
+| 768        | content margin-x |   n/a |   40 |   — |
+| 768        | title font-size  |   n/a |   32 |   — |
+| 1920       | hero section h   |   627 |  627 |   0 |
+| 1920       | content padding  |   n/a |   40 |   — |
+| 1920       | content margin-l |   n/a |   80 |   — |
+| 1920       | content gap      |   n/a |   24 |   — |
+| 1920       | title font-size  |   n/a |   40 |   — |
+| 1920       | button h         |   n/a |   48 |   — |
 
 Draft heights from prior cached metadata / fix tokens (`--hero-height-mobile|tablet|desktop`). Inner card padding/font targets still not re-measured from Figma this run.
 
