@@ -7,26 +7,26 @@
 
 ## Measurements (live − draft frame)
 
-| Breakpoint | Metric              | Draft | Live |   Δ |
-| ---------- | ------------------- | ----: | ---: | --: |
-| 375        | section h           |   283 |  283 |   0 |
-| 375        | padding             |    16 |   16 |   0 |
-| 375        | title font-size     |    24 |   24 |   0 |
-| 375        | card peek w×h       | 56×200 | 56×200 | 0 |
-| 375        | card featured w×h   | 218×200 | 218×200 | 0 |
-| 375        | track gap           |     8 |    8 |   0 |
-| 768        | section h           |   400 |  400 |   0 |
-| 768        | padding             | 24/40 | 24/40 | 0 |
-| 768        | arrow size          |    40 |   40 |   0 |
-| 768        | card peek w×h       | 105×280 | 105×280 | 0 |
-| 768        | card featured w×h   | 448×280 | 448×280 | 0 |
-| 1920       | section h           |   556 |  556 |   0 |
-| 1920       | padding             | 40/80 | 40/80 | 0 |
-| 1920       | title font-size     |    40 |   40 |   0 |
-| 1920       | arrow size          |    48 |   48 |   0 |
-| 1920       | card peek w×h       | 120×384 | 120×384 | 0 |
-| 1920       | card side w×h       | 288×384 | 288×384 | 0 |
-| 1920       | card featured w×h   | 816×384 | 816×384 | 0 |
+| Breakpoint | Metric            |   Draft |    Live |   Δ |
+| ---------- | ----------------- | ------: | ------: | --: |
+| 375        | section h         |     283 |     283 |   0 |
+| 375        | padding           |      16 |      16 |   0 |
+| 375        | title font-size   |      24 |      24 |   0 |
+| 375        | card peek w×h     |  56×200 |  56×200 |   0 |
+| 375        | card featured w×h | 218×200 | 218×200 |   0 |
+| 375        | track gap         |       8 |       8 |   0 |
+| 768        | section h         |     400 |     400 |   0 |
+| 768        | padding           |   24/40 |   24/40 |   0 |
+| 768        | arrow size        |      40 |      40 |   0 |
+| 768        | card peek w×h     | 105×280 | 105×280 |   0 |
+| 768        | card featured w×h | 448×280 | 448×280 |   0 |
+| 1920       | section h         |     556 |     556 |   0 |
+| 1920       | padding           |   40/80 |   40/80 |   0 |
+| 1920       | title font-size   |      40 |      40 |   0 |
+| 1920       | arrow size        |      48 |      48 |   0 |
+| 1920       | card peek w×h     | 120×384 | 120×384 |   0 |
+| 1920       | card side w×h     | 288×384 | 288×384 |   0 |
+| 1920       | card featured w×h | 816×384 | 816×384 |   0 |
 
 Draft heights/card sizes from `src/styles/tokens.scss` (commented as draft nodes). Figma MCP `get_metadata` / `get_screenshot` blocked by Starter plan rate limit this run.
 
