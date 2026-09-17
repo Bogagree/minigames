@@ -1,2 +1,140 @@
+@use '../../styles/mixins' as *;
+
 .hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: calc(var(--size-10) * 4 + var(--size-1));
+  overflow: hidden;
+  background-color: var(--color-surface);
+
+  &__banner {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    pointer-events: none;
+  }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-2);
+    align-items: flex-start;
+    width: calc(100% - var(--size-4));
+    max-width: calc(var(--size-10) * 4 + var(--size-2));
+    margin: var(--size-3) auto;
+    padding: var(--size-3);
+    border-radius: var(--radius-md);
+    background-color: var(--color-white);
+    box-shadow: var(--shadow-card);
+  }
+
+  &__title {
+    margin: 0;
+    color: var(--color-on-primary);
+    font-size: var(--font-size-headline-medium);
+    font-weight: var(--font-weight-bold);
+    line-height: normal;
+  }
+
+  &__text {
+    margin: 0;
+    color: var(--color-on-bg);
+    font-size: var(--font-size-title-xx-small);
+    font-weight: var(--font-weight-regular);
+    line-height: 1.5;
+
+    &--full {
+      display: none;
+    }
+  }
+
+  &__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--button-height-md);
+    padding: var(--button-padding-y-md) var(--button-padding-x-md);
+    border: var(--border-width-md) solid var(--color-on-primary);
+    border-radius: var(--radius-sm);
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
+    font: inherit;
+    font-size: var(--font-size-label-large);
+    font-weight: var(--font-weight-bold);
+    line-height: normal;
+    white-space: nowrap;
+    cursor: pointer;
+
+    &:hover,
+    &:focus-visible {
+      background-color: var(--color-primary-high);
+    }
+
+    &:active {
+      background-color: var(--color-primary-high);
+      filter: brightness(0.95);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  @include tablet-up {
+    min-height: calc(var(--size-10) * 4 + var(--size-5) + var(--size-1) / 2);
+
+    &__content {
+      width: auto;
+      max-width: calc(var(--size-10) * 5 + var(--size-4));
+      margin-inline: var(--size-5);
+      padding: var(--size-4);
+    }
+
+    &__title {
+      font-size: var(--font-size-2xl);
+    }
+
+    &__text--compact {
+      display: none;
+    }
+
+    &__text--full {
+      display: block;
+    }
+  }
+
+  @include desktop-up {
+    min-height: calc(var(--size-10) * 7 + var(--size-5) + var(--size-1) / 2);
+
+    &__content {
+      max-width: calc(var(--size-10) * 6 + var(--size-4));
+      margin-block: var(--size-10);
+      margin-inline-start: var(--size-10);
+      margin-inline-end: auto;
+      padding: var(--size-5);
+      gap: var(--size-3);
+    }
+
+    &__title {
+      font-size: calc(var(--font-size-2xl) + var(--size-1));
+    }
+
+    &__text {
+      font-size: var(--font-size-title-xxx-small);
+    }
+
+    &__button {
+      min-height: var(--button-height-lg);
+      padding-inline: var(--size-4);
+    }
+  }
 }
