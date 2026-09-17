@@ -1,13 +1,20 @@
+import { createHeader } from '../../components/header/header';
 import './home-page.scss';
 
 export function createHomePage(): HTMLElement {
-  const page: HTMLElement = document.createElement('main');
+  const page: HTMLElement = document.createElement('div');
   page.className = 'home-page';
+
+  const main: HTMLElement = document.createElement('main');
+  main.className = 'home-page__main';
+  main.setAttribute('id', 'main-content');
 
   const title: HTMLHeadingElement = document.createElement('h1');
   title.className = 'home-page__title';
   title.textContent = 'MiniGames';
-  page.append(title);
+  main.append(title);
+
+  page.append(createHeader(), main);
 
   return page;
 }
