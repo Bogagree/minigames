@@ -1,0 +1,27 @@
+---
+description: MiniGames — Spec-Driven Development
+alwaysApply: true
+---
+
+# SDD в MiniGames
+
+Этот репозиторий ведётся по Spec-Driven Development. Глобальное правило SDD тоже действует.
+
+## Где что лежит
+
+| Артефакт | Путь |
+| --- | --- |
+| Индекс SDD | `docs/README.md` |
+| Закрытые решения | `docs/decisions.md` |
+| Спеки | `docs/specs/` |
+| Конвенции | `docs/conventions/` |
+| План шагов / PR | `docs/implementation-plan.md` |
+
+## Перед кодом
+
+1. Прочитать спеку области (`docs/specs/…`) и `docs/decisions.md`.
+2. Одна задача = одна feature-ветка = один короткий контекст чата.
+3. Меняется поведение — сначала спека или decision, потом код.
+4. Новое архитектурное решение — сразу `Accepted` в `docs/decisions.md`, не оставлять только в чате.
+
+Не дублировать длинные ТЗ курса в чат: ссылаться на `docs/specs/` и внешние Story-ссылки из спек.
