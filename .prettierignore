@@ -1,0 +1,6 @@
+dist
+node_modules
+package-lock.json
+*.gitkeep
+docs/implementation-plan.md
+.husky

@@ -1,0 +1,32 @@
+@use 'tokens';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-width: 375px;
+}
+
+body {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-foreground);
+  background-color: var(--color-background);
+}
+
+#app {
+  min-height: 100vh;
+}
+
+@media (width >= 1921px) {
+  #app {
+    max-width: 1920px;
+    margin-inline: auto;
+  }
+}

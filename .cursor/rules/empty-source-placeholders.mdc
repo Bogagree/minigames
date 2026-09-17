@@ -1,0 +1,18 @@
+---
+description: Use empty .ts/.scss placeholders, not .gitkeep
+alwaysApply: true
+---
+
+# Пустые папки в src
+
+Git не хранит пустые каталоги. В `src/` **не используй** `.gitkeep`.
+
+Сразу создавай файлы модуля по имени блока:
+
+- `header.ts` и `header.scss`, не общий `index.ts`
+- в `.ts` минимальный модуль: `export {};`
+- в `.scss` пустой BEM-блок: `.header {}`
+
+`public/` и `src/assets/` — не код. Файлы туда клади только когда есть ассет (favicon, картинка). `.gitkeep` там тоже не нужен.
+
+Реализацию пиши в эти же файлы, не добавляй рядом заглушки.
