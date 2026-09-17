@@ -53,9 +53,10 @@ If Task is unavailable, run stages sequentially in one session by reading each s
 
 ## PR stage (after all green)
 
-1. Push `feat/…` if needed.
-2. `gh pr create --base <story-branch>` with template fields: Task, Screenshot note, Deployment URL, Done/deadline placeholders, Score for the criterion.
-3. Return PR URL. **Do not merge.**
+1. Ensure QA wrote `docs/qa/<feat-slug>.md` (D-011) and it is committed on the feat/fix branch.
+2. Push `feat/…` if needed.
+3. `gh pr create --base <story-branch>` with template fields: Task, **Screenshot = link to `docs/qa/…`**, Deployment URL, Done/deadline placeholders, Score for the criterion.
+4. Return PR URL. **Do not merge.**
 
 ## Run log (mandatory at end)
 
@@ -66,6 +67,7 @@ If Task is unavailable, run stages sequentially in one session by reading each s
 - Developer: PASS | FAIL
 - Reviewer: Approve | Request changes | Comment
 - QA: PASS | FAIL | SKIPPED
+- QA report: docs/qa/<feat-slug>.md | n/a
 - PR: <url> | not created (<reason>)
 ```
 

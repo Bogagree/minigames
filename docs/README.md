@@ -11,6 +11,7 @@ MiniGames ведётся по **SDD**: требования и решения ж
 | [conventions/](./conventions/)                                              | Как пишем код, git, PR                               |
 | [implementation-plan.md](./implementation-plan.md)                          | Общий порядок работ (все story)                      |
 | [story-1-plan.md](./story-1-plan.md) … [story-4-plan.md](./story-4-plan.md) | Чеклисты шагов по каждой story                       |
+| [qa/](./qa/)                                                                | Pixel-check отчёты фабрики (`<feat-slug>.md`)        |
 | Agent factory (Cursor)                                                      | `.cursor/skills/minigames-*/` + rule `agent-factory` |
 
 ## Agent factory
@@ -19,8 +20,8 @@ MiniGames ведётся по **SDD**: требования и решения ж
 
 1. **Developer** — `.cursor/skills/minigames-developer/SKILL.md`
 2. **Reviewer** — `.cursor/skills/minigames-reviewer/SKILL.md`
-3. **QA** (pixel 375/768/1920) — `.cursor/skills/minigames-qa/SKILL.md`
-4. **PR** в ветку story — только если все стадии зелёные (оркестратор)
+3. **QA** (pixel 375/768/1920) — `.cursor/skills/minigames-qa/SKILL.md` → артефакт `docs/qa/<feat-slug>.md`
+4. **PR** в ветку story — только если все стадии зелёные (оркестратор); Screenshot = ссылка на QA-отчёт
 
 Запуск: «factory / оркестратор / полный пайплайн» + шаг `feat/…` → skill `minigames-orchestrator`.
 

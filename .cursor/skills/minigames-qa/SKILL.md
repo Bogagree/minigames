@@ -36,6 +36,16 @@ disable-model-invocation: true
 3. Compare with numbers (bounding boxes / computed styles), not vibes.
 4. Exercise critical clicks from AC (e.g. Log In opens dialog) — smoke only.
 
+## Artifact (mandatory)
+
+Persist the verdict in the **same PR** as the feature (or fix branch):
+
+- Path: `docs/qa/<feat-slug>.md`  
+  Example: `feat/header-unauthenticated` → `docs/qa/header-unauthenticated.md`
+- Include the `## QA result` block below; add a short measurements table when useful.
+- **Do not** commit binary screenshots (PNG/JPEG) — numbers + notes only.
+- Chat handoff still ends with the same `## QA result` block.
+
 ## Verdict template (mandatory)
 
 ```markdown
