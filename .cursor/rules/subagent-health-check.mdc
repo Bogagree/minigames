@@ -1,0 +1,33 @@
+---
+description: Health-check for Task subagents — ping, stuck threshold, takeover
+alwaysApply: true
+---
+
+# Subagent health check
+
+When the parent agent launches a **Task / isolated subagent** (especially orchestrator stages: Developer → Reviewer → QA):
+
+## Timing
+
+| Signal | Value |
+| --- | --- |
+| Health-check interval | **60s** |
+| Stuck threshold | **3 min** without progress, or **3** consecutive empty health checks |
+| Max restarts | **1** per stage |
+
+**Progress** = new tool activity, file edits, commits, or a stage verdict block. Silent “still researching” without repo changes does **not** count.
+
+60s alone is **not** “hung” — only the stuck threshold is.
+
+## On stuck
+
+1. **Interrupt** the subagent (`Task` resume + interrupt, or equivalent stop).
+2. Prefer **take over the stage yourself** in the parent session (same skill, same branch).
+3. Optionally **one** fresh subagent restart with a shorter prompt (“continue from X, no Figma rabbit holes”). If it hangs again → take over; do not loop.
+
+## Anti-patterns
+
+- Waiting indefinitely for a background subagent with no checks
+- Declaring hung at the first 60s ping while tools are still running
+- Restarting the same stuck stage more than once
+- Telling the user “still exploring” instead of interrupting and finishing the step
