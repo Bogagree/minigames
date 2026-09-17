@@ -7,18 +7,18 @@
 
 ## Measurements (vs Figma `2:565`)
 
-| Metric | Figma | Live (375 / 768) | Δ |
-| --- | --- | --- | --- |
-| Panel padding | 24px | 24px | 0 |
-| Logo | 32×32 | 32×32 | 0 |
-| Close control | 32×32 | 32×32 | 0 |
-| Brand gap (logo→title) | 8px | 8px | 0 |
-| Header → nav gap | 32px | 32px | 0 |
-| Nav link gap | 24px | 24px | 0 |
-| Nav link font-size | ~18px (text h 22) | 18px | ≤2 |
-| Title font-size | ~20px (text h 24) | 20px | 0 |
-| Auth button gap | 16px | 16px | 0 |
-| Auth button height | 37px | 41px | 4 |
+| Metric                 | Figma             | Live (375 / 768) | Δ   |
+| ---------------------- | ----------------- | ---------------- | --- |
+| Panel padding          | 24px              | 24px             | 0   |
+| Logo                   | 32×32             | 32×32            | 0   |
+| Close control          | 32×32             | 32×32            | 0   |
+| Brand gap (logo→title) | 8px               | 8px              | 0   |
+| Header → nav gap       | 32px              | 32px             | 0   |
+| Nav link gap           | 24px              | 24px             | 0   |
+| Nav link font-size     | ~18px (text h 22) | 18px             | ≤2  |
+| Title font-size        | ~20px (text h 24) | 20px             | 0   |
+| Auth button gap        | 16px              | 16px             | 0   |
+| Auth button height     | 37px              | 41px             | 4   |
 
 Notes:
 
