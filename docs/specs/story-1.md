@@ -1,0 +1,46 @@
+# Story 1 — spec
+
+Канонические баллы: [story-1.md](https://github.com/rolling-scopes-school/qualifying-stage/blob/main/tasks/minigames/story-1.md) (**294**).  
+Здесь — наш рабочий скоуп и статус. Обновлять при закрытии шагов и уточнении UI.
+
+## Цель
+
+Репозиторий, tooling, SPA-каркас, вёрстка Home (unauthenticated) и layout Auth-диалога. Без реального API.
+
+## In scope
+
+| Область                | Ожидание                                       | Статус                      |
+| ---------------------- | ---------------------------------------------- | --------------------------- |
+| Tooling                | Vite, TS, ESLint, Prettier, Husky, Sass tokens | in progress / частично есть |
+| SPA                    | bootstrap, тонкий router, Home stub            | частично есть               |
+| Deploy                 | GitHub Pages preview                           | есть                        |
+| Header                 | unauthenticated, по Figma                      | todo                        |
+| Burger                 | mobile menu                                    | todo                        |
+| Hero                   | секция Home                                    | todo                        |
+| Carousel               | layout слайдера игр                            | todo                        |
+| Leaderboard + Game Dev | секции Home                                    | todo                        |
+| Footer                 |                                                | todo                        |
+| Auth dialog            | layout D1–D5                                   | todo                        |
+| Favicon + QA           | pixel-check breakpoints                        | todo                        |
+
+## Out of scope (Story 1)
+
+- Library UI (Story 2+)
+- History API / полные роуты (Story 4)
+- Backend, Firebase, unit-тесты (пока план не расширен)
+- UI-фреймворки и готовые UI-библиотеки
+
+## Порядок реализации
+
+Шаги и имена веток — только в [implementation-plan.md](../implementation-plan.md).  
+Стек и структура — [architecture.md](./architecture.md) + [decisions.md](../decisions.md).
+
+## Definition of done (фича Story 1)
+
+- [ ] Соответствует Figma на 375 / 768 / 1920 (±10px)
+- [ ] Семантика + BEM + токены, без magic values
+- [ ] Нет `console.log` / явного `any`
+- [ ] Коммиты по RS git convention; один логичный PR в `story-1`
+- [ ] Спека этой области обновлена, если поведение уточняли
+
+Когда появится отдельная фича-спека (например `specs/header.md`) — строка в таблице выше ссылается на неё.
