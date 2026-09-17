@@ -129,6 +129,7 @@
 
   &__burger {
     position: relative;
+    z-index: var(--z-index-header-burger);
     display: inline-flex;
     align-items: center;
     justify-content: center;
