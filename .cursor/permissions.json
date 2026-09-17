@@ -1,0 +1,32 @@
+{
+  "terminalAllowlist": [
+    "git status",
+    "git diff",
+    "git log",
+    "git show",
+    "git branch",
+    "npm",
+    "npx",
+    "node"
+  ],
+  "autoRun": {
+    "allow_instructions": [
+      "Allow read and write of normal project source, tests, docs, and config files inside this repository workspace.",
+      "Allow npm and npx scripts for install, lint, format, typecheck, build, and test inside this repository.",
+      "Allow git status, git diff, git log, git show, git add, git commit, and creating or switching feature branches inside this repository.",
+      "Allow ordinary non-force git push of the current feature branch to origin when pushing or opening a PR.",
+      "Allow GitHub CLI commands that only create or view pull requests and checks: gh pr create, gh pr view, gh pr list, gh pr checks, gh pr diff.",
+      "Allow ordinary shell commands scoped to this workspace for local development and agent factory stages."
+    ],
+    "block_instructions": [
+      "Every command that merges a pull request should go through approval first, including gh pr merge and any GitHub API or CLI equivalent that merges a PR.",
+      "Every git force push should go through approval first, including git push --force, git push -f, git push --force-with-lease, and force pushes to main, master, or story branches.",
+      "Every hard reset or destructive working-tree wipe should go through approval first, including git reset --hard and git clean -fd.",
+      "Every change to git configuration or hooks should go through approval first, including git config, editing .git/config, and creating or modifying files under .git/hooks.",
+      "Every attempt to delete or corrupt the .git directory should go through approval first.",
+      "Every command that publishes packages (npm publish), creates releases (gh release), sets secrets (gh secret), or changes repo/org settings should go through approval first.",
+      "Every command that deploys to production or mutates cloud infrastructure should go through approval first.",
+      "Every command that reads or exfiltrates secrets, .env files, credentials, SSH keys, or tokens outside ordinary local tooling should go through approval first."
+    ]
+  }
+}
