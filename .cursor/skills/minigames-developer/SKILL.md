@@ -40,6 +40,7 @@ Implement **one** plan step. Do not review the whole repo. Do not open PR (orche
 
 ```markdown
 ## Developer result
+
 - Status: PASS | FAIL
 - Branch: feat/…
 - Criterion: RSS-QS-…

@@ -61,6 +61,7 @@ If Task is unavailable, run stages sequentially in one session by reading each s
 
 ```markdown
 ## Factory run
+
 - Step: feat/… (RSS-QS-…)
 - Developer: PASS | FAIL
 - Reviewer: Approve | Request changes | Comment
