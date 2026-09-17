@@ -17,8 +17,11 @@ MiniGames — SPA каталога мини-игр (RS School qualifying stage):
 
 ## Внешние артефакты
 
-- Макет: [Figma MiniGames](https://www.figma.com/design/4MnLizE59gZI2DDxaSgZqi/MiniGames)
+- **Рабочий макет (для вёрстки):** [MiniGames (Copy) — наш драфт](https://www.figma.com/design/hkWWcHFefT8fIxSmQvvXMb/MiniGames--Copy-?node-id=0-1)
+- Канон курса (не править, только сверка): [Figma MiniGames](https://www.figma.com/design/4MnLizE59gZI2DDxaSgZqi/MiniGames)
 - Баллы и чеклисты: Story-файлы qualifying-stage (см. [docs/README.md](../README.md))
+
+Агент и команда верстают **только по рабочему драфту**. Общий файл курса — источник задания, не рабочая копия.
 
 ## Инварианты продукта (все story)
 
