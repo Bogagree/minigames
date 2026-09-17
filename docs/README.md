@@ -28,4 +28,5 @@ MiniGames ведётся по **SDD**: требования и решения ж
 - [Overview](https://github.com/rolling-scopes-school/qualifying-stage/blob/main/tasks/minigames/README.md)
 - [Common project requirements](https://github.com/rolling-scopes-school/qualifying-stage/blob/main/tasks/minigames/common-project-requirements.md)
 - [Common layout requirements](https://github.com/rolling-scopes-school/qualifying-stage/blob/main/tasks/minigames/common-layout-requirements.md)
-- [Figma](https://www.figma.com/design/4MnLizE59gZI2DDxaSgZqi/MiniGames)
+- [Figma (канон курса)](https://www.figma.com/design/4MnLizE59gZI2DDxaSgZqi/MiniGames)
+- Рабочий макет для вёрстки: [наш драфт](https://www.figma.com/design/hkWWcHFefT8fIxSmQvvXMb/MiniGames--Copy-?node-id=0-1) — см. [specs/overview.md](./specs/overview.md)
