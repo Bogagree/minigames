@@ -1,0 +1,17 @@
+---
+description: MiniGames agent factory — developer → reviewer → QA → PR
+alwaysApply: false
+---
+
+# Agent factory
+
+When the user asks for the **factory / orchestrator / полный пайплайн / разработчик+ревьюер+QA** for a story step:
+
+1. Read and follow `.cursor/skills/minigames-orchestrator/SKILL.md`.
+2. Do not skip stages or open a PR until Developer PASS, Reviewer Approve, and QA PASS (or QA SKIPPED for non-UI).
+
+Individual roles (only when asked for that role alone):
+
+- `.cursor/skills/minigames-developer/SKILL.md`
+- `.cursor/skills/minigames-reviewer/SKILL.md`
+- `.cursor/skills/minigames-qa/SKILL.md`

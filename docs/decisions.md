@@ -117,3 +117,13 @@ Production-сборка Vite → GitHub Pages. Смена на Vercel/Netlify т
 - Почему: знания и решения должны переживать чаты и шариться командой
 
 Держим `docs/` (спеки, decisions, conventions, `implementation-plan.md`, `story-N-plan.md`) до конца курса и обновляем вместе с кодом.
+
+---
+
+## D-011: Артефакт QA — `docs/qa/`
+
+- Status: Accepted
+- Date: 2026-09-17
+- Почему: вердикт pixel-check должен переживать чат и ехать в том же PR, что фича
+
+После QA-стадии фабрики пишем отчёт `docs/qa/<feat-slug>.md` (`feat/header-unauthenticated` → `header-unauthenticated.md`): статус, draft URL, Δ по 375/768/1920, blocking/non-blocking. Бинарные скриншоты в git не кладём. В PR в поле Screenshot — ссылка на этот файл (+ Deployment). FAIL-отчёт тоже коммитим в fix-ветку.
