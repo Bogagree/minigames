@@ -106,7 +106,7 @@ Production-сборка Vite → GitHub Pages. Смена на Vercel/Netlify т
 - Date: 2026-09-17
 - Почему: единый git-процесс курса и читаемые PR
 
-Пример: `feat/header-unauthenticated`. Мелкие соседние критерии можно объединять в одной ветке по `implementation-plan.md`.
+Пример: `feat/header-unauthenticated`. Мелкие соседние критерии можно объединять в одной ветке по `story-N-plan.md`.
 
 ---
 
@@ -116,4 +116,4 @@ Production-сборка Vite → GitHub Pages. Смена на Vercel/Netlify т
 - Date: 2026-09-17
 - Почему: знания и решения должны переживать чаты и шариться командой
 
-Держим `docs/` (спеки, decisions, conventions, implementation-plan) до конца курса и обновляем вместе с кодом.
+Держим `docs/` (спеки, decisions, conventions, `implementation-plan.md`, `story-N-plan.md`) до конца курса и обновляем вместе с кодом.
