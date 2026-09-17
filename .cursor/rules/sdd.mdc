@@ -15,7 +15,8 @@ alwaysApply: true
 | Закрытые решения | `docs/decisions.md` |
 | Спеки | `docs/specs/` |
 | Конвенции | `docs/conventions/` |
-| План шагов / PR | `docs/implementation-plan.md` |
+| Общий план | `docs/implementation-plan.md` |
+| План story | `docs/story-N-plan.md` |
 
 ## Перед кодом
 

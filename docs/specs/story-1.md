@@ -20,7 +20,7 @@
 | Carousel               | layout слайдера игр                            | todo                        |
 | Leaderboard + Game Dev | секции Home                                    | todo                        |
 | Footer                 |                                                | todo                        |
-| Auth dialog            | layout D1–D5                                   | todo                        |
+| Auth dialog            | RSS-QS-1-5-1 … 1-5-5                           | todo                        |
 | Favicon + QA           | pixel-check breakpoints                        | todo                        |
 
 ## Out of scope (Story 1)
@@ -32,7 +32,8 @@
 
 ## Порядок реализации
 
-Шаги и имена веток — только в [implementation-plan.md](../implementation-plan.md).  
+Шаги и имена веток — [story-1-plan.md](../story-1-plan.md).  
+Общие правила планов — [implementation-plan.md](../implementation-plan.md).  
 Стек и структура — [architecture.md](./architecture.md) + [decisions.md](../decisions.md).
 
 ## Definition of done (фича Story 1)
