@@ -22,14 +22,21 @@ main
 - История по шагам, не 1–2 огромных коммита.
 - Сообщения по RS convention (тип + краткое описание).
 
-## PR в `story-1`
+## PR `feat/*` → `story-N`
 
-Шаблон: `.github/pull_request_template.md`.
+Шаблон: `.github/pull_request_template.md` — только Summary + Test plan.  
+Ссылка на QA: `docs/qa/<feat-slug>.md` (D-011).  
+Чеклист курса (Task / Screenshot / Deployment / Done / Score) **не заполнять**.  
+Футер `Made with Cursor` / co-authored Cursor в описании PR **не добавлять**.
+
+Для внутренних SDD-PR (процесс, docs): в описании указать затронутые файлы `docs/specs/…` и `docs/decisions.md`.
+
+## PR `story-1` | `story-2` | `story-3` → `main`
+
+Только здесь — чеклист курса для cross-check (не мержить в `main`):
 
 1. Task: ссылка на story
-2. Screenshot
+2. Screenshot (можно сводный QA / скрины)
 3. Deployment: https://bogagree.github.io/minigames/
 4. Done / deadline
 5. Score: ___ / 294
-
-Для внутренних SDD-PR (процесс, docs): в описании указать затронутые файлы `docs/specs/…` и `docs/decisions.md`.

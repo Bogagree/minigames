@@ -58,7 +58,9 @@ If Task is unavailable, run stages sequentially in one session by reading each s
 
 1. Ensure QA wrote `docs/qa/<feat-slug>.md` (D-011) and it is committed on the feat/fix branch.
 2. Push `feat/…` if needed.
-3. `gh pr create --base <story-branch>` with template fields: Task, **Screenshot = link to `docs/qa/…`**, Deployment URL, Done/deadline placeholders, Score for the criterion.
+3. `gh pr create --base <story-branch>` with **Summary + Test plan** only. Link QA report (`docs/qa/…`).  
+   **Do not** put the course checklist (Task / Screenshot / Deployment / Done / Score) — that is only for `story-N` → `main`.  
+   **Do not** add `Made with Cursor` (or similar) to the PR body.
 4. Return PR URL. **Do not merge.**
 
 ## Run log (mandatory at end)

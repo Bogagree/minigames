@@ -1,5 +1,10 @@
 import logoMarkUrl from '../../assets/icons/logo-mark.png';
 import burgerIconUrl from '../../assets/icons/burger.svg';
+import closeIconUrl from '../../assets/icons/close.svg';
+import {
+  createBurgerMenu,
+  type BurgerMenuController,
+} from '../burger-menu/burger-menu';
 import { openAuthDialog } from '../dialogs/auth-dialog/auth-dialog';
 import './header.scss';
 
@@ -9,6 +14,8 @@ const NAV_LINKS: ReadonlyArray<{ label: string; isCurrent: boolean }> = [
   { label: 'Tournaments', isCurrent: false },
   { label: 'Community', isCurrent: false },
 ];
+
+const DESKTOP_MEDIA_QUERY = '(min-width: 1920px)';
 
 function createBrand(): HTMLElement {
   const brand: HTMLAnchorElement = document.createElement('a');
@@ -77,21 +84,68 @@ function createAuthButton(
   return button;
 }
 
-function createBurgerButton(): HTMLButtonElement {
+function createBurgerButton(menu: BurgerMenuController): HTMLButtonElement {
   const button: HTMLButtonElement = document.createElement('button');
   button.type = 'button';
   button.className = 'header__burger';
   button.setAttribute('aria-label', 'Open menu');
+  button.setAttribute('aria-expanded', 'false');
+  button.setAttribute('aria-controls', 'burger-menu');
 
-  const icon: HTMLImageElement = document.createElement('img');
-  icon.className = 'header__burger-icon';
-  icon.src = burgerIconUrl;
-  icon.alt = '';
-  icon.width = 32;
-  icon.height = 32;
+  const burgerIcon: HTMLImageElement = document.createElement('img');
+  burgerIcon.className = 'header__burger-icon header__burger-icon--burger';
+  burgerIcon.src = burgerIconUrl;
+  burgerIcon.alt = '';
+  burgerIcon.width = 32;
+  burgerIcon.height = 32;
 
-  button.append(icon);
+  const closeIcon: HTMLImageElement = document.createElement('img');
+  closeIcon.className = 'header__burger-icon header__burger-icon--close';
+  closeIcon.src = closeIconUrl;
+  closeIcon.alt = '';
+  closeIcon.width = 32;
+  closeIcon.height = 32;
+  closeIcon.setAttribute('aria-hidden', 'true');
+
+  button.append(burgerIcon, closeIcon);
+
+  button.addEventListener('click', () => {
+    menu.toggle();
+  });
+
   return button;
+}
+
+function syncBurgerButton(button: HTMLButtonElement, isOpen: boolean): void {
+  button.classList.toggle('header__burger--open', isOpen);
+  button.setAttribute('aria-expanded', String(isOpen));
+  button.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+}
+
+function bindBurgerButtonState(
+  button: HTMLButtonElement,
+  menu: BurgerMenuController,
+): void {
+  const openMenu = menu.open.bind(menu);
+  const closeMenu = menu.close.bind(menu);
+
+  menu.open = (): void => {
+    openMenu();
+    syncBurgerButton(button, true);
+  };
+
+  menu.close = (): void => {
+    closeMenu();
+    syncBurgerButton(button, false);
+  };
+
+  menu.toggle = (): void => {
+    if (menu.isOpen()) {
+      menu.close();
+    } else {
+      menu.open();
+    }
+  };
 }
 
 export function createHeader(): HTMLElement {
@@ -108,8 +162,22 @@ export function createHeader(): HTMLElement {
     createAuthButton('Sign Up', 'primary', 'register'),
   );
 
-  actions.append(createNav(), buttons, createBurgerButton());
-  header.append(createBrand(), actions);
+  const menu: BurgerMenuController = createBurgerMenu();
+  menu.element.id = 'burger-menu';
+
+  const burgerButton: HTMLButtonElement = createBurgerButton(menu);
+  bindBurgerButtonState(burgerButton, menu);
+
+  actions.append(createNav(), buttons, burgerButton);
+  header.append(createBrand(), actions, menu.element);
+
+  const desktopMedia: MediaQueryList =
+    globalThis.matchMedia(DESKTOP_MEDIA_QUERY);
+  desktopMedia.addEventListener('change', (event: MediaQueryListEvent) => {
+    if (event.matches && menu.isOpen()) {
+      menu.close();
+    }
+  });
 
   return header;
 }
