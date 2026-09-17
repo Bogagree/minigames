@@ -17,6 +17,7 @@ alwaysApply: true
 | Конвенции | `docs/conventions/` |
 | Общий план | `docs/implementation-plan.md` |
 | План story | `docs/story-N-plan.md` |
+| Agent factory | `.cursor/skills/minigames-orchestrator` (+ developer / reviewer / qa) |
 
 ## Перед кодом
 
@@ -24,5 +25,7 @@ alwaysApply: true
 2. Одна задача = одна feature-ветка = один короткий контекст чата.
 3. Меняется поведение — сначала спека или decision, потом код.
 4. Новое архитектурное решение — сразу `Accepted` в `docs/decisions.md`, не оставлять только в чате.
+
+Полный шаг с ревью и QA → skill оркестратора (developer → reviewer → QA → PR). Не мержить PR без пользователя.
 
 Не дублировать длинные ТЗ курса в чат: ссылаться на `docs/specs/` и внешние Story-ссылки из спек.
