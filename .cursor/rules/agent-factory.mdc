@@ -9,6 +9,7 @@ When the user asks for the **factory / orchestrator / полный пайпла�
 
 1. Read and follow `.cursor/skills/minigames-orchestrator/SKILL.md`.
 2. Do not skip stages or open a PR until Developer PASS, Reviewer Approve, and QA PASS (or QA SKIPPED for non-UI).
+3. Health-check background stage subagents per `.cursor/rules/subagent-health-check.mdc` (60s ping / 3 min stuck → interrupt → takeover or 1 restart).
 
 Individual roles (only when asked for that role alone):
 

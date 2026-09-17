@@ -7,5 +7,8 @@
 | [overview.md](./overview.md)         | Продукт, домен, страницы/диалоги |
 | [architecture.md](./architecture.md) | Стек, слои, границы модулей      |
 | [story-1.md](./story-1.md)           | Скоуп и критерии Story 1         |
+| [header.md](./header.md)             | Header guest (RSS-QS-1-4-1)      |
+| [burger-menu.md](./burger-menu.md)   | Burger menu (RSS-QS-1-4-2)       |
+| [hero.md](./hero.md)                 | Hero section (RSS-QS-1-4-3)      |
 
 Stories 2–4: добавить отдельные спеки, когда курс откроет детали (не заранее выдумывать UI).

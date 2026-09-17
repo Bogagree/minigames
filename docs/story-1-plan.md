@@ -13,7 +13,7 @@
 ## Next (для нового чата / оркестратора)
 
 ```text
-feat/hero-section    # RSS-QS-1-4-3
+feat/carousel-layout    # RSS-QS-1-4-4
 ```
 
 Оркестратор без явного шага берёт **только** эту строку. После merge шага: пометить его `[done]` ниже и сдвинуть `## Next` на следующую незакрытую `feat/…` (в том же PR фичи или сразу после merge).
@@ -40,8 +40,8 @@ main
     ├── [done] feat/agent-factory             # docs/chore: skills + docs/qa (D-011)
     ├── [done] feat/header-unauthenticated    # RSS-QS-1-4-1
     ├── [done] feat/burger-menu               # RSS-QS-1-4-2
-    ├── feat/hero-section                     # RSS-QS-1-4-3  ← Next
-    ├── feat/carousel-layout                  # RSS-QS-1-4-4
+    ├── [done] feat/hero-section              # RSS-QS-1-4-3
+    ├── feat/carousel-layout                  # RSS-QS-1-4-4  ← Next
     ├── feat/leaderboard-gamedev              # RSS-QS-1-4-5, RSS-QS-1-4-6
     ├── feat/footer                           # RSS-QS-1-4-7
     ├── feat/auth-dialog                      # RSS-QS-1-5-1 … RSS-QS-1-5-5
