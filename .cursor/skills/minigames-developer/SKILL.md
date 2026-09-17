@@ -16,7 +16,7 @@ Implement **one** plan step. Do not review the whole repo. Do not open PR (orche
 
 ## Required reads (before code)
 
-1. `docs/story-N-plan.md` — confirm step / branch name / `RSS-QS-…`
+1. `docs/story-N-plan.md` — **`## Next`** + step / branch / `RSS-QS-…` (must match unless user overrode)
 2. Matching `docs/specs/…` (+ feature spec if linked)
 3. `docs/decisions.md`
 4. `docs/conventions/code.md`, `docs/conventions/git.md`
@@ -28,8 +28,9 @@ Implement **one** plan step. Do not review the whole repo. Do not open PR (orche
 2. Implement only that criterion’s AC.
 3. Tokens / BEM / page-first; no UI libs; no `console.log`; no explicit `any`.
 4. Update spec status / feature spec if behavior clarified; new arch → `Accepted` in `decisions.md`.
-5. `npm run lint` && `npm run format:check` && `npm run build` — must pass.
-6. Commit(s) with RS convention (`feat:`, `fix:`, `docs:`, …). Push if orchestrator will PR.
+5. In the same PR: mark this step `[done]` in `docs/story-N-plan.md` and set **`## Next`** to the following open feat (do not mark done before the work is actually in the PR).
+6. `npm run lint` && `npm run format:check` && `npm run build` — must pass.
+7. Commit(s) with RS convention (`feat:`, `fix:`, `docs:`, …). Push if orchestrator will PR.
 
 ## Stop conditions
 
