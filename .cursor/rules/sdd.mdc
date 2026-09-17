@@ -16,7 +16,7 @@ alwaysApply: true
 | Спеки | `docs/specs/` |
 | Конвенции | `docs/conventions/` |
 | Общий план | `docs/implementation-plan.md` |
-| План story | `docs/story-N-plan.md` |
+| План story | `docs/story-N-plan.md` (`## Next` + `[done]`) |
 | QA отчёты | `docs/qa/<feat-slug>.md` |
 | Agent factory | `.cursor/skills/minigames-orchestrator` (+ developer / reviewer / qa) |
 

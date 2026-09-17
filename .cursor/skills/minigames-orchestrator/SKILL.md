@@ -23,11 +23,14 @@ Pipeline (strict order):
 
 ## Input from user
 
-Require (or infer from plan + ask once if missing):
+Require:
 
-- Story base (`story-1`)
-- Step / branch (`feat/…`) and `RSS-QS-…` id
+- Story base (`story-1`, …)
 - Optional: “docs-only” → skip QA stage
+
+If step / `RSS-QS-…` not given: read `docs/story-N-plan.md` → section **`## Next`** (single `feat/…` line). Do **not** invent a different step. Confirm once in the run log.
+
+After a green feature PR is ready (or when updating the plan in that PR): mark the step `[done]` in the plan tree and advance `## Next` to the following open `feat/…`.
 
 ## How to run stages
 
