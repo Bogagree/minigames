@@ -11,8 +11,8 @@
 - **Desktop:** ряд бренд | группы; gutter `120px`; высота секции `343px`.
 - Nav-ссылки и social-иконки ведут на Home (`BASE_URL`).
 - RS School → `https://rs.school/` (новая вкладка). GitHub → `https://github.com/Bogagree` (`@Bogagree`), вместо плейсхолдера `@student-nickname` на макете.
-- Цвета (канва Home): фон `--color-bg-footer`; бренд/заголовки `--color-white`; текст/ссылки `--color-on-bg-footer`; social fill `--color-bg-footer-low` (hover `--color-bg-footer-lowest`); RS mark `--color-primary`; github-icon круг `--color-white`.
-- Иконки Community: Figma text-glyphs `share` / `chat` / `rss_feed` (`1:235` / `1:237` / `1:239`); github `code` (`13:2311`). SVG в `src/assets/icons/` по тем же glyph names. Логотип — существующий `logo-mark.png`.
+- Цвета (канва Home): фон `--color-bg-footer`; бренд/заголовки `--color-white`; текст/ссылки `--color-on-bg-footer`; social fill `--color-bg-footer-low` (в экспорте чипа `#2A264F`; hover — brightness на том же SVG); RS / GitHub — экспорты контейнеров с канвы.
+- Иконки Community: экспорт чипов `share` / `chat` / `rss_feed` (`src/assets/icons/share.svg`, `chat.svg`, `rss-feed.svg`). RS: `rs-logo-container.svg`. GitHub `code`: `github-icon.svg`. Логотип — существующий `logo-mark.png`.
 
 ## Out of scope
 

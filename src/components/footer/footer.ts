@@ -2,7 +2,8 @@ import logoMarkUrl from '../../assets/icons/logo-mark.png';
 import shareIconUrl from '../../assets/icons/share.svg';
 import chatIconUrl from '../../assets/icons/chat.svg';
 import rssIconUrl from '../../assets/icons/rss-feed.svg';
-import codeIconUrl from '../../assets/icons/code.svg';
+import githubIconUrl from '../../assets/icons/github-icon.svg';
+import rsLogoUrl from '../../assets/icons/rs-logo-container.svg';
 import './footer.scss';
 
 const HOME_HREF = import.meta.env.BASE_URL;
@@ -132,8 +133,8 @@ function createSocials(): HTMLElement {
     icon.className = 'footer__social-icon';
     icon.src = social.iconUrl;
     icon.alt = '';
-    icon.width = 20;
-    icon.height = 20;
+    icon.width = 40;
+    icon.height = 40;
     icon.setAttribute('aria-hidden', 'true');
 
     link.append(icon);
@@ -153,10 +154,13 @@ function createRsSchoolLink(): HTMLAnchorElement {
   link.rel = 'noopener noreferrer';
   link.setAttribute('aria-label', 'RS School');
 
-  const mark: HTMLSpanElement = document.createElement('span');
+  const mark: HTMLImageElement = document.createElement('img');
   mark.className = 'footer__rs-logo';
+  mark.src = rsLogoUrl;
+  mark.alt = '';
+  mark.width = 24;
+  mark.height = 24;
   mark.setAttribute('aria-hidden', 'true');
-  mark.textContent = 'RS';
 
   const text: HTMLSpanElement = document.createElement('span');
   text.textContent = 'RS School';
@@ -178,11 +182,10 @@ function createGithubLink(): HTMLAnchorElement {
   iconWrap.setAttribute('aria-hidden', 'true');
 
   const icon: HTMLImageElement = document.createElement('img');
-  icon.src = codeIconUrl;
+  icon.src = githubIconUrl;
   icon.alt = '';
-  icon.width = 16;
-  icon.height = 16;
-
+  icon.width = 24;
+  icon.height = 24;
   iconWrap.append(icon);
 
   const text: HTMLSpanElement = document.createElement('span');
