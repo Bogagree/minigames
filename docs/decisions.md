@@ -127,3 +127,14 @@ Production-сборка Vite → GitHub Pages. Смена на Vercel/Netlify т
 - Почему: вердикт pixel-check должен переживать чат и ехать в том же PR, что фича
 
 После QA-стадии фабрики пишем отчёт `docs/qa/<feat-slug>.md` (`feat/header-unauthenticated` → `header-unauthenticated.md`): статус, draft URL, Δ по 375/768/1920, blocking/non-blocking. Бинарные скриншоты в git не кладём. В PR в поле Screenshot — ссылка на этот файл (+ Deployment). FAIL-отчёт тоже коммитим в fix-ветку.
+
+---
+
+## D-012: Фабрика — post-user-review + Figma evidence для QA
+
+- Status: Accepted
+- Date: 2026-09-19
+- Почему: ложный PASS карусели (live vs свои токены при rate-limit MCP) и ручные правки после ревью пользователя не были частью пайплайна
+
+1. **Post-user-review:** замечания пользователя по открытому `feat/*` PR → тот же пайплайн Developer → Reviewer → QA на той же ветке, commit+push в существующий PR (не новый PR). См. orchestrator skill.
+2. **QA ground truth:** PASS только против геометрии Figma draft (MCP / кэш metadata с `x|width|height` / paste пользователя с `node-id`). Сравнение live ↔ токены из того же PR запрещено. Нет evidence → статус `BLOCKED`, не зелёный PR.

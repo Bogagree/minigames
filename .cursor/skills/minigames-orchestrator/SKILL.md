@@ -1,13 +1,3 @@
----
-name: minigames-orchestrator
-description: >-
-  Multi-agent factory for MiniGames: runs developer → reviewer → QA in order,
-  then opens a PR to the story branch only if all stages PASS/Approve. Use when
-  the user asks for the agent factory, orchestrator, full feature pipeline,
-  «разработчик ревьюер qa», or end-to-end feat with PR.
-disable-model-invocation: true
----
-
 # MiniGames — Orchestrator (agent factory)
 
 ## Goal
@@ -43,11 +33,24 @@ Prefer **isolated subagents** (`Task`) with `model: inherit`. Each prompt must:
 
 If Task is unavailable, run stages sequentially in one session by reading each skill in order — still emit each stage’s verdict block before continuing.
 
-### Loop on failure
+### Loop on failure (pre-PR)
 
 - Reviewer **Request changes** or QA **FAIL** → hand defects to Developer (same branch), re-run Reviewer, then QA.
 - Max **2** fix loops unless user says continue.
 - After max loops still red → stop; no PR; summarize blockers.
+
+### Post-user-review fix (PR already open)
+
+When the user reviews an **open** `feat/*` PR (or local branch) and reports defects (chat, screenshots, Figma panels, node-ids):
+
+1. Treat feedback as a **blocking defect list** — do **not** open a new PR.
+2. Run on the **same** `feat/…` branch: Developer (fix) → Reviewer → QA.
+3. Commit + push to the existing PR head.
+4. Update `docs/qa/<feat-slug>.md` (re-QA; note prior false PASS if applicable).
+5. Emit the run log with `PR: <existing url> (updated)`.
+6. Max **2** fix loops per user review batch unless user says continue.
+
+Triggers (examples): «докидывай правки», «после ревью», paste of Figma stroke/shadow, «неправильный бордер», layout width complaints while PR #N is open.
 
 ### Docs-only / non-UI
 
@@ -69,11 +72,12 @@ If Task is unavailable, run stages sequentially in one session by reading each s
 ## Factory run
 
 - Step: feat/… (RSS-QS-…)
+- Mode: new-step | post-user-review
 - Developer: PASS | FAIL
 - Reviewer: Approve | Request changes | Comment
-- QA: PASS | FAIL | SKIPPED
+- QA: PASS | FAIL | SKIPPED | BLOCKED (no Figma evidence)
 - QA report: docs/qa/<feat-slug>.md | n/a
-- PR: <url> | not created (<reason>)
+- PR: <url> | updated <url> | not created (<reason>)
 ```
 
 ## Anti-patterns
@@ -82,4 +86,6 @@ If Task is unavailable, run stages sequentially in one session by reading each s
 - Creating PR while any stage is red
 - Reviewing the entire repository
 - Using course Figma instead of the draft in `docs/specs/overview.md` for layout QA
+- **QA PASS by comparing live UI to tokens authored in the same PR** (circular “proof”)
+- Ignoring user post-PR feedback until the next story step
 - Merging the PR
