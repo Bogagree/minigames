@@ -1,0 +1,8 @@
+msg="$(head -n 1 "$1")"
+
+if ! printf '%s\n' "$msg" | grep -Eq '^(feat|fix|docs|style|refactor|test|chore|build|ci|perf)(\([a-z0-9_-]+\))?: .+'; then
+  echo "Invalid commit message."
+  echo "Use RS Git convention: type: description"
+  echo "Allowed types: feat, fix, docs, style, refactor, test, chore, build, ci, perf"
+  exit 1
+fi

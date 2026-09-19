@@ -1,0 +1,39 @@
+.auth-dialog {
+  margin: auto;
+  padding: var(--size-3);
+  border: var(--border-width-md) solid var(--color-on-primary);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-bg);
+  color: var(--color-on-primary);
+  font-family: var(--font-family-base);
+
+  &::backdrop {
+    background-color: rgb(36 33 69 / 40%);
+  }
+
+  &__title {
+    margin: 0 0 var(--size-2);
+    font-size: var(--font-size-headline-small);
+    font-weight: var(--font-weight-bold);
+  }
+
+  &__close {
+    padding: var(--button-padding-y-sm) var(--button-padding-x-sm);
+    border: var(--border-width-md) solid var(--color-on-primary);
+    border-radius: var(--radius-sm);
+    background-color: transparent;
+    color: var(--color-on-primary);
+    font: inherit;
+    font-size: var(--font-size-label-large);
+    font-weight: var(--font-weight-bold);
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--color-surface);
+    }
+
+    &:active {
+      background-color: var(--color-primary);
+    }
+  }
+}

@@ -1,0 +1,220 @@
+@use '../../styles/mixins' as *;
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--size-2);
+  border-bottom: var(--border-width-md) solid var(--color-on-primary);
+  background-color: var(--color-bg);
+  color: var(--color-on-primary);
+
+  &__brand {
+    display: inline-flex;
+    gap: var(--size-1);
+    align-items: center;
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  &__logo {
+    display: block;
+    width: var(--size-4);
+    height: var(--size-4);
+    object-fit: contain;
+  }
+
+  &__title {
+    font-size: var(--font-size-headline-small);
+    font-weight: var(--font-weight-bold);
+    line-height: normal;
+    white-space: nowrap;
+  }
+
+  &__actions {
+    display: flex;
+    gap: var(--size-2);
+    align-items: center;
+  }
+
+  &__nav {
+    display: none;
+  }
+
+  &__nav-list {
+    display: flex;
+    gap: var(--size-5);
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__nav-link {
+    color: var(--color-on-bg);
+    font-size: var(--font-size-title-xx-small);
+    font-weight: var(--font-weight-medium);
+    line-height: normal;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+
+    &:hover,
+    &:focus-visible {
+      color: var(--color-on-primary);
+    }
+
+    &--current {
+      color: var(--color-on-primary);
+      font-weight: var(--font-weight-bold);
+    }
+  }
+
+  &__buttons {
+    display: none;
+    gap: var(--size-2);
+    align-items: center;
+  }
+
+  &__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--button-padding-y-sm) var(--button-padding-x-sm);
+    border: var(--border-width-md) solid var(--color-on-primary);
+    border-radius: var(--radius-sm);
+    font: inherit;
+    font-size: var(--font-size-label-large);
+    font-weight: var(--font-weight-bold);
+    line-height: normal;
+    white-space: nowrap;
+    cursor: pointer;
+
+    &--outline {
+      background-color: transparent;
+      color: var(--color-on-primary);
+
+      &:hover,
+      &:focus-visible {
+        background-color: var(--color-surface);
+      }
+
+      &:active {
+        background-color: var(--color-primary);
+      }
+    }
+
+    &--primary {
+      background-color: var(--color-primary);
+      color: var(--color-on-primary);
+
+      &:hover,
+      &:focus-visible {
+        background-color: var(--color-primary-high);
+      }
+
+      &:active {
+        background-color: var(--color-primary-high);
+        filter: brightness(0.95);
+      }
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  &__burger {
+    position: relative;
+    z-index: var(--z-index-header-burger);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--size-4);
+    height: var(--size-4);
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  &__burger-icon {
+    display: block;
+    width: var(--size-4);
+    height: var(--size-4);
+    transition:
+      opacity var(--duration-menu) var(--easing-menu),
+      transform var(--duration-menu) var(--easing-menu);
+
+    &--burger {
+      opacity: 1;
+      transform: rotate(0deg) scale(1);
+    }
+
+    &--close {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transform: rotate(-90deg) scale(0.8);
+      pointer-events: none;
+    }
+  }
+
+  &__burger--open {
+    .header__burger-icon--burger {
+      opacity: 0;
+      transform: rotate(90deg) scale(0.8);
+    }
+
+    .header__burger-icon--close {
+      opacity: 1;
+      transform: rotate(0deg) scale(1);
+    }
+  }
+
+  @include tablet-up {
+    padding-inline: var(--size-5);
+    /* Figma tablet header uses 20px vertical rhythm between 16 and 24 tokens */
+    padding-block: calc(var(--size-2) + var(--size-1) / 2);
+
+    &__buttons {
+      display: inline-flex;
+    }
+
+    &__button--outline {
+      display: none;
+    }
+  }
+
+  @include desktop-up {
+    padding-inline: var(--size-10);
+    padding-block: var(--size-3);
+
+    &__title {
+      font-size: var(--font-size-headline-medium);
+    }
+
+    &__actions {
+      gap: var(--size-4);
+    }
+
+    &__nav {
+      display: block;
+    }
+
+    &__button {
+      padding: var(--button-padding-y-md) var(--button-padding-x-md);
+    }
+
+    &__button--outline {
+      display: inline-flex;
+    }
+
+    &__burger {
+      display: none;
+    }
+  }
+}
