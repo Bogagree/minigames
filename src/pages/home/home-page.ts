@@ -1,5 +1,6 @@
 import { createHeader } from '../../components/header/header';
 import { createHero } from '../../components/hero/hero';
+import { createSlider } from '../../components/slider/slider';
 import './home-page.scss';
 
 export function createHomePage(): HTMLElement {
@@ -13,7 +14,7 @@ export function createHomePage(): HTMLElement {
   const title: HTMLHeadingElement = document.createElement('h1');
   title.className = 'home-page__title';
   title.textContent = 'MiniGames';
-  main.append(title, createHero());
+  main.append(title, createHero(), createSlider());
 
   page.append(createHeader(), main);
 
