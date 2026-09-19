@@ -51,7 +51,7 @@
     display: block;
     width: 100%;
     overflow: hidden;
-    border: var(--border-width-card) solid var(--color-on-primary);
+    border: var(--border-width-md) solid var(--color-on-primary);
     border-radius: var(--radius-md);
     background-color: var(--color-white);
     border-spacing: 0;
@@ -82,11 +82,12 @@
 
     &--head {
       min-height: var(--leaderboard-header-height-mobile);
-      background-color: var(--color-outline);
-      color: var(--color-on-primary);
+      background-color: var(--color-tertiary);
+      color: var(--color-white);
 
       .leaderboard__cell {
-        background-color: var(--color-outline);
+        background-color: var(--color-tertiary);
+        color: var(--color-white);
       }
     }
 

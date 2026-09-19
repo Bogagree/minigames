@@ -157,4 +157,4 @@ Story 1 кладёт курс-совместимый mock в `src/data/*.json` �
 - Date: 2026-09-19
 - Почему: в `tokens.scss` не хватало avatar-random / outline-variant / secondary / tertiary; `--color-like` расходился с гайдбуком
 
-Имена CSS-переменных совпадают с guidebook (General / Borders / Additional). Hex — из Dev Mode paste. `--color-tertiary` (`#3A2EBF`) хранится как «table header, button hover» в гайдбуке; шапка Home Top Players на канве — серый `--color-outline`, не tertiary.
+Имена CSS-переменных совпадают с guidebook (General / Borders / Additional). Hex — из Dev Mode paste. `--color-tertiary` (`#3A2EBF`) — заливка шапки таблицы Home (`2:17`) и «table header, button hover» в гайдбуке. Обводка таблицы (`2:16`) — `--border-width-md` + `--color-on-primary`, не game-card `2.5px`.

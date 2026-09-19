@@ -10,7 +10,7 @@
 - **Tablet:** 3 строки; колонки Rank / Player / Games / Score / Streak; score full; streak compact; заголовок «Top Players This Week».
 - **Desktop:** 5 строк; колонки Rank / Player / Games Played / Total Score / Streak / Favorite Game; streak `🔥 12 days`.
 - Интерактивных элементов нет.
-- Цвета (гайдбук + paste 2026-09-19): шапка `--color-outline` `#E5E7EB` (не `--color-surface` и не `--color-tertiary`); зебра чётных строк — outline на белом фоне таблицы; аватарки `--color-avatar-random-1…5` с бордером `--color-on-primary`; чип Favorite Game — заливка outline, обводка `--color-outline-variant`.
+- Цвета (гайдбук + канва `2:17` / `2:16`): шапка `--color-tertiary` `#3A2EBF`, текст `--color-white`; внешняя обводка таблицы `--border-width-md` (2px) `--color-on-primary` (не card 2.5px); зебра чётных строк — `--color-outline` на белом фоне; аватарки `--color-avatar-random-1…5` с бордером `--color-on-primary`; чип Favorite Game — заливка outline, обводка `--color-outline-variant`.
 
 ## Out of scope
 
