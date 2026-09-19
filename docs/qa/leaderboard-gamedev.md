@@ -36,35 +36,35 @@ Inner (desktop `10:2241`): illustration `x=120` `682×483`; card `x=842` `958×3
 
 ## Color baseline (user-paste guidebook)
 
-| Surface                         | Expected                                      | Forbidden in this block      |
-| ------------------------------- | --------------------------------------------- | ---------------------------- |
-| Table header (`th`)             | outline `#E5E7EB`                             | tertiary `#3A2EBF`           |
-| Table body                      | white `#FFFFFF`                               | —                            |
-| Even rows (2, 4)                | outline `#E5E7EB`                             | —                            |
-| Odd rows (1, 3, 5)              | white (transparent on white table)            | —                            |
-| Avatars 1–5                     | `#E9EEF6` `#A3E2C9` `#BCE3FF` `#FFC6FF` `#E8DFF5` | —                      |
-| Avatar stroke                   | on-primary `#242145` (guidebook / cache)      | —                            |
-| Chip fill                       | outline `#E5E7EB`                             | primary yellow               |
-| Chip stroke                     | outline-variant `#D2D2D2`                     | —                            |
+| Surface             | Expected                                          | Forbidden in this block |
+| ------------------- | ------------------------------------------------- | ----------------------- |
+| Table header (`th`) | outline `#E5E7EB`                                 | tertiary `#3A2EBF`      |
+| Table body          | white `#FFFFFF`                                   | —                       |
+| Even rows (2, 4)    | outline `#E5E7EB`                                 | —                       |
+| Odd rows (1, 3, 5)  | white (transparent on white table)                | —                       |
+| Avatars 1–5         | `#E9EEF6` `#A3E2C9` `#BCE3FF` `#FFC6FF` `#E8DFF5` | —                       |
+| Avatar stroke       | on-primary `#242145` (guidebook / cache)          | —                       |
+| Chip fill           | outline `#E5E7EB`                                 | primary yellow          |
+| Chip stroke         | outline-variant `#D2D2D2`                         | —                       |
 
 ## Color measurements (live computed)
 
 Same hex at 375 / 768 / 1920 (avatars 4–5 only painted on desktop rows).
 
-| Target            | Expected    | Live 1920     | Match |
-| ----------------- | ----------- | ------------- | :---: |
-| `th` background   | `#E5E7EB`   | `#E5E7EB`     |   ✓   |
-| `th` vs tertiary  | not `#3A2EBF` | `#E5E7EB`   |   ✓   |
-| table background  | `#FFFFFF`   | `#FFFFFF`     |   ✓   |
-| row 1 / 3 / 5     | white       | `transparent` on `#FFFFFF` | ✓ |
-| row 2 / 4         | `#E5E7EB`   | `#E5E7EB`     |   ✓   |
-| avatar 1          | `#E9EEF6`   | `#E9EEF6`     |   ✓   |
-| avatar 2          | `#A3E2C9`   | `#A3E2C9`     |   ✓   |
-| avatar 3          | `#BCE3FF`   | `#BCE3FF`     |   ✓   |
-| avatar 4          | `#FFC6FF`   | `#FFC6FF`     |   ✓   |
-| avatar 5          | `#E8DFF5`   | `#E8DFF5`     |   ✓   |
-| chip fill         | `#E5E7EB`   | `#E5E7EB`     |   ✓   |
-| chip stroke       | `#D2D2D2` 2px | `#D2D2D2` 2px | ✓ |
+| Target           | Expected      | Live 1920                  | Match |
+| ---------------- | ------------- | -------------------------- | :---: |
+| `th` background  | `#E5E7EB`     | `#E5E7EB`                  |   ✓   |
+| `th` vs tertiary | not `#3A2EBF` | `#E5E7EB`                  |   ✓   |
+| table background | `#FFFFFF`     | `#FFFFFF`                  |   ✓   |
+| row 1 / 3 / 5    | white         | `transparent` on `#FFFFFF` |   ✓   |
+| row 2 / 4        | `#E5E7EB`     | `#E5E7EB`                  |   ✓   |
+| avatar 1         | `#E9EEF6`     | `#E9EEF6`                  |   ✓   |
+| avatar 2         | `#A3E2C9`     | `#A3E2C9`                  |   ✓   |
+| avatar 3         | `#BCE3FF`     | `#BCE3FF`                  |   ✓   |
+| avatar 4         | `#FFC6FF`     | `#FFC6FF`                  |   ✓   |
+| avatar 5         | `#E8DFF5`     | `#E8DFF5`                  |   ✓   |
+| chip fill        | `#E5E7EB`     | `#E5E7EB`                  |   ✓   |
+| chip stroke      | `#D2D2D2` 2px | `#D2D2D2` 2px              |   ✓   |
 
 375 / 768: header `#E5E7EB`; zebra odd `transparent` / even `#E5E7EB`; avatars 1–3 match; chip (computed, Favorite Game column hidden) same fill/stroke.
 
