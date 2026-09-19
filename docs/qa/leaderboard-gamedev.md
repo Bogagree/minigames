@@ -1,23 +1,25 @@
 # QA — feat/leaderboard-gamedev (RSS-QS-1-4-5, RSS-QS-1-4-6)
 
 - Branch: `feat/leaderboard-gamedev`
-- Draft: [MiniGames (Copy)](https://www.figma.com/design/hkWWcHFefT8fIxSmQvvXMb/MiniGames--Copy-?node-id=0-1) — Top Players `2:421` / `2:189` / `2:12`; Developer CTA `12:2279` / `12:2260` / `10:2241`
+- Draft: [MiniGames (Copy)](https://www.figma.com/design/hkWWcHFefT8fIxSmQvvXMb/MiniGames--Copy-?node-id=0-1) — Top Players `2:421` / `2:189` / `2:12`; table header `2:17`; table `2:16`; Developer CTA `12:2279` / `12:2260` / `10:2241`
 - Base URL: `http://127.0.0.1:5173/minigames/`
-- Evidence: **user-paste** (guidebook hexes, 2026-09-19) + **cache** (absolute Figma geometry from prior MCP dump; this run MCP rate-limited)
+- Evidence: **user-paste** (Home canvas `2:17` / `2:16` + guidebook avatar/chip hexes, 2026-09-19) + **cache** (absolute Figma geometry from prior MCP dump; this run MCP rate-limited)
 - Live: Playwright MCP, viewports 375 / 768 / 1920 (+ fluid 520, centered 2000)
-- Re-QA: **post-user-review color fix**. Prior report PASS is **invalid** for color (see below).
+- Re-QA: **post-user-review** after header/table stroke correction. Prior color PASS is **invalid** (see below).
 
 ## Why prior PASS was invalid
 
-The first QA treated **layout Δ ≤ 10px** as sufficient for `PASS`. It did **not** measure computed colors against the Figma guidebook / Home canvas.
+The previous color re-QA treated the **same-PR spec / guidebook write-up** as ground truth and required table header fill **outline `#E5E7EB`**, forbidding **tertiary `#3A2EBF`**. It never compared live computed `th` / table stroke to Home canvas nodes **`2:17`** (Table Header) and **`2:16`** (Table).
 
-That missed user-reported color defects (later fixed on this branch):
+That inverted the canvas:
 
-- Table header painted **tertiary** `#3A2EBF` (or surface) instead of Home-canvas **outline** `#E5E7EB`
-- Favorite-game chips used **primary yellow** instead of gray fill + **outline-variant** stroke
-- Zebra / avatar fills were not checked against guidebook hexes
+| Target | Prior QA (false PASS) | Canvas nodes (this run) |
+| ------ | --------------------- | ----------------------- |
+| Header fill | `#E5E7EB`, not tertiary | `2:17` fill **tertiary `#3A2EBF`** |
+| Header text | (not checked vs `2:17`) | `2:17` text **white `#FFFFFF`** |
+| Table outer stroke | (not measured vs `2:16`) | `2:16` **2px** `#242145`, radius **12px** |
 
-Skill ground truth: Figma / user-paste colors are required; “layout only” is not a valid color PASS. This run measures **live computed hex** vs user-paste.
+Skill ground truth is the **draft node**, not tokens or a same-PR spec that disagreed with `2:17`. A PASS that required `#E5E7EB` on the header was a **false PASS**. This run measures **computed** `backgroundColor` / `color` / `borderWidth` / `borderColor` / `borderRadius` on live `th` and `.leaderboard__table` vs those nodes — not vs CSS variable names.
 
 ## Figma baseline (absolute node geometry)
 
@@ -34,43 +36,50 @@ Cached from prior MCP `get_metadata` dump (`fileKey` `hkWWcHFefT8fIxSmQvvXMb` no
 
 Inner (desktop `10:2241`): illustration `x=120` `682×483`; card `x=842` `958×344` → **gap 40px** (section gutter 120, not 120 between columns). Track for leaderboard table/header: `x=120` `w=1680`.
 
-## Color baseline (user-paste guidebook)
+## Color / stroke baseline (canvas + guidebook paste)
 
-| Surface             | Expected                                          | Forbidden in this block |
-| ------------------- | ------------------------------------------------- | ----------------------- |
-| Table header (`th`) | outline `#E5E7EB`                                 | tertiary `#3A2EBF`      |
-| Table body          | white `#FFFFFF`                                   | —                       |
-| Even rows (2, 4)    | outline `#E5E7EB`                                 | —                       |
-| Odd rows (1, 3, 5)  | white (transparent on white table)                | —                       |
-| Avatars 1–5         | `#E9EEF6` `#A3E2C9` `#BCE3FF` `#FFC6FF` `#E8DFF5` | —                       |
-| Avatar stroke       | on-primary `#242145` (guidebook / cache)          | —                       |
-| Chip fill           | outline `#E5E7EB`                                 | primary yellow          |
-| Chip stroke         | outline-variant `#D2D2D2`                         | —                       |
+| Surface | Node / source | Expected |
+| ------- | ------------- | -------- |
+| Table header (`th`) fill | `2:17` | tertiary `#3A2EBF` |
+| Table header (`th`) text | `2:17` | white `#FFFFFF` |
+| Table outer stroke | `2:16` | **2px** `--color-on-primary` `#242145` (not game-card 2.5px) |
+| Table radius | `2:16` | 12px |
+| Table body | guidebook | white `#FFFFFF` |
+| Even rows (2, 4) | guidebook | outline `#E5E7EB` |
+| Odd rows (1, 3, 5) | guidebook | white (transparent on white table) |
+| Avatars 1–5 | guidebook | `#E9EEF6` `#A3E2C9` `#BCE3FF` `#FFC6FF` `#E8DFF5` |
+| Avatar stroke | guidebook / cache | on-primary `#242145` |
+| Chip fill | guidebook | outline `#E5E7EB` |
+| Chip stroke | guidebook | outline-variant `#D2D2D2` |
 
-## Color measurements (live computed)
+## Color / stroke measurements (live computed)
 
-Same hex at 375 / 768 / 1920 (avatars 4–5 only painted on desktop rows).
+Same hex at 375 / 768 / 1920 unless noted. Proof is `getComputedStyle` hex / px, not `var(--…)`.
 
-| Target           | Expected      | Live 1920                  | Match |
-| ---------------- | ------------- | -------------------------- | :---: |
-| `th` background  | `#E5E7EB`     | `#E5E7EB`                  |   ✓   |
-| `th` vs tertiary | not `#3A2EBF` | `#E5E7EB`                  |   ✓   |
-| table background | `#FFFFFF`     | `#FFFFFF`                  |   ✓   |
-| row 1 / 3 / 5    | white         | `transparent` on `#FFFFFF` |   ✓   |
-| row 2 / 4        | `#E5E7EB`     | `#E5E7EB`                  |   ✓   |
-| avatar 1         | `#E9EEF6`     | `#E9EEF6`                  |   ✓   |
-| avatar 2         | `#A3E2C9`     | `#A3E2C9`                  |   ✓   |
-| avatar 3         | `#BCE3FF`     | `#BCE3FF`                  |   ✓   |
-| avatar 4         | `#FFC6FF`     | `#FFC6FF`                  |   ✓   |
-| avatar 5         | `#E8DFF5`     | `#E8DFF5`                  |   ✓   |
-| chip fill        | `#E5E7EB`     | `#E5E7EB`                  |   ✓   |
-| chip stroke      | `#D2D2D2` 2px | `#D2D2D2` 2px              |   ✓   |
+| Target | Expected (`2:17` / `2:16` / paste) | Live 1920 | Match |
+| ------ | ---------------------------------- | --------- | :---: |
+| `th` background | `#3A2EBF` (`2:17`) | `#3A2EBF` | ✓ |
+| `th` color | `#FFFFFF` (`2:17`) | `#FFFFFF` | ✓ |
+| table `borderWidth` | `2px` (`2:16`) | `2px` | ✓ |
+| table `borderColor` | `#242145` (`2:16`) | `#242145` | ✓ |
+| table `borderRadius` | `12px` (`2:16`) | `12px` | ✓ |
+| table background | `#FFFFFF` | `#FFFFFF` | ✓ |
+| row 1 / 3 / 5 | white | `transparent` on `#FFFFFF` | ✓ |
+| row 2 / 4 | `#E5E7EB` | `#E5E7EB` | ✓ |
+| avatar 1 | `#E9EEF6` | `#E9EEF6` | ✓ |
+| avatar 2 | `#A3E2C9` | `#A3E2C9` | ✓ |
+| avatar 3 | `#BCE3FF` | `#BCE3FF` | ✓ |
+| avatar 4 | `#FFC6FF` | `#FFC6FF` | ✓ |
+| avatar 5 | `#E8DFF5` | `#E8DFF5` | ✓ |
+| avatar stroke | `#242145` | `#242145` 2px | ✓ |
+| chip fill | `#E5E7EB` | `#E5E7EB` | ✓ |
+| chip stroke | `#D2D2D2` 2px | `#D2D2D2` 2px | ✓ |
 
-375 / 768: header `#E5E7EB`; zebra odd `transparent` / even `#E5E7EB`; avatars 1–3 match; chip (computed, Favorite Game column hidden) same fill/stroke.
+375 / 768: `th` `#3A2EBF` / `#FFFFFF`; table `2px` `#242145` `12px`; zebra odd `transparent` / even `#E5E7EB`; avatars 1–3 match; chip (Favorite Game column hidden) same fill/stroke.
 
 ## Measurements (live − Figma)
 
-Scrollbar: at 1920, `clientWidth` 1905; gutters stay 120. Content/track **1665** ≈ Figma **1680 − 15**. Same artifact at 768 (`clientWidth` 753). Not treated as a gutter FAIL.
+Scrollbar: at 1920, `clientWidth` 1905; gutters stay 120. Content/track **1665** ≈ Figma **1680 − 15**. Same artifact at 768 (`clientWidth` 753) and 375 (`clientWidth` 360, `scrollWidth` 375 = `innerWidth`). Not treated as a gutter FAIL. Off-canvas closed burger sits at `left=360` and is not page overflow.
 
 | BP   | Metric                      |          Draft |           Live |          Δ |
 | ---- | --------------------------- | -------------: | -------------: | ---------: |
@@ -104,24 +113,24 @@ All layout Δ ≤ 10px (scrollbar-aware for track/card width).
 - Mobile: title «Top Players»; Rank / Player / Score / Streak; 3 rows; score compact; streak `🔥 12d`
 - Tablet: title «Top Players This Week»; Games / Score (short labels); streak compact; 3 rows
 - Desktop: Games Played / Total Score / Streak / Favorite Game; streak `🔥 12 days`; 5 rows
-- `section.game-developer` + `h2`; CTA `button[type=button]` «Submit Form», `cursor: pointer`; click does **not** navigate (`http://127.0.0.1:5173/minigames/`); burger dialog stays `aria-hidden`
+- `section.game-developer` + `h2`; CTA `button[type=button]` «Submit Form», `cursor: pointer`; click does **not** navigate (`http://127.0.0.1:5173/minigames/`); burger stays `aria-hidden="true"`
 - Contact `mailto:developers@minigames.com`
-- No horizontal overflow at 375 / 520 / 768 / 1920 (`scrollWidth` ≤ layout width)
+- No horizontal overflow at 375 / 520 / 768 / 1920 (`scrollWidth` ≤ layout/`innerWidth` except scrollbar vs `clientWidth`)
 - Above 1920: `#app` `max-width: 1920` centered; section heights unchanged (2000: app `w=1920` `x≈33`; lb 590 / gd 563)
 
 ## QA result
 
 - Status: PASS
-- Draft: https://www.figma.com/design/hkWWcHFefT8fIxSmQvvXMb/MiniGames--Copy-?node-id=0-1 (nodes: Top Players `2:421` / `2:189` / `2:12`; Developer CTA `12:2279` / `12:2260` / `10:2241`)
+- Draft: https://www.figma.com/design/hkWWcHFefT8fIxSmQvvXMb/MiniGames--Copy-?node-id=0-1 (nodes: Top Players `2:421` / `2:189` / `2:12`; header `2:17`; table `2:16`; Developer CTA `12:2279` / `12:2260` / `10:2241`)
 - Evidence: user-paste + cache
 - Breakpoints:
-  - 375: PASS — layout Δ+4 / +6; header `#E5E7EB`; zebra / avatars 1–3 match paste
-  - 768: PASS — layout Δ+4 / +1; header `#E5E7EB`; zebra / avatars 1–3 / chip stroke `#D2D2D2` match
-  - 1920: PASS — layout Δ+4 / 0; header `#E5E7EB` (not `#3A2EBF`); even rows `#E5E7EB`; avatars 1–5 exact; chips `#E5E7EB` + `#D2D2D2` 2px
+  - 375: PASS — layout Δ+4 / +6; `th` `#3A2EBF` / `#FFFFFF`; table `2px` `#242145` `12px`; zebra / avatars 1–3 match paste
+  - 768: PASS — layout Δ+4 / +1; same header + table stroke; zebra / avatars 1–3 / chip `#E5E7EB` + `#D2D2D2` 2px
+  - 1920: PASS — layout Δ+4 / 0; header `2:17` tertiary + white; table `2:16` 2px `#242145` 12px; even rows `#E5E7EB`; avatars 1–5 exact; chips match
 - Blocking defects:
   - (none)
 - Non-blocking:
-  - Prior QA PASS was **invalid for color** (layout-only); this re-QA adds user-paste color table
+  - Prior color PASS was **invalid**: compared live to same-PR spec (`#E5E7EB` header, tertiary forbidden), not canvas `2:17`
   - Desktop CTA column gap is **40px** in Figma `10:2241` (live 40). Spec wording «gutter 120px» is the **section** inset, not the illustration–card gap.
   - CTA illustration is a local SVG stand-in (`game-developer-illustration.svg`), not a Figma export
   - Folder `game-dev/` vs BEM `game-developer`
