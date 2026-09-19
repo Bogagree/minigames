@@ -25,11 +25,14 @@ disable-model-invocation: true
 
 ## Ground truth (mandatory)
 
-| Allowed baseline                                          | Forbidden baseline                                    |
-| --------------------------------------------------------- | ----------------------------------------------------- |
-| Figma draft node geometry                                 | `tokens.scss` / CSS values written in the **same** PR |
-| Spec numbers **copied from Figma** and cited with node-id | “matches tokens” without Figma citation               |
-| User-provided measurements                                | Guessing from screenshots alone for ±10px PASS        |
+Which **token name** belongs on a surface is decided by the **Home (or page) instance fill/stroke**, not by the guidebook column «place» alone.
+
+| Allowed baseline                                                                                              | Forbidden baseline                                            |
+| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| Draft **instance** node: geometry **and** fill/stroke/radius (MCP screenshot + Dev Mode hex, cited `node-id`) | `tokens.scss` / CSS / `docs/specs` written in the **same** PR |
+| Guidebook hex **only** to name a token after the instance hex is known                                        | “matches tokens” / “matches spec” without canvas `node-id`    |
+| User Dev Mode paste / panel screenshot for that node                                                          | Guessing from a zoomed-out section screenshot for color PASS  |
+| Cached metadata that includes **fills**, not only `x/width/height`                                            | Layout Δ ≤ 10px as a substitute for color checks              |
 
 If **no** Figma evidence is available (MCP rate limit **and** no cache **and** no user numbers):
 
@@ -38,23 +41,41 @@ If **no** Figma evidence is available (MCP rate limit **and** no cache **and** n
 - Ask user for `node-id` link or Dev Mode sizes
 - Orchestrator must **not** open/update PR as green UI until unblocked **or** user explicitly accepts risk
 
+If the **spec in this PR contradicts the canvas instance** (e.g. spec says header outline, node `2:17` is tertiary): **FAIL** (or BLOCKED until hex confirmed). Do **not** PASS because live matches the spec.
+
 ## Checks
 
 1. Breakpoints: **375**, **768**, **1920** (and fluid between — no horizontal scroll from 375+).
 2. Per major block in scope: measure vs Figma — **section padding / content width**, heights, gaps, card sizes, font sizes. **Δ ≤ 10px**.
 3. Always record **content/track width** when the draft defines a content frame (e.g. desktop track **1680** at gutter **120** on 1920).
-4. Semantics: landmark/`header`/`nav`/`main`/buttons as appropriate — not only `div`.
-5. Interactive: cursor, default/hover/active where in style guide; disabled if present.
-6. Assets: real logo/icons (not screenshot layout); sizes match draft.
-7. No layout break above 1920 (centered, side margins grow) if globals apply.
-8. Note scrollbar artifact (client width &lt; 1920) separately — do not “fix” by shrinking gutters unless Figma says so.
+4. **Fills / strokes** on every painted child in scope (see Color below). Geometry-only is not a color PASS.
+5. Semantics: landmark/`header`/`nav`/`main`/buttons as appropriate — not only `div`.
+6. Interactive: cursor, default/hover/active where in style guide; disabled if present.
+7. Assets: **Figma export** in `src/assets/` (not an invented SVG/drawing). Invented stand-in → **FAIL**. If the export is missing, **BLOCKED** and ask the user to download (same signal as Developer `ASSET BLOCKED`).
+8. No layout break above 1920 (centered, side margins grow) if globals apply.
+9. Note scrollbar artifact (client width &lt; 1920) separately — do not “fix” by shrinking gutters unless Figma says so.
+
+## Color (mandatory for tables, chips, avatars, buttons, borders)
+
+Open **child** nodes, not only the section frame. Example leaderboard: Table `2:16`, Header `2:17`, odd/even body rows (`2:30` / `2:46`, …), chip, avatar.
+
+Record a table:
+
+| Surface | Figma node-id | Figma fill / stroke / radius | Live computed | Match |
+
+Live rules:
+
+- Compare **computed** `backgroundColor`, `color`, `borderWidth`, `borderColor`, `borderRadius` to the **instance** hex — not to CSS variable names.
+- `rgba(0,0,0,0)` is **transparent** (shows parent fill). Do not report it as `#000000`.
+- Odd/even table rows are **different nodes**. Measure at least one odd and one even body row.
+- Guidebook «table header» / «border» labels do not override a different fill on the Home instance.
 
 ## Method
 
-1. Resolve draft `fileKey` from `docs/specs/overview.md`; collect node-ids from spec or user.
-2. Pull Figma numbers (MCP → else cache → else user paste).
-3. Run app; set viewport 375 → 768 → 1920; measure bounding boxes / computed styles.
-4. Compare **live − Figma**, not live − tokens.
+1. Resolve draft `fileKey` from `docs/specs/overview.md`; collect **child** node-ids from spec or layers (header, rows, chips — not only the section).
+2. Pull Figma geometry **and** fills (MCP `get_screenshot` / `get_design_context` on those ids → else user paste → else BLOCKED for color). Cache of `x/width/height` alone is **not** color evidence.
+3. Run app; set viewport 375 → 768 → 1920; measure bounding boxes **and** computed colors.
+4. Compare **live − Figma instance**, not live − tokens, not live − same-PR spec.
 5. Exercise critical clicks from AC — smoke only.
 
 ## Artifact (mandatory)
@@ -76,6 +97,7 @@ Persist the verdict in the **same PR** as the feature (or fix branch):
 - Status: PASS | FAIL | BLOCKED
 - Draft: <figma url or fileKey> (nodes: …)
 - Evidence: MCP | cache | user-paste
+- Color evidence: instance nodes … (fills/strokes) | missing → not PASS
 - Breakpoints:
   - 375: PASS|FAIL|BLOCKED — notes / Δ
   - 768: PASS|FAIL|BLOCKED — notes / Δ
@@ -86,4 +108,4 @@ Persist the verdict in the **same PR** as the feature (or fix branch):
   - …
 ```
 
-`PASS` only if no Blocking defects, all three breakpoints PASS, and Evidence ≠ missing.
+`PASS` only if no Blocking defects, all three breakpoints PASS, Evidence ≠ missing, and **color table vs instance nodes is complete** for every painted child in scope (or Color evidence is explicitly N/A for non-visual diffs).

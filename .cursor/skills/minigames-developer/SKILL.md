@@ -36,6 +36,15 @@ Implement **one** plan step. Do not review the whole repo. Do not open PR (orche
 
 - Missing / conflicting AC → ask user; do not guess across stories.
 - Neighbor steps (e.g. burger panel while doing header) → leave stubs only if AC requires a hook; no full neighbor feature.
+- **Figma raster/SVG cannot be exported** (MCP rate limit / 402 / empty download) **and** the file is not already in `src/assets/` → **FAIL**. Do **not** invent, redraw, trace, or placeholder-illustrate. Handoff must include:
+
+```markdown
+## ASSET BLOCKED
+
+- Figma node: <fileKey> / <node-id> / <layer name>
+- Put file at: src/assets/<icons|images>/...
+- Action: скачай экспорт из рабочего драфта руками и положи по пути выше
+```
 
 ## Handoff output (mandatory)
 

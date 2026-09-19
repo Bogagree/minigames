@@ -1,2 +1,195 @@
+@use '../../styles/mixins' as *;
+
 .game-developer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-2);
+  width: 100%;
+  min-height: var(--game-dev-height-mobile);
+  padding: var(--size-2);
+  background-color: var(--color-bg);
+  color: var(--color-on-primary);
+
+  &__illustration {
+    display: block;
+    width: 100%;
+    height: var(--game-dev-illustration-height-mobile);
+    object-fit: cover;
+    object-position: center;
+    border-radius: var(--radius-md);
+  }
+
+  &__card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-2);
+    align-items: flex-start;
+    min-height: var(--game-dev-card-height-mobile);
+    padding: var(--size-3);
+    overflow: hidden;
+    border: var(--border-width-card) solid var(--color-on-primary);
+    border-radius: var(--radius-md);
+    background-color: var(--color-white);
+    box-shadow: var(--shadow-card);
+  }
+
+  &__card::before {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(
+      var(--color-on-primary) 12%,
+      transparent 13%
+    );
+    background-size: var(--size-3) var(--size-3);
+    opacity: var(--opacity-pattern);
+    content: '';
+  }
+
+  &__title,
+  &__text,
+  &__button,
+  &__contact {
+    position: relative;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: var(--font-size-headline-medium);
+    font-weight: var(--font-weight-bold);
+    line-height: normal;
+  }
+
+  &__text {
+    margin: 0;
+    color: var(--color-on-bg);
+    font-size: var(--font-size-title-xx-small);
+    font-weight: var(--font-weight-regular);
+    line-height: calc(
+      var(--font-size-title-xxx-small) / var(--font-size-title-xx-small)
+    );
+  }
+
+  &__button {
+    display: inline-flex;
+    gap: var(--size-1);
+    align-items: center;
+    justify-content: center;
+    min-height: var(--button-height-sm);
+    padding: 0 var(--button-padding-x-sm);
+    border: var(--border-width-md) solid var(--color-on-primary);
+    border-radius: var(--radius-sm);
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
+    font: inherit;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    line-height: normal;
+    white-space: nowrap;
+    cursor: pointer;
+
+    &:hover,
+    &:focus-visible {
+      background-color: var(--color-primary-high);
+    }
+
+    &:active {
+      background-color: var(--color-primary-high);
+      filter: brightness(0.95);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  &__button-icon {
+    display: block;
+    width: var(--size-2);
+    height: var(--size-2);
+  }
+
+  &__contact {
+    margin: 0;
+    color: var(--color-on-bg);
+    font-size: var(--font-size-label-large);
+    font-weight: var(--font-weight-regular);
+    line-height: normal;
+    white-space: nowrap;
+  }
+
+  &__email {
+    color: inherit;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  @include tablet-up {
+    min-height: var(--game-dev-height-tablet);
+    padding: var(--size-3) var(--size-5);
+    gap: var(--size-3);
+
+    &__illustration {
+      height: var(--game-dev-illustration-height-tablet);
+    }
+
+    &__card {
+      min-height: var(--game-dev-card-height-tablet);
+      padding: var(--size-4);
+    }
+
+    &__button {
+      min-height: var(--button-height-md);
+      padding: var(--button-padding-y-md) var(--button-padding-x-md);
+      font-size: var(--font-size-label-large);
+    }
+
+    &__button-icon {
+      width: var(--size-2);
+      height: var(--size-2);
+    }
+  }
+
+  @include desktop-up {
+    flex-direction: row;
+    gap: var(--size-5);
+    align-items: center;
+    min-height: var(--game-dev-height-desktop);
+    padding: var(--size-5) var(--home-gutter-desktop);
+
+    &__illustration {
+      flex-shrink: 0;
+      width: var(--game-dev-illustration-width-desktop);
+      height: var(--game-dev-illustration-height-desktop);
+    }
+
+    &__card {
+      flex: 1;
+      min-width: 0;
+      min-height: var(--game-dev-card-height-desktop);
+      padding: var(--size-5);
+      gap: var(--size-3);
+    }
+
+    &__title {
+      font-size: var(--font-size-2xl);
+    }
+
+    &__text {
+      font-size: var(--font-size-title-xxx-small);
+    }
+
+    &__button {
+      min-height: var(--game-dev-button-height-desktop);
+      padding-inline: var(--size-3);
+      font-size: var(--font-size-title-xx-small);
+    }
+
+    &__button-icon {
+      width: var(--size-3);
+      height: var(--size-3);
+    }
+  }
 }

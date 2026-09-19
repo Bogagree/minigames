@@ -86,6 +86,9 @@ Triggers (examples): «докидывай правки», «после ревь�
 - Creating PR while any stage is red
 - Reviewing the entire repository
 - Using course Figma instead of the draft in `docs/specs/overview.md` for layout QA
-- **QA PASS by comparing live UI to tokens authored in the same PR** (circular “proof”)
+- **QA PASS by comparing live UI to tokens or specs authored in the same PR** (circular “proof”)
+- **QA PASS on geometry only** when the block has fills/strokes (table header/rows, chips, avatars, borders)
+- Treating guidebook «place» labels as ground truth when the Home **instance** fill differs
+- Inventing Figma rasters/SVGs when MCP export fails — stop and ask the user to download
 - Ignoring user post-PR feedback until the next story step
 - Merging the PR
