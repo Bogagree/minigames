@@ -51,7 +51,7 @@ If the **spec in this PR contradicts the canvas instance** (e.g. spec says heade
 4. **Fills / strokes** on every painted child in scope (see Color below). Geometry-only is not a color PASS.
 5. Semantics: landmark/`header`/`nav`/`main`/buttons as appropriate — not only `div`.
 6. Interactive: cursor, default/hover/active where in style guide; disabled if present.
-7. Assets: real logo/icons (not screenshot layout); sizes match draft.
+7. Assets: **Figma export** in `src/assets/` (not an invented SVG/drawing). Invented stand-in → **FAIL**. If the export is missing, **BLOCKED** and ask the user to download (same signal as Developer `ASSET BLOCKED`).
 8. No layout break above 1920 (centered, side margins grow) if globals apply.
 9. Note scrollbar artifact (client width &lt; 1920) separately — do not “fix” by shrinking gutters unless Figma says so.
 
