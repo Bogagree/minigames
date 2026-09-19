@@ -8,14 +8,14 @@
 
 ## Figma baseline (absolute node geometry)
 
-| Node | Frame | x | width | height |
-| ---- | ----- | -: | ----: | -----: |
-| `2:421` Top Players | 375 | 0 | 375 | 293 |
-| `12:2279` Developer CTA | 375 | 0 | 375 | 566 |
-| `2:189` Top Players | 768 | 0 | 768 | 329 |
-| `12:2260` Developer CTA | 768 | 0 | 768 | 628 |
-| `2:12` Top Players | 1920 | 0 | 1920 | 586 |
-| `10:2241` Developer CTA | 1920 | 0 | 1920 | 562.79 |
+| Node                    | Frame |   x | width | height |
+| ----------------------- | ----- | --: | ----: | -----: |
+| `2:421` Top Players     | 375   |   0 |   375 |    293 |
+| `12:2279` Developer CTA | 375   |   0 |   375 |    566 |
+| `2:189` Top Players     | 768   |   0 |   768 |    329 |
+| `12:2260` Developer CTA | 768   |   0 |   768 |    628 |
+| `2:12` Top Players      | 1920  |   0 |  1920 |    586 |
+| `10:2241` Developer CTA | 1920  |   0 |  1920 | 562.79 |
 
 Inner (desktop `10:2241`): illustration `x=120` `682×483`; card `x=842` `958×344` → **gap 40px** (section gutter 120, not 120 between columns). Track for leaderboard table/header: `x=120` `w=1680`.
 
@@ -23,29 +23,29 @@ Inner (desktop `10:2241`): illustration `x=120` `682×483`; card `x=842` `958×3
 
 Scrollbar: at 1920, `clientWidth` 1905; gutters stay 120. Content/track **1665** ≈ Figma **1680 − 15**. Same artifact at 768 (`clientWidth` 753). Not treated as a gutter FAIL.
 
-| BP | Metric | Draft | Live | Δ |
-| -- | ------ | ----: | ---: | --: |
-| 375 | leaderboard h | 293 | 297 | +4 |
-| 375 | leaderboard pad / content w | 16 / 343 | 16 / 343 | 0 |
-| 375 | table h / rows | 216 / 3×56 | 220 / 3×56 | +4 |
-| 375 | game-dev h | 566 | 572 | +6 |
-| 375 | illustration | 343×227 | 343×227 | 0 |
-| 375 | card | 343×291 | 343×297 | +6 |
-| 375 | CTA button | 129×32 | 134×32 | +5 / 0 |
-| 768 | leaderboard h | 329 | 333 | +4 |
-| 768 | pad-inline | 40 | 40 | 0 |
-| 768 | table rows | 3×60 | 3×60 | 0 |
-| 768 | game-dev h | 628 | 629 | +1 |
-| 768 | illustration h / card h | 300 / 256 | 300 / 257 | 0 / +1 |
-| 768 | CTA button | 155×37 | 155×41 | 0 / +4 |
-| 1920 | leaderboard h | 586 | 590 | +4 |
-| 1920 | pad-inline / track w | 120 / 1680 | 120 / 1665 | 0 / −15 sb |
-| 1920 | header/row h / rows | 67 / 72 / 5 | 67 / 72 / 5 | 0 |
-| 1920 | game-dev h | 562.79 | 563 | 0 |
-| 1920 | illustration | 682×483 | 682×483 | 0 |
-| 1920 | card | 958×344 @ x842 | 943×344 @ x842 | −15 sb / 0 |
-| 1920 | illustration–card gap | 40 | 40 | 0 |
-| 1920 | CTA button | 189×56 | 183×56 | −6 / 0 |
+| BP   | Metric                      |          Draft |           Live |          Δ |
+| ---- | --------------------------- | -------------: | -------------: | ---------: |
+| 375  | leaderboard h               |            293 |            297 |         +4 |
+| 375  | leaderboard pad / content w |       16 / 343 |       16 / 343 |          0 |
+| 375  | table h / rows              |     216 / 3×56 |     220 / 3×56 |         +4 |
+| 375  | game-dev h                  |            566 |            572 |         +6 |
+| 375  | illustration                |        343×227 |        343×227 |          0 |
+| 375  | card                        |        343×291 |        343×297 |         +6 |
+| 375  | CTA button                  |         129×32 |         134×32 |     +5 / 0 |
+| 768  | leaderboard h               |            329 |            333 |         +4 |
+| 768  | pad-inline                  |             40 |             40 |          0 |
+| 768  | table rows                  |           3×60 |           3×60 |          0 |
+| 768  | game-dev h                  |            628 |            629 |         +1 |
+| 768  | illustration h / card h     |      300 / 256 |      300 / 257 |     0 / +1 |
+| 768  | CTA button                  |         155×37 |         155×41 |     0 / +4 |
+| 1920 | leaderboard h               |            586 |            590 |         +4 |
+| 1920 | pad-inline / track w        |     120 / 1680 |     120 / 1665 | 0 / −15 sb |
+| 1920 | header/row h / rows         |    67 / 72 / 5 |    67 / 72 / 5 |          0 |
+| 1920 | game-dev h                  |         562.79 |            563 |          0 |
+| 1920 | illustration                |        682×483 |        682×483 |          0 |
+| 1920 | card                        | 958×344 @ x842 | 943×344 @ x842 | −15 sb / 0 |
+| 1920 | illustration–card gap       |             40 |             40 |          0 |
+| 1920 | CTA button                  |         189×56 |         183×56 |     −6 / 0 |
 
 All layout Δ ≤ 10px (scrollbar-aware for track/card width).
 
