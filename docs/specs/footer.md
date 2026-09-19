@@ -11,7 +11,7 @@
 - **Desktop:** ряд бренд | группы; gutter `120px`; высота секции `343px`.
 - Nav-ссылки и social-иконки ведут на Home (`BASE_URL`).
 - RS School → `https://rs.school/` (новая вкладка). GitHub → `https://github.com/Bogagree` (`@Bogagree`), вместо плейсхолдера `@student-nickname` на макете.
-- Цвета (канва Home): фон `--color-bg-footer`; бренд/заголовки `--color-white`; текст/ссылки `--color-on-bg-footer`; social fill `--color-bg-footer-low` (в экспорте чипа `#2A264F`; hover — brightness на том же SVG); RS / GitHub — экспорты контейнеров с канвы.
+- Цвета (канва Home + Dev Mode paste): фон `--color-bg-footer` `#1E1B3A`; бренд/заголовки колонок `--color-white`; tagline и nav-ссылки `--color-on-bg-footer` `#B9B5C9`; social fill `--color-bg-footer-low` `#2A264F`, hover `--color-bg-footer-lowest` `#3C376E`; stroke/effects у текста нет. RS / GitHub — экспорты контейнеров с канвы.
 - Иконки Community: экспорт чипов `share` / `chat` / `rss_feed` (`src/assets/icons/share.svg`, `chat.svg`, `rss-feed.svg`). RS: `rs-logo-container.svg`. GitHub `code`: `github-icon.svg`. Логотип — существующий `logo-mark.png`.
 
 ## Out of scope

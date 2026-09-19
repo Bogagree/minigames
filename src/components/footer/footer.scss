@@ -132,14 +132,14 @@
     height: var(--size-4);
     overflow: hidden;
     border-radius: var(--radius-full);
-    background-color: transparent;
+    background-color: var(--color-bg-footer-low);
     color: var(--color-white);
     text-decoration: none;
     cursor: pointer;
 
     &:hover,
     &:focus-visible {
-      filter: brightness(1.15);
+      background-color: var(--color-bg-footer-lowest);
     }
 
     &:active {
