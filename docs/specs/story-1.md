@@ -9,19 +9,20 @@
 
 ## In scope
 
-| Область                | Ожидание                                         | Статус                   |
-| ---------------------- | ------------------------------------------------ | ------------------------ |
-| Tooling                | Vite, TS, ESLint, Prettier, Husky, Sass tokens   | есть                     |
-| SPA                    | bootstrap, тонкий router, Home stub              | есть (stub; UI по шагам) |
-| Deploy                 | GitHub Pages preview                             | есть                     |
-| Header                 | [unauthenticated](./header.md), по нашему драфту | есть (RSS-QS-1-4-1)      |
-| Burger                 | [mobile menu](./burger-menu.md)                  | есть (RSS-QS-1-4-2)      |
-| Hero                   | [секция Home](./hero.md)                         | есть (RSS-QS-1-4-3)      |
-| Carousel               | [layout слайдера](./carousel.md)                 | есть (RSS-QS-1-4-4)      |
-| Leaderboard + Game Dev | секции Home                                      | todo                     |
-| Footer                 |                                                  | todo                     |
-| Auth dialog            | RSS-QS-1-5-1 … 1-5-5                             | todo                     |
-| Favicon + QA           | pixel-check breakpoints                          | todo                     |
+| Область        | Ожидание                                         | Статус                   |
+| -------------- | ------------------------------------------------ | ------------------------ |
+| Tooling        | Vite, TS, ESLint, Prettier, Husky, Sass tokens   | есть                     |
+| SPA            | bootstrap, тонкий router, Home stub              | есть (stub; UI по шагам) |
+| Deploy         | GitHub Pages preview                             | есть                     |
+| Header         | [unauthenticated](./header.md), по нашему драфту | есть (RSS-QS-1-4-1)      |
+| Burger         | [mobile menu](./burger-menu.md)                  | есть (RSS-QS-1-4-2)      |
+| Hero           | [секция Home](./hero.md)                         | есть (RSS-QS-1-4-3)      |
+| Carousel       | [layout слайдера](./carousel.md)                 | есть (RSS-QS-1-4-4)      |
+| Leaderboard    | [таблица Home](./leaderboard.md)                 | есть (RSS-QS-1-4-5)      |
+| Game developer | [CTA Home](./game-developer.md)                  | есть (RSS-QS-1-4-6)      |
+| Footer         |                                                  | todo                     |
+| Auth dialog    | RSS-QS-1-5-1 … 1-5-5                             | todo                     |
+| Favicon + QA   | pixel-check breakpoints                          | todo                     |
 
 ## Out of scope (Story 1)
 

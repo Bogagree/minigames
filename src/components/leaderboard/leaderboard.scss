@@ -1,2 +1,278 @@
+@use '../../styles/mixins' as *;
+
 .leaderboard {
+  width: 100%;
+  min-height: var(--leaderboard-height-mobile);
+  padding: var(--size-2);
+  background-color: var(--color-bg);
+  color: var(--color-on-primary);
+
+  &__header {
+    display: flex;
+    gap: var(--size-2);
+    align-items: center;
+    min-width: 0;
+    margin-bottom: var(--size-2);
+  }
+
+  &__accent {
+    flex-shrink: 0;
+    width: var(--size-1);
+    height: var(--size-3);
+    border-radius: var(--radius-sm);
+    background-color: var(--color-primary);
+  }
+
+  &__title {
+    margin: 0;
+    font-size: var(--font-size-headline-medium);
+    font-weight: var(--font-weight-bold);
+    line-height: normal;
+  }
+
+  &__title-text {
+    &--full {
+      display: none;
+    }
+  }
+
+  &__caption {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  &__table {
+    position: relative;
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    border: var(--border-width-card) solid var(--color-on-primary);
+    border-radius: var(--radius-md);
+    background-color: var(--color-white);
+    border-spacing: 0;
+  }
+
+  &__head,
+  &__body {
+    display: block;
+    width: 100%;
+  }
+
+  &__row {
+    display: grid;
+    grid-template-columns:
+      var(--leaderboard-rank-width-mobile)
+      minmax(0, 1fr)
+      var(--leaderboard-score-width-mobile)
+      var(--leaderboard-streak-width-mobile);
+    column-gap: var(--size-1);
+    align-items: center;
+    min-height: var(--leaderboard-row-height-mobile);
+    padding-inline: var(--size-2);
+    border-bottom: var(--border-width-md) solid var(--color-outline);
+
+    &:last-child {
+      border-bottom: 0;
+    }
+
+    &--head {
+      min-height: var(--leaderboard-header-height-mobile);
+      background-color: var(--color-surface);
+    }
+
+    &--desktop-only {
+      display: none;
+    }
+  }
+
+  &__cell {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-size: var(--font-size-label-large);
+    font-weight: var(--font-weight-medium);
+    line-height: normal;
+    text-align: center;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    &--player {
+      display: flex;
+      gap: var(--size-1);
+      align-items: center;
+      min-width: 0;
+      text-align: start;
+    }
+
+    &--games,
+    &--favorite {
+      display: none;
+    }
+  }
+
+  &__label--full {
+    display: none;
+  }
+
+  &__avatar {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: var(--leaderboard-avatar-size-mobile);
+    height: var(--leaderboard-avatar-size-mobile);
+    border-radius: var(--radius-full);
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+  }
+
+  &__name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__score--full,
+  &__streak--full {
+    display: none;
+  }
+
+  &__chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+    padding: calc(var(--size-1) / 2) var(--size-2);
+    overflow: hidden;
+    border-radius: var(--radius-md);
+    background-color: var(--color-primary);
+    font-size: var(--font-size-label-large);
+    font-weight: var(--font-weight-medium);
+    text-overflow: ellipsis;
+  }
+
+  @include tablet-up {
+    min-height: var(--leaderboard-height-tablet);
+    padding: var(--size-3) var(--size-5);
+
+    &__header {
+      margin-bottom: var(--size-3);
+    }
+
+    &__title-text--short {
+      display: none;
+    }
+
+    &__title-text--full {
+      display: inline;
+    }
+
+    &__row {
+      grid-template-columns:
+        var(--leaderboard-rank-width-tablet)
+        minmax(0, 1fr)
+        var(--leaderboard-stat-width-tablet)
+        var(--leaderboard-stat-width-tablet)
+        var(--leaderboard-stat-width-tablet);
+      min-height: var(--leaderboard-row-height-tablet);
+      column-gap: var(--size-2);
+
+      &--head {
+        min-height: var(--leaderboard-header-height-tablet);
+      }
+    }
+
+    &__cell {
+      font-size: var(--font-size-title-xx-small);
+
+      &--games {
+        display: block;
+      }
+    }
+
+    &__avatar {
+      width: var(--leaderboard-avatar-size-tablet);
+      height: var(--leaderboard-avatar-size-tablet);
+    }
+
+    &__score--compact {
+      display: none;
+    }
+
+    &__score--full,
+    &__streak--compact {
+      display: inline;
+    }
+  }
+
+  @include desktop-up {
+    min-height: var(--leaderboard-height-desktop);
+    padding: var(--size-5) var(--home-gutter-desktop);
+
+    &__header {
+      margin-bottom: var(--size-5);
+    }
+
+    &__accent {
+      height: var(--size-4);
+    }
+
+    &__title {
+      font-size: var(--font-size-2xl);
+    }
+
+    &__row {
+      grid-template-columns: var(--leaderboard-rank-width-tablet) repeat(
+          5,
+          minmax(0, 1fr)
+        );
+      min-height: var(--leaderboard-row-height-desktop);
+      padding-inline: var(--size-3);
+
+      &--head {
+        min-height: var(--leaderboard-header-height-desktop);
+      }
+
+      &--desktop-only {
+        display: grid;
+      }
+    }
+
+    &__cell {
+      &--games,
+      &--favorite {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    &__label--short {
+      display: none;
+    }
+
+    &__label--full {
+      display: inline;
+    }
+
+    &__avatar {
+      width: var(--leaderboard-avatar-size-desktop);
+      height: var(--leaderboard-avatar-size-desktop);
+      font-size: var(--font-size-label-large);
+    }
+
+    &__streak--compact {
+      display: none;
+    }
+
+    &__streak--full {
+      display: inline;
+    }
+  }
 }

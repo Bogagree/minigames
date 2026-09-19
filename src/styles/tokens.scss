@@ -56,6 +56,42 @@ $breakpoint-desktop: 1920px;
   --slider-card-side-desktop: 288px;
   --slider-card-featured-desktop: 816px;
 
+  /* Shared Home desktop gutter (Figma x=120 on 1920 frames) */
+  --home-gutter-desktop: calc(var(--size-10) + var(--size-5));
+
+  /* Figma Top Players Section (draft nodes 2:421 / 2:189 / 2:12) */
+  --leaderboard-height-mobile: 293px;
+  --leaderboard-height-tablet: 329px;
+  --leaderboard-height-desktop: 586px;
+  --leaderboard-header-height-mobile: 48px;
+  --leaderboard-header-height-tablet: 48px;
+  --leaderboard-header-height-desktop: 67px;
+  --leaderboard-row-height-mobile: 56px;
+  --leaderboard-row-height-tablet: 60px;
+  --leaderboard-row-height-desktop: 72px;
+  --leaderboard-rank-width-mobile: 40px;
+  --leaderboard-rank-width-tablet: 80px;
+  --leaderboard-score-width-mobile: 80px;
+  --leaderboard-streak-width-mobile: 70px;
+  --leaderboard-stat-width-tablet: 110px;
+  --leaderboard-avatar-size-mobile: var(--size-3);
+  --leaderboard-avatar-size-tablet: calc(var(--size-3) + var(--size-1) / 2);
+  --leaderboard-avatar-size-desktop: var(--size-5);
+
+  /* Figma Developer CTA Section (draft nodes 12:2279 / 12:2260 / 10:2241) */
+  --game-dev-height-mobile: 566px;
+  --game-dev-height-tablet: 628px;
+  --game-dev-height-desktop: 563px;
+  --game-dev-illustration-height-mobile: 227px;
+  --game-dev-illustration-height-tablet: 300px;
+  --game-dev-illustration-height-desktop: 483px;
+  --game-dev-illustration-width-desktop: 682px;
+  --game-dev-card-height-mobile: 291px;
+  --game-dev-card-height-tablet: 256px;
+  --game-dev-card-height-desktop: calc(var(--size-10) * 4 + var(--size-3));
+  --game-dev-button-height-desktop: calc(var(--size-5) + var(--size-2));
+  --opacity-pattern: 0.08;
+
   --line-height-body: 1.5;
 
   --size-0: 0;
