@@ -127,6 +127,8 @@ $breakpoint-desktop: 1920px;
   /* Figma Drop shadow: X/Y 4, blur 0, spread 0, color on-primary */
   --shadow-card: calc(var(--size-1) / 2) calc(var(--size-1) / 2) 0 0
     var(--color-on-primary);
+  /* Figma cta-card Drop shadow: X 0, Y 14, blur 30, spread -10, #000 7.84% */
+  --shadow-cta: 0 14px 30px -10px rgb(0 0 0 / 7.84%);
 
   --radius-none: 0;
   --radius-sm: 8px;

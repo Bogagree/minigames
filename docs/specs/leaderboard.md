@@ -10,7 +10,7 @@
 - **Tablet:** 3 строки; колонки Rank / Player / Games / Score / Streak; score full; streak compact; заголовок «Top Players This Week».
 - **Desktop:** 5 строк; колонки Rank / Player / Games Played / Total Score / Streak / Favorite Game; streak `🔥 12 days`.
 - Интерактивных элементов нет.
-- Цвета (канва Home): шапка `2:17` `--color-tertiary` `#3A2EBF`, текст `--color-white`; обводка `2:16` `--border-width-md` + `--color-on-primary`; зебра **с первой строки body**: нечётные (`2:30`, `2:62`, `2:94`) `--color-bg` `#F9F8F3`, чётные (`2:46`, `2:78`) белые; разделитель строк `--border-width-sm` (1px) `--color-outline` (не 2px card/md); аватарки `--color-avatar-random-1…5` с бордером `--color-on-primary`; чип Favorite Game — заливка outline, обводка `--color-outline-variant`.
+- Цвета (канва Home): шапка `2:17` `--color-tertiary` `#3A2EBF`, текст `--color-white`; внешняя рамка `.leaderboard__table-frame` как у `.slider__card`: `--border-width-card` + `--color-on-primary` + `--shadow-card` (shadow на обёртке, `overflow: hidden` на самой таблице, чтобы не срезать тень); зебра **с первой строки body**: нечётные (`2:30`, `2:62`, `2:94`) `--color-bg` `#F9F8F3`, чётные (`2:46`, `2:78`) белые; разделитель строк `--border-width-sm` (1px) `--color-outline`; аватарки `--color-avatar-random-1…5` с бордером `--color-on-primary`; чип Favorite Game — заливка прозрачная, обводка `--color-outline-variant`.
 
 ## Out of scope
 

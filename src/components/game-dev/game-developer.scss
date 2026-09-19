@@ -27,31 +27,11 @@
     align-items: flex-start;
     min-height: var(--game-dev-card-height-mobile);
     padding: var(--size-3);
-    overflow: hidden;
-    border: var(--border-width-card) solid var(--color-on-primary);
+    overflow: visible;
+    border: var(--border-width-md) solid var(--color-on-primary);
     border-radius: var(--radius-md);
     background-color: var(--color-white);
-    box-shadow: var(--shadow-card);
-  }
-
-  &__card::before {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background-image: radial-gradient(
-      var(--color-on-primary) 12%,
-      transparent 13%
-    );
-    background-size: var(--size-3) var(--size-3);
-    opacity: var(--opacity-pattern);
-    content: '';
-  }
-
-  &__title,
-  &__text,
-  &__button,
-  &__contact {
-    position: relative;
+    box-shadow: var(--shadow-cta);
   }
 
   &__title {
