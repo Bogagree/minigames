@@ -158,20 +158,3 @@ Story 1 кладёт курс-совместимый mock в `src/data/*.json` �
 - Почему: в `tokens.scss` не хватало avatar-random / outline-variant / secondary / tertiary; `--color-like` расходился с гайдбуком
 
 Имена CSS-переменных совпадают с guidebook (General / Borders / Additional). Hex — из Dev Mode paste. Какой токен на Home — решает **fill инстанса** (`2:17` tertiary; зебра с первой строки body `--color-bg`, затем белая). Обводка таблицы `2:16` — `--border-width-md`; разделитель строк — `--border-width-sm`.
-
----
-
-## D-015: QA — effects, family chrome, visible shadow, stale reports
-
-- Status: Accepted
-- Date: 2026-09-19
-- Почему: PASS в `docs/qa/leaderboard-gamedev.md` не поймал ~10 дыр (shadow/inside stroke, гайдбук как expected, соседний хром, clipped shadow, выдуманный SVG, старый отчёт)
-
-Контракт QA (скилл `minigames-qa`, оркестратор):
-
-1. Paint evidence на **каждом** painted child в scope: fill, stroke (weight + inside/outside), **effect/shadow**. Geometry-only `get_metadata` не даёт color/effect PASS.
-2. Hex только с **этого** instance `node-id`. Гайдбук именует токен после hex; expected из same-PR spec/`tokens.scss`/«place»/соседа запрещён.
-3. Карточка карусели ≠ таблица ≠ CTA — хром не копировать между семействами.
-4. Тень мерить **видимую** (обёртка/секция), не `getComputedStyle` у `overflow: hidden`.
-5. Выдуманный ассет → **FAIL**; MCP 402/rate-limit → **BLOCKED**, не PASS по памяти.
-6. Post-user-review без **перезаписанного** `docs/qa/<slug>.md` в этом прогоне ≠ зелёный PR; старый PASS не переиспользовать.

@@ -12,7 +12,6 @@ MiniGames ведётся по **SDD**: требования и решения ж
 | [implementation-plan.md](./implementation-plan.md)                          | Общий порядок работ (все story)                      |
 | [story-1-plan.md](./story-1-plan.md) … [story-4-plan.md](./story-4-plan.md) | Чеклисты шагов по каждой story                       |
 | [qa/](./qa/)                                                                | Pixel-check отчёты фабрики (`<feat-slug>.md`)        |
-| [qa-agent-improvement-brief.md](./qa-agent-improvement-brief.md)            | Бриф дыр QA (effects, children, stale PASS)          |
 | Agent factory (Cursor)                                                      | `.cursor/skills/minigames-*/` + rule `agent-factory` |
 
 ## Agent factory
