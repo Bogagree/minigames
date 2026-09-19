@@ -46,9 +46,11 @@ When the user reviews an **open** `feat/*` PR (or local branch) and reports defe
 1. Treat feedback as a **blocking defect list** — do **not** open a new PR.
 2. Run on the **same** `feat/…` branch: Developer (fix) → Reviewer → QA.
 3. Commit + push to the existing PR head.
-4. Update `docs/qa/<feat-slug>.md` (re-QA; note prior false PASS if applicable).
+4. **Overwrite** `docs/qa/<feat-slug>.md` with a **new** QA run after the latest Developer UI commit. A file that still says PASS is not a closed QA stage. Do **not** reuse the previous report.
 5. Emit the run log with `PR: <existing url> (updated)`.
 6. Max **2** fix loops per user review batch unless user says continue.
+
+Green PR after user review requires a QA report **from this run**. Post-user-review **without** a fresh `docs/qa/<feat-slug>.md` ≠ green.
 
 Triggers (examples): «докидывай правки», «после ревью», paste of Figma stroke/shadow, «неправильный бордер», layout width complaints while PR #N is open.
 
@@ -59,7 +61,7 @@ Triggers (examples): «докидывай правки», «после ревь�
 
 ## PR stage (after all green)
 
-1. Ensure QA wrote `docs/qa/<feat-slug>.md` (D-011) and it is committed on the feat/fix branch.
+1. Ensure QA **overwrote** `docs/qa/<feat-slug>.md` (D-011 / D-015) in **this** factory run and it is committed. An older PASS on the branch is not enough after UI or user-review changes.
 2. Push `feat/…` if needed.
 3. `gh pr create --base <story-branch>` with **Summary + Test plan** only. Link QA report (`docs/qa/…`).  
    **Do not** put the course checklist (Task / Screenshot / Deployment / Done / Score) — that is only for `story-N` → `main`.  
@@ -87,8 +89,13 @@ Triggers (examples): «докидывай правки», «после ревь�
 - Reviewing the entire repository
 - Using course Figma instead of the draft in `docs/specs/overview.md` for layout QA
 - **QA PASS by comparing live UI to tokens or specs authored in the same PR** (circular “proof”)
-- **QA PASS on geometry only** when the block has fills/strokes (table header/rows, chips, avatars, borders)
-- Treating guidebook «place» labels as ground truth when the Home **instance** fill differs
-- Inventing Figma rasters/SVGs when MCP export fails — stop and ask the user to download
+- **QA PASS on geometry only** when the block has fills/strokes/effects (table header/rows, chips, avatars, borders, shadows)
+- Treating `get_metadata` x/width/height cache as color or shadow evidence
+- Treating guidebook «place» hex as expected when the Home **instance** fill/effect differs
+- Copying chrome (stroke/shadow) from a neighbor family (carousel card vs table vs CTA)
+- Measuring clipped `box-shadow` (`overflow: hidden`) as a visible-shadow PASS
+- Reusing `docs/qa/<slug>.md` PASS after live or user-review changed
+- Inventing Figma rasters/SVGs when MCP export fails (402 / rate-limit) — **BLOCKED**, ask the user to download; invented asset is **FAIL**, not non-blocking
+- QA PASS «from guidebook memory» while MCP is rate-limited
 - Ignoring user post-PR feedback until the next story step
 - Merging the PR
