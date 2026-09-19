@@ -13,10 +13,10 @@ The previous color re-QA treated the **same-PR spec / guidebook write-up** as gr
 
 That inverted the canvas:
 
-| Target | Prior QA (false PASS) | Canvas nodes (this run) |
-| ------ | --------------------- | ----------------------- |
-| Header fill | `#E5E7EB`, not tertiary | `2:17` fill **tertiary `#3A2EBF`** |
-| Header text | (not checked vs `2:17`) | `2:17` text **white `#FFFFFF`** |
+| Target             | Prior QA (false PASS)    | Canvas nodes (this run)                   |
+| ------------------ | ------------------------ | ----------------------------------------- |
+| Header fill        | `#E5E7EB`, not tertiary  | `2:17` fill **tertiary `#3A2EBF`**        |
+| Header text        | (not checked vs `2:17`)  | `2:17` text **white `#FFFFFF`**           |
 | Table outer stroke | (not measured vs `2:16`) | `2:16` **2px** `#242145`, radius **12px** |
 
 Skill ground truth is the **draft node**, not tokens or a same-PR spec that disagreed with `2:17`. A PASS that required `#E5E7EB` on the header was a **false PASS**. This run measures **computed** `backgroundColor` / `color` / `borderWidth` / `borderColor` / `borderRadius` on live `th` and `.leaderboard__table` vs those nodes — not vs CSS variable names.
@@ -38,42 +38,42 @@ Inner (desktop `10:2241`): illustration `x=120` `682×483`; card `x=842` `958×3
 
 ## Color / stroke baseline (canvas + guidebook paste)
 
-| Surface | Node / source | Expected |
-| ------- | ------------- | -------- |
-| Table header (`th`) fill | `2:17` | tertiary `#3A2EBF` |
-| Table header (`th`) text | `2:17` | white `#FFFFFF` |
-| Table outer stroke | `2:16` | **2px** `--color-on-primary` `#242145` (not game-card 2.5px) |
-| Table radius | `2:16` | 12px |
-| Table body | guidebook | white `#FFFFFF` |
-| Even rows (2, 4) | guidebook | outline `#E5E7EB` |
-| Odd rows (1, 3, 5) | guidebook | white (transparent on white table) |
-| Avatars 1–5 | guidebook | `#E9EEF6` `#A3E2C9` `#BCE3FF` `#FFC6FF` `#E8DFF5` |
-| Avatar stroke | guidebook / cache | on-primary `#242145` |
-| Chip fill | guidebook | outline `#E5E7EB` |
-| Chip stroke | guidebook | outline-variant `#D2D2D2` |
+| Surface                  | Node / source     | Expected                                                     |
+| ------------------------ | ----------------- | ------------------------------------------------------------ |
+| Table header (`th`) fill | `2:17`            | tertiary `#3A2EBF`                                           |
+| Table header (`th`) text | `2:17`            | white `#FFFFFF`                                              |
+| Table outer stroke       | `2:16`            | **2px** `--color-on-primary` `#242145` (not game-card 2.5px) |
+| Table radius             | `2:16`            | 12px                                                         |
+| Table body               | guidebook         | white `#FFFFFF`                                              |
+| Even rows (2, 4)         | guidebook         | outline `#E5E7EB`                                            |
+| Odd rows (1, 3, 5)       | guidebook         | white (transparent on white table)                           |
+| Avatars 1–5              | guidebook         | `#E9EEF6` `#A3E2C9` `#BCE3FF` `#FFC6FF` `#E8DFF5`            |
+| Avatar stroke            | guidebook / cache | on-primary `#242145`                                         |
+| Chip fill                | guidebook         | outline `#E5E7EB`                                            |
+| Chip stroke              | guidebook         | outline-variant `#D2D2D2`                                    |
 
 ## Color / stroke measurements (live computed)
 
 Same hex at 375 / 768 / 1920 unless noted. Proof is `getComputedStyle` hex / px, not `var(--…)`.
 
-| Target | Expected (`2:17` / `2:16` / paste) | Live 1920 | Match |
-| ------ | ---------------------------------- | --------- | :---: |
-| `th` background | `#3A2EBF` (`2:17`) | `#3A2EBF` | ✓ |
-| `th` color | `#FFFFFF` (`2:17`) | `#FFFFFF` | ✓ |
-| table `borderWidth` | `2px` (`2:16`) | `2px` | ✓ |
-| table `borderColor` | `#242145` (`2:16`) | `#242145` | ✓ |
-| table `borderRadius` | `12px` (`2:16`) | `12px` | ✓ |
-| table background | `#FFFFFF` | `#FFFFFF` | ✓ |
-| row 1 / 3 / 5 | white | `transparent` on `#FFFFFF` | ✓ |
-| row 2 / 4 | `#E5E7EB` | `#E5E7EB` | ✓ |
-| avatar 1 | `#E9EEF6` | `#E9EEF6` | ✓ |
-| avatar 2 | `#A3E2C9` | `#A3E2C9` | ✓ |
-| avatar 3 | `#BCE3FF` | `#BCE3FF` | ✓ |
-| avatar 4 | `#FFC6FF` | `#FFC6FF` | ✓ |
-| avatar 5 | `#E8DFF5` | `#E8DFF5` | ✓ |
-| avatar stroke | `#242145` | `#242145` 2px | ✓ |
-| chip fill | `#E5E7EB` | `#E5E7EB` | ✓ |
-| chip stroke | `#D2D2D2` 2px | `#D2D2D2` 2px | ✓ |
+| Target               | Expected (`2:17` / `2:16` / paste) | Live 1920                  | Match |
+| -------------------- | ---------------------------------- | -------------------------- | :---: |
+| `th` background      | `#3A2EBF` (`2:17`)                 | `#3A2EBF`                  |   ✓   |
+| `th` color           | `#FFFFFF` (`2:17`)                 | `#FFFFFF`                  |   ✓   |
+| table `borderWidth`  | `2px` (`2:16`)                     | `2px`                      |   ✓   |
+| table `borderColor`  | `#242145` (`2:16`)                 | `#242145`                  |   ✓   |
+| table `borderRadius` | `12px` (`2:16`)                    | `12px`                     |   ✓   |
+| table background     | `#FFFFFF`                          | `#FFFFFF`                  |   ✓   |
+| row 1 / 3 / 5        | white                              | `transparent` on `#FFFFFF` |   ✓   |
+| row 2 / 4            | `#E5E7EB`                          | `#E5E7EB`                  |   ✓   |
+| avatar 1             | `#E9EEF6`                          | `#E9EEF6`                  |   ✓   |
+| avatar 2             | `#A3E2C9`                          | `#A3E2C9`                  |   ✓   |
+| avatar 3             | `#BCE3FF`                          | `#BCE3FF`                  |   ✓   |
+| avatar 4             | `#FFC6FF`                          | `#FFC6FF`                  |   ✓   |
+| avatar 5             | `#E8DFF5`                          | `#E8DFF5`                  |   ✓   |
+| avatar stroke        | `#242145`                          | `#242145` 2px              |   ✓   |
+| chip fill            | `#E5E7EB`                          | `#E5E7EB`                  |   ✓   |
+| chip stroke          | `#D2D2D2` 2px                      | `#D2D2D2` 2px              |   ✓   |
 
 375 / 768: `th` `#3A2EBF` / `#FFFFFF`; table `2px` `#242145` `12px`; zebra odd `transparent` / even `#E5E7EB`; avatars 1–3 match; chip (Favorite Game column hidden) same fill/stroke.
 
