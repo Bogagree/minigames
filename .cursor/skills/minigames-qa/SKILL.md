@@ -25,11 +25,11 @@ disable-model-invocation: true
 
 ## Ground truth (mandatory)
 
-| Allowed baseline | Forbidden baseline |
-| --- | --- |
-| Figma draft node geometry | `tokens.scss` / CSS values written in the **same** PR |
-| Spec numbers **copied from Figma** and cited with node-id | “matches tokens” without Figma citation |
-| User-provided measurements | Guessing from screenshots alone for ±10px PASS |
+| Allowed baseline                                          | Forbidden baseline                                    |
+| --------------------------------------------------------- | ----------------------------------------------------- |
+| Figma draft node geometry                                 | `tokens.scss` / CSS values written in the **same** PR |
+| Spec numbers **copied from Figma** and cited with node-id | “matches tokens” without Figma citation               |
+| User-provided measurements                                | Guessing from screenshots alone for ±10px PASS        |
 
 If **no** Figma evidence is available (MCP rate limit **and** no cache **and** no user numbers):
 
