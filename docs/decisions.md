@@ -157,7 +157,7 @@ Story 1 кладёт курс-совместимый mock в `src/data/*.json` �
 - Date: 2026-09-19
 - Почему: в `tokens.scss` не хватало avatar-random / outline-variant / secondary / tertiary; `--color-like` расходился с гайдбуком
 
-Имена CSS-переменных совпадают с guidebook (General / Borders / Additional). Hex — из Dev Mode paste. Какой токен на Home — решает **fill инстанса** (`2:17` tertiary; зебра с первой строки body `--color-bg`, затем белая). Обводка таблицы `2:16` — `--border-width-md`; разделитель строк — `--border-width-sm`.
+Имена CSS-переменных совпадают с guidebook (General / Borders / Additional). Hex — из Dev Mode paste. Какой токен на Home — решает **fill инстанса** (`2:17` tertiary; зебра с первой строки body `--color-bg`, затем белая). Рамка таблицы как у `.slider__card`: `--border-width-card` + `--shadow-card`. Разделитель строк — `--border-width-sm`. CTA `cta-card`: `--border-width-md` (2px, inside) + `--shadow-cta` (0 / 14 / 30 / −10 / black 7.84%), не hard offset карточки карусели.
 
 ---
 

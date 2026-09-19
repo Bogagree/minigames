@@ -272,7 +272,12 @@ export function createLeaderboard(): HTMLElement {
   }
 
   table.append(caption, thead, tbody);
-  section.append(header, table);
+
+  const frame: HTMLDivElement = document.createElement('div');
+  frame.className = 'leaderboard__table-frame';
+  frame.append(table);
+
+  section.append(header, frame);
 
   return section;
 }
