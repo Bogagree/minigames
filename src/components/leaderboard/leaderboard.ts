@@ -134,7 +134,7 @@ function createPlayerCell(entry: LeaderboardEntry): HTMLTableCellElement {
   cell.className = 'leaderboard__cell leaderboard__cell--player';
 
   const avatar: HTMLSpanElement = document.createElement('span');
-  avatar.className = 'leaderboard__avatar';
+  avatar.className = `leaderboard__avatar leaderboard__avatar--${String(entry.rank)}`;
   avatar.textContent = playerInitials(entry.playerName);
   avatar.setAttribute('aria-hidden', 'true');
 
@@ -193,6 +193,9 @@ function createFavoriteCell(entry: LeaderboardEntry): HTMLTableCellElement {
 function createBodyRow(entry: LeaderboardEntry): HTMLTableRowElement {
   const row: HTMLTableRowElement = document.createElement('tr');
   row.className = 'leaderboard__row';
+  if (entry.rank % 2 === 0) {
+    row.classList.add('leaderboard__row--alt');
+  }
   if (entry.rank > COMPACT_ROW_LIMIT) {
     row.classList.add('leaderboard__row--desktop-only');
   }

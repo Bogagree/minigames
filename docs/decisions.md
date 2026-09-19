@@ -148,3 +148,13 @@ Production-сборка Vite → GitHub Pages. Смена на Vercel/Netlify т
 - Почему: D-007 фиксирует статику + `leaderboard.json`, а слой `src/services` ещё без API
 
 Story 1 кладёт курс-совместимый mock в `src/data/*.json` и импортирует его в компонент. Fetch/сервис появятся отдельным decision, когда подключат backend.
+
+---
+
+## D-014: Color tokens = полный гайдбук Figma
+
+- Status: Accepted
+- Date: 2026-09-19
+- Почему: в `tokens.scss` не хватало avatar-random / outline-variant / secondary / tertiary; `--color-like` расходился с гайдбуком
+
+Имена CSS-переменных совпадают с guidebook (General / Borders / Additional). Hex — из Dev Mode paste. `--color-tertiary` (`#3A2EBF`) хранится как «table header, button hover» в гайдбуке; шапка Home Top Players на канве — серый `--color-outline`, не tertiary.
