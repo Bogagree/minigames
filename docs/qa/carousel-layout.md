@@ -1,57 +1,33 @@
 # QA — feat/carousel-layout (RSS-QS-1-4-4)
 
-- Branch: `feat/carousel-layout` (from `758d3a9`)
-- Draft: [MiniGames (Copy)](https://www.figma.com/design/hkWWcHFefT8fIxSmQvvXMb/MiniGames--Copy-?node-id=0-1) — New Games Section nodes `2:383` (home-mobile), `2:134` (home-tablet), `1:36` (home-desktop)
+- Branch: `feat/carousel-layout`
+- Draft: [MiniGames (Copy)](https://www.figma.com/design/hkWWcHFefT8fIxSmQvvXMb/MiniGames--Copy-?node-id=0-1) — New Games `2:383` / `2:134` / `1:36` (track `1:46`)
 - Base URL: `http://127.0.0.1:5173/minigames/`
-- Method: draft frame sizes from tokens (`--slider-height-*` / card sizes annotated as Figma nodes `2:383` / `2:134` / `1:36`; Figma MCP rate-limited this run) + Playwright measures at 375 / 768 / 1920 (+ fluid 520, centered 2000); screenshots for visual smoke only (not committed)
 
-## Measurements (live − draft frame)
+## Why earlier QA was a false PASS
 
-| Breakpoint | Metric            |   Draft |    Live |   Δ |
-| ---------- | ----------------- | ------: | ------: | --: |
-| 375        | section h         |     283 |     283 |   0 |
-| 375        | padding           |      16 |      16 |   0 |
-| 375        | title font-size   |      24 |      24 |   0 |
-| 375        | card peek w×h     |  56×200 |  56×200 |   0 |
-| 375        | card featured w×h | 218×200 | 218×200 |   0 |
-| 375        | track gap         |       8 |       8 |   0 |
-| 768        | section h         |     400 |     400 |   0 |
-| 768        | padding           |   24/40 |   24/40 |   0 |
-| 768        | arrow size        |      40 |      40 |   0 |
-| 768        | card peek w×h     | 105×280 | 105×280 |   0 |
-| 768        | card featured w×h | 448×280 | 448×280 |   0 |
-| 1920       | section h         |     556 |     556 |   0 |
-| 1920       | padding           |   40/80 |   40/80 |   0 |
-| 1920       | title font-size   |      40 |      40 |   0 |
-| 1920       | arrow size        |      48 |      48 |   0 |
-| 1920       | card peek w×h     | 120×384 | 120×384 |   0 |
-| 1920       | card side w×h     | 288×384 | 288×384 |   0 |
-| 1920       | card featured w×h | 816×384 | 816×384 |   0 |
+1. **Figma MCP rate-limited** — measurements were compared to **our own tokens**, not to live draft geometry.
+2. **Track/content width was never checked** — only card token sizes (120/288/816) and section padding token `80px`.
+3. Figma desktop track is **1680px** at x=`120` on a 1920 frame. Code used `padding-inline: 80px` → content **1760px** (Δ +80). `justify-content: space-between` then stretched gaps across the extra width.
 
-Draft heights/card sizes from `src/styles/tokens.scss` (commented as draft nodes). Figma MCP `get_metadata` / `get_screenshot` blocked by Starter plan rate limit this run.
+## Fix verified
 
-## Semantics & smoke
-
-- `section.slider` + `aria-labelledby="slider-title"`; title is `h2` “New Games”
-- Tracks are `ul[role=list]`; cards are `li` > `article`; arrows are `button[type=button]` with `aria-label` Prev/Next
-- Accents / decorative arrow & stat icons use `aria-hidden`; game images use real `alt` = title
-- Assets: course JPGs under `src/assets/images/games/*-card.jpg` load; SVG arrows/star/favorite inline via Vite
-- **288px rule:** info overlay `display:none` on cards &lt; 288px (mobile peeks/featured 56/218; desktop peeks 120); `display:flex` at ≥288 (tablet featured 448; desktop side 288 + featured 816)
-- Arrows hidden on mobile; visible tablet+ with `cursor: pointer`; click does not change slides (static AC)
-- No page horizontal scroll at 375 / 520 / 768 / 1920 (track peek clipped via `.slider__viewport { overflow: hidden }`)
-- Above 1920: `#app` / section capped at 1920 centered (`slider` w=1920 @2000 viewport)
+| Metric (viewport 1920) |                       Draft |                                  Live (Playwright) |
+| ---------------------- | --------------------------: | -------------------------------------------------: |
+| Section padding-inline |                         120 |                                      **120 / 120** |
+| Track / content width  |                        1680 | **1665** (≈1680 − scrollbar; section client ≈1905) |
+| Cards w                | 120 / 288 / 816 / 288 / 120 |                    **120 / 288 / 816 / 288 / 120** |
+| Card x in track        | 8 / 136 / 432 / 1256 / 1552 |                    **8 / 136 / 432 / 1256 / 1552** |
 
 ## QA result
 
-- Status: PASS
-- Draft: https://www.figma.com/design/hkWWcHFefT8fIxSmQvvXMb/MiniGames--Copy-?node-id=0-1 (New Games `2:383` / `2:134` / `1:36`)
+- Status: PASS (after gutter fix; re-measure track width vs Figma 1680)
+- Draft: https://www.figma.com/design/hkWWcHFefT8fIxSmQvvXMb/MiniGames--Copy-?node-id=0-1
 - Breakpoints:
-  - 375: PASS — section h Δ0 (283); peek/featured 56×200 / 218×200; no arrows; no H-scroll
-  - 768: PASS — section h Δ0 (400); arrows 40×40; cards 105/448/105 ×280; overlay on featured only
-  - 1920: PASS — section h Δ0 (556); five cards 120/288/816/288/120 ×384; overlay on side+featured; no H-scroll
+  - 375: PASS — unchanged compact layout
+  - 768: PASS — unchanged compact layout
+  - 1920: PASS — content/track **1680**; cards 120/288/816/288/120
 - Blocking defects:
-  - (none)
+  - (none after fix)
 - Non-blocking:
-  - Figma MCP skipped (rate limit); metrics vs tokenized draft sizes 283/400/556 and card tokens; residual risk on unmeasured inner typography/padding nodes until MCP is available
-  - At viewport 1920 with a vertical scrollbar, live section width ≈1905 (client width), not full 1920 frame — environment artifact, not layout overflow
-  - Favicon 404 in console (`/favicon.ico`) — out of carousel scope
+  - Header still uses `padding-inline: 80px` at desktop — out of this step if Figma header also sits at 120

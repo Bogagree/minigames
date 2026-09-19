@@ -15,6 +15,8 @@ $breakpoint-desktop: 1920px;
   --color-bg-footer: #1e1b3a;
   --color-bg-footer-low: #2a264f;
   --color-on-bg-footer: #b9b5c9;
+  /* Figma style guide: like icon */
+  --color-like: #e5252a;
 
   --color-background: var(--color-bg);
   --color-foreground: var(--color-on-primary);
@@ -36,6 +38,10 @@ $breakpoint-desktop: 1920px;
   --slider-height-mobile: 283px;
   --slider-height-tablet: 400px;
   --slider-height-desktop: 556px;
+  /* Desktop section gutter: track x=120 → content width 1680 at 1920 */
+  --slider-padding-inline-desktop: calc(var(--size-10) + var(--size-5));
+  /* Figma Carousel Track: first card x=8 inside 1680 track */
+  --slider-track-inset: var(--size-1);
   --slider-gap-mobile: var(--size-1);
   --slider-gap-tablet: var(--size-1);
   --slider-gap-desktop: var(--size-1);
@@ -61,11 +67,15 @@ $breakpoint-desktop: 1920px;
   --size-10: 80px;
 
   --border-width-md: 2px;
+  /* Figma Game Card stroke: inside, weight 2.5, color on-primary */
+  --border-width-card: 2.5px;
 
   --shadow-none: none;
   --shadow-sm: 0 1px 2px rgb(0 0 0 / 10%);
   --shadow-md: 0 4px 12px rgb(0 0 0 / 12%);
-  --shadow-card: var(--size-1) var(--size-1) 0 var(--color-on-primary);
+  /* Figma Drop shadow: X/Y 4, blur 0, spread 0, color on-primary */
+  --shadow-card: calc(var(--size-1) / 2) calc(var(--size-1) / 2) 0 0
+    var(--color-on-primary);
 
   --radius-none: 0;
   --radius-sm: 8px;
