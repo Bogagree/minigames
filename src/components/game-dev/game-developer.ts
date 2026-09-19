@@ -1,4 +1,4 @@
-import illustrationUrl from '../../assets/images/game-developer-illustration.svg';
+import illustrationUrl from '../../assets/images/illustration-side.jpg';
 import uploadIconUrl from '../../assets/icons/upload.svg';
 import './game-developer.scss';
 
