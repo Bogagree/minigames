@@ -193,7 +193,7 @@ function createFavoriteCell(entry: LeaderboardEntry): HTMLTableCellElement {
 function createBodyRow(entry: LeaderboardEntry): HTMLTableRowElement {
   const row: HTMLTableRowElement = document.createElement('tr');
   row.className = 'leaderboard__row';
-  if (entry.rank % 2 === 0) {
+  if (entry.rank % 2 === 1) {
     row.classList.add('leaderboard__row--alt');
   }
   if (entry.rank > COMPACT_ROW_LIMIT) {

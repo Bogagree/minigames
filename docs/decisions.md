@@ -137,7 +137,7 @@ Production-сборка Vite → GitHub Pages. Смена на Vercel/Netlify т
 - Почему: ложный PASS карусели (live vs свои токены при rate-limit MCP) и ручные правки после ревью пользователя не были частью пайплайна
 
 1. **Post-user-review:** замечания пользователя по открытому `feat/*` PR → тот же пайплайн Developer → Reviewer → QA на той же ветке, commit+push в существующий PR (не новый PR). См. orchestrator skill.
-2. **QA ground truth:** PASS только против геометрии Figma draft (MCP / кэш metadata с `x|width|height` / paste пользователя с `node-id`). Сравнение live ↔ токены из того же PR запрещено. Нет evidence → статус `BLOCKED`, не зелёный PR.
+2. **QA ground truth:** PASS только против **канвы** draft (геометрия **и** fills/strokes дочерних узлов: шапка, ряды body, чипы, аватарки). MCP / скрин узла / Dev Mode paste с `node-id`. Live ↔ токены или спека **того же PR** запрещены. Подпись «place» в гайдбуке не перебивает fill инстанса на Home. Нет evidence по цвету видимого блока → `BLOCKED` или FAIL, не зелёный PASS.
 
 ---
 
@@ -157,4 +157,4 @@ Story 1 кладёт курс-совместимый mock в `src/data/*.json` �
 - Date: 2026-09-19
 - Почему: в `tokens.scss` не хватало avatar-random / outline-variant / secondary / tertiary; `--color-like` расходился с гайдбуком
 
-Имена CSS-переменных совпадают с guidebook (General / Borders / Additional). Hex — из Dev Mode paste. `--color-tertiary` (`#3A2EBF`) — заливка шапки таблицы Home (`2:17`) и «table header, button hover» в гайдбуке. Обводка таблицы (`2:16`) — `--border-width-md` + `--color-on-primary`, не game-card `2.5px`.
+Имена CSS-переменных совпадают с guidebook (General / Borders / Additional). Hex — из Dev Mode paste. Какой токен на Home — решает **fill инстанса** (`2:17` tertiary; зебра с первой строки body `--color-bg`, затем белая). Обводка таблицы `2:16` — `--border-width-md`; разделитель строк — `--border-width-sm`.

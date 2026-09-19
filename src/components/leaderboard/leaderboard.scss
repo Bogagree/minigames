@@ -74,7 +74,7 @@
     align-items: center;
     min-height: var(--leaderboard-row-height-mobile);
     padding-inline: var(--size-2);
-    border-bottom: var(--border-width-md) solid var(--color-outline);
+    border-bottom: var(--border-width-sm) solid var(--color-outline);
 
     &:last-child {
       border-bottom: 0;
@@ -92,10 +92,10 @@
     }
 
     &--alt {
-      background-color: var(--color-outline);
+      background-color: var(--color-bg);
 
       .leaderboard__cell {
-        background-color: var(--color-outline);
+        background-color: var(--color-bg);
       }
     }
 
