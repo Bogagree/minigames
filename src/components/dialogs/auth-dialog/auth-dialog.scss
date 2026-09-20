@@ -1,39 +1,260 @@
+@use '../../../styles/mixins' as *;
+
+html.is-auth-dialog-open,
+body.is-auth-dialog-open {
+  overflow: hidden;
+}
+
 .auth-dialog {
+  position: relative;
+  width: calc(100% - var(--size-4));
+  max-width: var(--auth-dialog-width);
   margin: auto;
-  padding: var(--size-3);
-  border: var(--border-width-md) solid var(--color-on-primary);
-  border-radius: var(--radius-sm);
+  padding: var(--auth-dialog-padding);
+  overflow: visible;
+  border: var(--border-width-auth-dialog) solid var(--color-on-primary);
+  border-radius: var(--radius-auth-dialog);
   background-color: var(--color-bg);
   color: var(--color-on-primary);
   font-family: var(--font-family-base);
+  box-shadow: var(--shadow-auth-dialog);
+  opacity: 0;
+  transform: translateY(var(--size-2));
+  transition:
+    opacity var(--duration-dialog) var(--easing-dialog),
+    transform var(--duration-dialog) var(--easing-dialog);
 
-  &::backdrop {
-    background-color: rgb(36 33 69 / 40%);
+  &[open] {
+    display: flex;
+    flex-direction: column;
+    gap: var(--auth-dialog-gap);
   }
 
-  &__title {
-    margin: 0 0 var(--size-2);
-    font-size: var(--font-size-headline-small);
-    font-weight: var(--font-weight-bold);
+  &::backdrop {
+    background-color: color-mix(
+      in srgb,
+      var(--color-on-primary) var(--opacity-backdrop),
+      transparent
+    );
+    opacity: 0;
+    transition: opacity var(--duration-dialog) var(--easing-dialog);
+  }
+
+  &--open {
+    opacity: 1;
+    transform: none;
+  }
+
+  &--open::backdrop {
+    opacity: 1;
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--auth-dialog-gap);
+    min-width: 0;
+    max-height: calc(
+      var(--auth-dialog-max-height) - var(--auth-dialog-padding) * 2
+    );
+    padding-bottom: calc(var(--size-1) / 2);
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 
   &__close {
-    padding: var(--button-padding-y-sm) var(--button-padding-x-sm);
-    border: var(--border-width-md) solid var(--color-on-primary);
+    position: absolute;
+    top: var(--size-2);
+    right: var(--size-2);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--size-4);
+    height: var(--size-4);
+    padding: 0;
+    border: none;
     border-radius: var(--radius-sm);
     background-color: transparent;
+    cursor: pointer;
+
+    &:hover,
+    &:focus-visible {
+      filter: brightness(1.1);
+    }
+
+    &:active {
+      filter: brightness(0.95);
+    }
+  }
+
+  &__close-icon {
+    display: block;
+    width: var(--size-4);
+    height: var(--size-4);
+  }
+
+  &__switcher {
+    display: flex;
+    gap: var(--size-2);
+    margin: 0 var(--size-5) 0 0;
+  }
+
+  &__tab {
+    flex: 1;
+    min-height: var(--button-height-md);
+    padding: var(--button-padding-y-sm) var(--button-padding-x-sm);
+    border: none;
+    border-bottom: var(--border-width-md) solid var(--color-outline);
+    background-color: transparent;
+    color: var(--color-on-bg);
+    font: inherit;
+    font-size: var(--font-size-title-xx-small);
+    font-weight: var(--font-weight-medium);
+    line-height: normal;
+    cursor: pointer;
+    transition:
+      color var(--duration-dialog) var(--easing-dialog),
+      border-color var(--duration-dialog) var(--easing-dialog);
+
+    &:hover,
+    &:focus-visible {
+      color: var(--color-on-primary);
+    }
+
+    &--active {
+      color: var(--color-on-primary);
+      font-weight: var(--font-weight-bold);
+      border-bottom-color: var(--color-primary);
+    }
+  }
+
+  &__panels {
+    display: grid;
+  }
+
+  &__panel {
+    display: flex;
+    grid-area: 1 / 1;
+    flex-direction: column;
+    gap: var(--auth-dialog-gap);
+    min-width: 0;
+    opacity: 0;
+    transform: translateX(var(--size-2));
+    pointer-events: none;
+    visibility: hidden;
+    transition:
+      opacity var(--duration-dialog) var(--easing-dialog),
+      transform var(--duration-dialog) var(--easing-dialog),
+      visibility var(--duration-dialog) var(--easing-dialog);
+
+    &--active {
+      opacity: 1;
+      transform: none;
+      pointer-events: auto;
+      visibility: visible;
+    }
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-1);
+  }
+
+  &__label {
+    color: var(--color-on-primary);
+    font-size: var(--font-size-label-large);
+    font-weight: var(--font-weight-medium);
+    line-height: normal;
+  }
+
+  &__input {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: var(--button-height-md);
+    padding: var(--button-padding-y-sm) var(--size-2);
+    border: var(--border-width-md) solid var(--color-outline);
+    border-radius: var(--radius-sm);
+    background-color: var(--color-white);
+    color: var(--color-on-primary);
+    font: inherit;
+    font-size: var(--font-size-title-xx-small);
+    line-height: normal;
+
+    &::placeholder {
+      color: var(--color-on-bg-low);
+    }
+
+    &:hover {
+      border-color: var(--color-outline-variant);
+    }
+
+    &:focus-visible {
+      border-color: var(--color-on-primary);
+      outline: none;
+    }
+  }
+
+  &__submit {
+    display: inline-flex;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: var(--auth-dialog-submit-height);
+    padding: var(--button-padding-y-md) var(--button-padding-x-md);
+    overflow: visible;
+    border: none;
+    border-radius: var(--radius-sm);
+    background-color: var(--color-primary);
     color: var(--color-on-primary);
     font: inherit;
     font-size: var(--font-size-label-large);
     font-weight: var(--font-weight-bold);
+    line-height: normal;
     cursor: pointer;
+    box-shadow:
+      var(--shadow-auth-submit),
+      inset 0 0 0 var(--border-width-card) var(--color-on-primary);
 
-    &:hover {
-      background-color: var(--color-surface);
+    &:hover,
+    &:focus-visible {
+      background-color: var(--color-primary-high);
     }
 
     &:active {
-      background-color: var(--color-primary);
+      background-color: var(--color-primary-high);
+      filter: brightness(0.95);
     }
+  }
+
+  &__hint {
+    margin: 0;
+    color: var(--color-on-bg);
+    font-size: var(--font-size-label-large);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-body);
+    text-align: center;
+  }
+
+  &__link {
+    padding: 0;
+    border: none;
+    background: none;
+    color: var(--color-tertiary);
+    font: inherit;
+    font-weight: var(--font-weight-bold);
+    text-decoration: underline;
+    cursor: pointer;
+
+    &:hover,
+    &:focus-visible {
+      color: var(--color-on-primary);
+    }
+  }
+
+  @include tablet-up {
+    width: var(--auth-dialog-width);
   }
 }

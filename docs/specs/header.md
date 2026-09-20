@@ -7,10 +7,10 @@
 - Только guest-состояние хедера.
 - Breakpoints: 375 (logo + burger), 768 (logo + Sign Up + burger), 1920 (logo + nav + Log In + Sign Up).
 - Nav-ссылки ведут на Home (`BASE_URL`).
-- Log In / Sign Up открывают Auth dialog (каркас; полный layout — RSS-QS-1-5-*).
+- Log In / Sign Up открывают [Auth dialog](./auth-dialog.md) (`login` / `register`).
 - Кнопка burger в разметке есть; панель меню — [burger-menu.md](./burger-menu.md) (RSS-QS-1-4-2).
 
 ## Out of scope
 
 - Authenticated header
-- Полный Auth dialog UI
+- Вёрстка содержимого диалога (см. [auth-dialog.md](./auth-dialog.md))

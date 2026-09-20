@@ -35,6 +35,7 @@ src/assets/         → картинки/иконки (только реальн
 
 - `createRouter(routes, fallbackPath)` рендерит fallback-страницу в корень приложения.
 - History API и многостраничный SPA — вне текущей архитектуры Story 1 (D-006).
+- Auth dialog — singleton native `<dialog>` на `document.body` (D-016), не страница роутера.
 
 ## Деплой
 

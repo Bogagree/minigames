@@ -14,5 +14,6 @@
 | [leaderboard.md](./leaderboard.md)       | Leaderboard (RSS-QS-1-4-5)          |
 | [game-developer.md](./game-developer.md) | Game developer CTA (RSS-QS-1-4-6)   |
 | [footer.md](./footer.md)                 | Footer (RSS-QS-1-4-7)               |
+| [auth-dialog.md](./auth-dialog.md)       | Auth dialog (RSS-QS-1-5-1 … 1-5-5)  |
 
 Stories 2–4: добавить отдельные спеки, когда курс откроет детали (не заранее выдумывать UI).
