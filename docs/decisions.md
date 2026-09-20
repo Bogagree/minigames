@@ -195,3 +195,13 @@ Auth (Story 1) — один `HTMLDialogElement` на `document.body` (`openAuthD
 - Почему: Dev Mode paste задаёт отдельный хром окна и submit; карусель и CTA — другие семьи
 
 Login и Registration — один chrome панели; Login и Create Account — один chrome submit. Токены: `--border-width-auth-dialog` (3px inside), `--shadow-auth-dialog` (8/8/0/0 `--color-black`), `--shadow-auth-submit` (0/4/0/0 `--color-on-primary`), `--radius-auth-dialog` (`--size-3`). Не копировать `--shadow-card` / `--shadow-cta`. Тень панели не на том же боксе, что `overflow` (скролл — `.auth-dialog__body`). Submit 2.5px: не CSS `border` (Chromium округляет used-value до 2px); inside stroke — `inset` spread `--border-width-card` в том же `box-shadow`, что drop shadow.
+
+---
+
+## D-018: Favicon — существующий logo mark из драфта
+
+- Status: Accepted
+- Date: 2026-09-20
+- Почему: в рабочем драфте нет отдельного кадра favicon; MCP export rate-limit; invent SVG запрещён
+
+Иконка вкладки — тот же Figma brand mark, что уже лежит в `src/assets/icons/logo-mark.png`. Копия для раздачи: `public/favicon.png`, `<link rel="icon">` в `index.html`. Новый SVG/ICO не выдумываем.
