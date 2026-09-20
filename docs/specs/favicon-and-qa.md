@@ -4,7 +4,7 @@
 Канон: [RSS-QS-1-6-1](https://github.com/rolling-scopes-school/qualifying-stage/blob/main/tasks/minigames/tasks/story-1/RSS-QS-1-6-1-global-semantic-validation.md).  
 Favicon: строка в [story-1.md](https://github.com/rolling-scopes-school/qualifying-stage/blob/main/tasks/minigames/story-1.md) + [common project requirements](https://github.com/rolling-scopes-school/qualifying-stage/blob/main/tasks/minigames/common-project-requirements.md).
 
-Pixel Perfect 375 / 768 / 1920 — отчёт фабрики: `docs/qa/favicon-and-qa.md` (этот файл **не** подменяет QA PASS).
+Pixel Perfect 375 / 768 / 1920 — отчёт фабрики: `docs/qa/favicon-and-qa.md` (этот файл **не** подменяет QA PASS). При 402 Figma MCP — PNG в `tmp/pixel-perfect/` ([инструкция](../qa/README.md)).
 
 ## Favicon
 

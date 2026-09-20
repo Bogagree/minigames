@@ -19,11 +19,23 @@ disable-model-invocation: true
 - Feature spec (e.g. `docs/specs/header.md`) + **Figma node-id(s)** for the section **and** every painted child in scope
 - Figma evidence (one of, in order) — split by what it can prove:
   1. MCP `get_design_context` / `get_screenshot` on the **child** `node-id` (not only the section), or user Dev Mode paste / panel screenshot for that id
-  2. Repo/session cache that includes **fills, strokes (weight + inside/outside), and effects** for that id
-  3. `get_metadata` / cache with only `x` / `width` / `height` — **geometry only**. Not color PASS. Not effect PASS. Not “evidence #2” for paint.
+  2. **User PNG exports** in `tmp/pixel-perfect/` when MCP is 402 / rate-limited (see below). Layout + visual vs those rasters. Paint: sample from the PNG or Dev Mode paste — not guidebook / same-PR tokens.
+  3. Repo/session cache that includes **fills, strokes (weight + inside/outside), and effects** for that id
+  4. `get_metadata` / cache with only `x` / `width` / `height` — **geometry only**. Not color PASS. Not effect PASS.
 - Browser: Playwright or Cursor browser at `BASE_URL` (prefer `http://127.0.0.1:…`, not `localhost`)
+- Optional: MCP `perfectpixel` (`capture_and_diff`) — live URL vs `tmp/pixel-perfect/home-<bp>.png`
 
-If MCP is 402 / rate-limited: **BLOCKED** (not PASS from guidebook memory or same-PR tokens). Ask the user for Dev Mode paste or a download. Do not invent.
+## Local Figma PNGs (`tmp/pixel-perfect/`)
+
+PNG files gitignored; folder is in the repo (`tmp/pixel-perfect/README.md`). Contract: `docs/qa/README.md`. Required names for Home:
+
+| Path                              | Breakpoint |
+| --------------------------------- | ---------- |
+| `tmp/pixel-perfect/home-375.png`  | 375        |
+| `tmp/pixel-perfect/home-768.png`  | 768        |
+| `tmp/pixel-perfect/home-1920.png` | 1920       |
+
+On Figma MCP fail, **before** BLOCKED: `list` / read those three files. Present → Evidence `user-export-png`. Compare live at that viewport (PerfectPixel if the MCP is up, else measure + visual). Missing any of the three for a global Home run → **BLOCKED** with this path — do not PASS from guidebook or same-PR tokens. Do not invent rasters. Do not commit the PNGs.
 
 ## Ground truth (mandatory)
 
@@ -36,6 +48,7 @@ Hex is recorded **only after** the instance is read. Guidebook may **name** the 
 | This `node-id`: fill + stroke (weight, inside/outside, hex) + effect/shadow | Same-PR `tokens.scss` / CSS / `docs/specs` as expected            |
 | Guidebook **name** after instance hex is known                              | Guidebook «place» hex as expected (zebra/chip/header)             |
 | User Dev Mode paste / panel for **this** id                                 | Neighbor chrome (“all cards share one border”)                    |
+| User PNG in `tmp/pixel-perfect/` (MCP 402; sample paint from the raster)    | Guidebook / same-PR tokens while MCP is down                      |
 | Cache **with fills + strokes + effects**                                    | Geometry cache (`x/width/height`) as color/effect evidence        |
 | Visible shadow on an ancestor that is not `overflow: hidden`                | `getComputedStyle` / element shot of a clipped box as shadow PASS |
 
@@ -80,7 +93,7 @@ Live rules:
 ## Method
 
 1. Resolve draft `fileKey` from `docs/specs/overview.md`. List **child** node-ids (not only the section).
-2. Pull paint per child (`get_design_context` / `get_screenshot` on **that** id → else user paste → else BLOCKED). Geometry-only metadata is layout-only.
+2. Pull paint per child (`get_design_context` / `get_screenshot` on **that** id → else user paste → else `tmp/pixel-perfect` PNG sample → else BLOCKED). Geometry-only metadata is layout-only. MCP 402: skip further Figma MCP calls this run; use the PNGs.
 3. Run app; viewports 375 → 768 → 1920; measure boxes **and** computed fill/stroke/shadow (visible shadow if clipped).
 4. Compare **live − this instance**, never live − tokens, live − same-PR spec, live − guidebook place, live − neighbor.
 5. Exercise critical clicks from AC — smoke only.
@@ -112,7 +125,7 @@ Live rules:
 
 - Status: PASS | FAIL | BLOCKED
 - Draft: <figma url or fileKey> (nodes: …)
-- Evidence: MCP-child | cache-with-paint | user-paste
+- Evidence: MCP-child | cache-with-paint | user-paste | user-export-png (`tmp/pixel-perfect/…`)
 - Paint evidence: each in-scope child has fill + stroke + effect from **that** node-id | missing → not PASS
 - Report: overwrote docs/qa/<feat-slug>.md this run (not a reused PASS)
 - Breakpoints:

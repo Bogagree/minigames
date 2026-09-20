@@ -4,16 +4,16 @@ MiniGames ведётся по **SDD**: требования и решения ж
 
 ## Карта
 
-| Файл / папка                                                                | Назначение                                           |
-| --------------------------------------------------------------------------- | ---------------------------------------------------- |
-| [decisions.md](./decisions.md)                                              | Закрытые архитектурные решения (`Accepted`)          |
-| [specs/](./specs/)                                                          | Спеки продукта, доменов и фич                        |
-| [conventions/](./conventions/)                                              | Как пишем код, git, PR                               |
-| [implementation-plan.md](./implementation-plan.md)                          | Общий порядок работ (все story)                      |
-| [story-1-plan.md](./story-1-plan.md) … [story-4-plan.md](./story-4-plan.md) | Чеклисты шагов по каждой story                       |
-| [qa/](./qa/)                                                                | Pixel-check отчёты фабрики (`<feat-slug>.md`)        |
-| [qa-agent-improvement-brief.md](./qa-agent-improvement-brief.md)            | Бриф дыр QA (effects, children, stale PASS)          |
-| Agent factory (Cursor)                                                      | `.cursor/skills/minigames-*/` + rule `agent-factory` |
+| Файл / папка                                                                | Назначение                                                      |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| [decisions.md](./decisions.md)                                              | Закрытые архитектурные решения (`Accepted`)                     |
+| [specs/](./specs/)                                                          | Спеки продукта, доменов и фич                                   |
+| [conventions/](./conventions/)                                              | Как пишем код, git, PR                                          |
+| [implementation-plan.md](./implementation-plan.md)                          | Общий порядок работ (все story)                                 |
+| [story-1-plan.md](./story-1-plan.md) … [story-4-plan.md](./story-4-plan.md) | Чеклисты шагов по каждой story                                  |
+| [qa/](./qa/)                                                                | Pixel-check отчёты; [локальные PNG при MCP 402](./qa/README.md) |
+| [qa-agent-improvement-brief.md](./qa-agent-improvement-brief.md)            | Бриф дыр QA (effects, children, stale PASS)                     |
+| Agent factory (Cursor)                                                      | `.cursor/skills/minigames-*/` + rule `agent-factory`            |
 
 ## Agent factory
 

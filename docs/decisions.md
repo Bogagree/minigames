@@ -184,7 +184,7 @@ Story 1 кладёт курс-совместимый mock в `src/data/*.json` �
 - Date: 2026-09-20
 - Почему: один UI для header и burger, top-layer + Esc/backdrop без UI-библиотеки
 
-Auth (Story 1) — один `HTMLDialogElement` на `document.body` (`openAuthDialog`). Close — существующий `src/assets/icons/close.svg`. Password visibility / eye SVG не добавляем: в рабочем драфте нет отдельного экспорта. Backend/validation — вне скоупа.
+Auth (Story 1) — один `HTMLDialogElement` на `document.body` (`openAuthDialog`). Close — `src/assets/icons/close.svg`. Password visibility — layout-only toggle (`eye.svg` / `eye-off.svg`), без API. Google / Forgot Password — кнопки без OAuth и без reset flow. Backend/validation — вне скоупа.
 
 ---
 
@@ -205,3 +205,23 @@ Login и Registration — один chrome панели; Login и Create Account 
 - Почему: в рабочем драфте нет отдельного кадра favicon; MCP export rate-limit; invent SVG запрещён
 
 Иконка вкладки — тот же Figma brand mark, что уже лежит в `src/assets/icons/logo-mark.png`. Копия для раздачи: `public/favicon.png`, `<link rel="icon">` в `index.html`. Новый SVG/ICO не выдумываем.
+
+---
+
+## D-019: QA fallback — PNG в `tmp/pixel-perfect/`
+
+- Status: Accepted
+- Date: 2026-09-20
+- Почему: Figma MCP Starter rate-limit (402) блокирует QA; гайдбук как expected запрещён
+
+Ручной экспорт кадров рабочего драфта (PNG 1×, 375 / 768 / 1920) кладётся в `tmp/pixel-perfect/home-<bp>.png` (PNG в `.gitignore`, папка в репо через `README.md`). QA при отбивке MCP читает эти файлы (`user-export-png`) и может гонять mcp-perfectpixel. Папка без PNG → BLOCKED. PNG в git не коммитим (D-011). Контракт: `docs/qa/README.md`.
+
+---
+
+## D-020: Auth layout — user PNG Login / Register
+
+- Status: Accepted
+- Date: 2026-09-20
+- Почему: QA `feat/favicon-and-qa` FAIL: живой диалог не совпал с экспортами; пользователь велел переделать Login/Register
+
+Канон copy и структуры — `tmp/pixel-perfect/Login Dialog.png` и `Register Dialog.png`, не подчёркнутые табы предыдущего шага. Google / forgot / confirm / eye — только вёрстка. Иконки — SVG в `src/assets/icons/` по этим кадрам (Figma MCP 402, отдельных node-export нет).

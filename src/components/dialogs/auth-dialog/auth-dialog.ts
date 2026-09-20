@@ -1,4 +1,10 @@
 import closeIconUrl from '../../../assets/icons/close.svg';
+import eyeOffIconUrl from '../../../assets/icons/eye-off.svg';
+import eyeIconUrl from '../../../assets/icons/eye.svg';
+import googleIconUrl from '../../../assets/icons/google.svg';
+import lockIconUrl from '../../../assets/icons/lock.svg';
+import mailIconUrl from '../../../assets/icons/mail.svg';
+import userIconUrl from '../../../assets/icons/user.svg';
 import './auth-dialog.scss';
 
 export type AuthDialogMode = 'login' | 'register';
@@ -15,6 +21,8 @@ type AuthDialogReferences = {
   registerTab: HTMLButtonElement;
   loginPanel: HTMLDivElement;
   registerPanel: HTMLDivElement;
+  loginTitle: HTMLHeadingElement;
+  registerTitle: HTMLHeadingElement;
 };
 
 const authDialogState: {
@@ -27,20 +35,22 @@ const authDialogState: {
   closing: false,
 };
 
+function createIcon(source: string, className: string): HTMLImageElement {
+  const icon: HTMLImageElement = document.createElement('img');
+  icon.className = className;
+  icon.src = source;
+  icon.alt = '';
+  icon.width = 20;
+  icon.height = 20;
+  return icon;
+}
+
 function createCloseButton(onClose: () => void): HTMLButtonElement {
   const button: HTMLButtonElement = document.createElement('button');
   button.type = 'button';
   button.className = 'auth-dialog__close';
   button.setAttribute('aria-label', 'Close dialog');
-
-  const icon: HTMLImageElement = document.createElement('img');
-  icon.className = 'auth-dialog__close-icon';
-  icon.src = closeIconUrl;
-  icon.alt = '';
-  icon.width = 32;
-  icon.height = 32;
-
-  button.append(icon);
+  button.append(createIcon(closeIconUrl, 'auth-dialog__close-icon'));
   button.addEventListener('click', onClose);
   return button;
 }
@@ -62,12 +72,53 @@ function createTab(
   return tab;
 }
 
+function createIntro(
+  titleId: string,
+  title: string,
+  subtitle: string,
+): { block: HTMLDivElement; title: HTMLHeadingElement } {
+  const block: HTMLDivElement = document.createElement('div');
+  block.className = 'auth-dialog__intro';
+
+  const heading: HTMLHeadingElement = document.createElement('h2');
+  heading.className = 'auth-dialog__title';
+  heading.id = titleId;
+  heading.textContent = title;
+
+  const text: HTMLParagraphElement = document.createElement('p');
+  text.className = 'auth-dialog__subtitle';
+  text.textContent = subtitle;
+
+  block.append(heading, text);
+  return { block, title: heading };
+}
+
+function bindPasswordToggle(
+  input: HTMLInputElement,
+  button: HTMLButtonElement,
+  icon: HTMLImageElement,
+): void {
+  button.addEventListener('click', () => {
+    const isPassword = input.type === 'password';
+    input.type = isPassword ? 'text' : 'password';
+    icon.src = isPassword ? eyeOffIconUrl : eyeIconUrl;
+    button.setAttribute(
+      'aria-label',
+      isPassword ? 'Hide password' : 'Show password',
+    );
+    button.setAttribute('aria-pressed', String(isPassword));
+  });
+}
+
 function createField(options: {
   id: string;
   label: string;
   name: string;
   type: 'email' | 'password' | 'text';
   autocomplete: AutoFill;
+  placeholder: string;
+  iconSrc: string;
+  togglePassword?: boolean;
 }): HTMLElement {
   const field: HTMLDivElement = document.createElement('div');
   field.className = 'auth-dialog__field';
@@ -77,16 +128,44 @@ function createField(options: {
   label.htmlFor = options.id;
   label.textContent = options.label;
 
+  const control: HTMLDivElement = document.createElement('div');
+  control.className = 'auth-dialog__control';
+
   const input: HTMLInputElement = document.createElement('input');
   input.className = 'auth-dialog__input';
   input.id = options.id;
   input.name = options.name;
   input.type = options.type;
   input.autocomplete = options.autocomplete;
-  input.placeholder = options.label;
+  input.placeholder = options.placeholder;
 
-  field.append(label, input);
+  control.append(createIcon(options.iconSrc, 'auth-dialog__input-icon'), input);
+
+  if (options.togglePassword === true) {
+    const toggle: HTMLButtonElement = document.createElement('button');
+    toggle.type = 'button';
+    toggle.className = 'auth-dialog__visibility';
+    toggle.setAttribute('aria-label', 'Show password');
+    toggle.setAttribute('aria-pressed', 'false');
+    const eye: HTMLImageElement = createIcon(
+      eyeIconUrl,
+      'auth-dialog__visibility-icon',
+    );
+    toggle.append(eye);
+    bindPasswordToggle(input, toggle, eye);
+    control.append(toggle);
+  }
+
+  field.append(label, control);
   return field;
+}
+
+function createForgotButton(): HTMLButtonElement {
+  const button: HTMLButtonElement = document.createElement('button');
+  button.type = 'button';
+  button.className = 'auth-dialog__forgot';
+  button.textContent = 'Forgot Password?';
+  return button;
 }
 
 function createSwitchHint(
@@ -116,6 +195,29 @@ function createSubmitButton(label: string): HTMLButtonElement {
   return button;
 }
 
+function createOrDivider(): HTMLDivElement {
+  const row: HTMLDivElement = document.createElement('div');
+  row.className = 'auth-dialog__or';
+  row.setAttribute('role', 'separator');
+
+  const label: HTMLSpanElement = document.createElement('span');
+  label.className = 'auth-dialog__or-label';
+  label.textContent = 'OR';
+  row.append(label);
+  return row;
+}
+
+function createGoogleButton(label: string): HTMLButtonElement {
+  const button: HTMLButtonElement = document.createElement('button');
+  button.type = 'button';
+  button.className = 'auth-dialog__google';
+  button.append(
+    createIcon(googleIconUrl, 'auth-dialog__google-icon'),
+    document.createTextNode(label),
+  );
+  return button;
+}
+
 function wrapAuthPanel(
   form: HTMLFormElement,
   panelId: string,
@@ -131,17 +233,29 @@ function wrapAuthPanel(
   return panel;
 }
 
-function createLoginForm(): HTMLFormElement {
+function createLoginForm(): {
+  form: HTMLFormElement;
+  title: HTMLHeadingElement;
+} {
   const form: HTMLFormElement = document.createElement('form');
   form.noValidate = true;
 
+  const intro = createIntro(
+    'auth-dialog-login-title',
+    'Welcome Back!',
+    'Sign in to resume your games and progress.',
+  );
+
   form.append(
+    intro.block,
     createField({
       id: 'auth-dialog-login-email',
-      label: 'Email',
+      label: 'Email Address',
       name: 'email',
       type: 'email',
       autocomplete: 'email',
+      placeholder: 'e.g. alex@minigames.com',
+      iconSrc: mailIconUrl,
     }),
     createField({
       id: 'auth-dialog-login-password',
@@ -149,8 +263,14 @@ function createLoginForm(): HTMLFormElement {
       name: 'password',
       type: 'password',
       autocomplete: 'current-password',
+      placeholder: '••••••••',
+      iconSrc: lockIconUrl,
+      togglePassword: true,
     }),
-    createSubmitButton('Log In'),
+    createForgotButton(),
+    createSubmitButton('Login'),
+    createOrDivider(),
+    createGoogleButton('Continue with Google'),
     createSwitchHint("Don't have an account?", 'Register', () => {
       setAuthMode('register');
     }),
@@ -160,27 +280,41 @@ function createLoginForm(): HTMLFormElement {
     event.preventDefault();
   });
 
-  return form;
+  return { form, title: intro.title };
 }
 
-function createRegisterForm(): HTMLFormElement {
+function createRegisterForm(): {
+  form: HTMLFormElement;
+  title: HTMLHeadingElement;
+} {
   const form: HTMLFormElement = document.createElement('form');
   form.noValidate = true;
 
+  const intro = createIntro(
+    'auth-dialog-register-title',
+    'Create Account',
+    'Join MiniGames to track your score & streak.',
+  );
+
   form.append(
+    intro.block,
     createField({
-      id: 'auth-dialog-register-nickname',
-      label: 'Nickname',
-      name: 'nickname',
+      id: 'auth-dialog-register-username',
+      label: 'Username',
+      name: 'username',
       type: 'text',
       autocomplete: 'username',
+      placeholder: 'e.g. CozyGamer_99',
+      iconSrc: userIconUrl,
     }),
     createField({
       id: 'auth-dialog-register-email',
-      label: 'Email',
+      label: 'Email Address',
       name: 'email',
       type: 'email',
       autocomplete: 'email',
+      placeholder: 'your.email@domain.com',
+      iconSrc: mailIconUrl,
     }),
     createField({
       id: 'auth-dialog-register-password',
@@ -188,8 +322,21 @@ function createRegisterForm(): HTMLFormElement {
       name: 'password',
       type: 'password',
       autocomplete: 'new-password',
+      placeholder: 'Min. 8 characters',
+      iconSrc: lockIconUrl,
     }),
-    createSubmitButton('Sign Up'),
+    createField({
+      id: 'auth-dialog-register-confirm',
+      label: 'Confirm Password',
+      name: 'confirm-password',
+      type: 'password',
+      autocomplete: 'new-password',
+      placeholder: 'Repeat your password',
+      iconSrc: lockIconUrl,
+    }),
+    createSubmitButton('Create Account'),
+    createOrDivider(),
+    createGoogleButton('Sign up with Google'),
     createSwitchHint('Already have an account?', 'Login', () => {
       setAuthMode('login');
     }),
@@ -199,7 +346,7 @@ function createRegisterForm(): HTMLFormElement {
     event.preventDefault();
   });
 
-  return form;
+  return { form, title: intro.title };
 }
 
 function lockPageScroll(isLocked: boolean): void {
@@ -269,7 +416,7 @@ function setAuthMode(mode: AuthDialogMode): void {
 
   references.dialog.setAttribute(
     'aria-labelledby',
-    isLogin ? references.loginTab.id : references.registerTab.id,
+    isLogin ? references.loginTitle.id : references.registerTitle.id,
   );
 }
 
@@ -281,13 +428,16 @@ function ensureAuthDialog(): AuthDialogReferences {
   const dialog: HTMLDialogElement = document.createElement('dialog');
   dialog.className = 'auth-dialog';
 
+  const login = createLoginForm();
+  const register = createRegisterForm();
+
   const loginPanel = wrapAuthPanel(
-    createLoginForm(),
+    login.form,
     'auth-dialog-panel-login',
     'auth-dialog-tab-login',
   );
   const registerPanel = wrapAuthPanel(
-    createRegisterForm(),
+    register.form,
     'auth-dialog-panel-register',
     'auth-dialog-tab-register',
   );
@@ -301,7 +451,7 @@ function ensureAuthDialog(): AuthDialogReferences {
     },
   );
   const registerTab = createTab(
-    'Registration',
+    'Register',
     'auth-dialog-tab-register',
     registerPanel.id,
     () => {
@@ -357,6 +507,8 @@ function ensureAuthDialog(): AuthDialogReferences {
     registerTab,
     loginPanel,
     registerPanel,
+    loginTitle: login.title,
+    registerTitle: register.title,
   };
   authDialogState.references = references;
   setAuthMode('login');
