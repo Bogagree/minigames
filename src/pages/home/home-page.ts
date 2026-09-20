@@ -3,6 +3,7 @@ import { createHero } from '../../components/hero/hero';
 import { createSlider } from '../../components/slider/slider';
 import { createLeaderboard } from '../../components/leaderboard/leaderboard';
 import { createGameDeveloper } from '../../components/game-dev/game-developer';
+import { createFooter } from '../../components/footer/footer';
 import './home-page.scss';
 
 export function createHomePage(): HTMLElement {
@@ -24,7 +25,7 @@ export function createHomePage(): HTMLElement {
     createGameDeveloper(),
   );
 
-  page.append(createHeader(), main);
+  page.append(createHeader(), main, createFooter());
 
   return page;
 }
