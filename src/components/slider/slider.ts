@@ -95,12 +95,15 @@ function createStat(
   icon.height = 24;
   icon.setAttribute('aria-hidden', 'true');
 
+  const srLabel: HTMLSpanElement = document.createElement('span');
+  srLabel.className = 'slider__stat-label';
+  srLabel.textContent = `${label}: `;
+
   const text: HTMLSpanElement = document.createElement('span');
   text.className = 'slider__stat-value';
   text.textContent = value;
 
-  stat.append(icon, text);
-  stat.setAttribute('aria-label', `${label}: ${value}`);
+  stat.append(icon, srLabel, text);
 
   return stat;
 }

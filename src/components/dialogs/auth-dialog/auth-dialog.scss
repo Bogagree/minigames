@@ -155,6 +155,13 @@ body.is-auth-dialog-open {
     }
   }
 
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--auth-dialog-gap);
+    min-width: 0;
+  }
+
   &__field {
     display: flex;
     flex-direction: column;

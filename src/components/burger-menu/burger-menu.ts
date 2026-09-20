@@ -115,7 +115,6 @@ export function createBurgerMenu(): BurgerMenuController {
   menu.setAttribute('role', 'dialog');
   menu.setAttribute('aria-modal', 'true');
   menu.setAttribute('aria-label', 'Mobile navigation');
-  menu.setAttribute('aria-hidden', 'true');
   menu.hidden = true;
 
   const panel: HTMLElement = document.createElement('div');
@@ -136,7 +135,6 @@ export function createBurgerMenu(): BurgerMenuController {
       }
 
       menu.hidden = false;
-      menu.removeAttribute('aria-hidden');
       document.documentElement.classList.add(BODY_OPEN_CLASS);
       document.body.classList.add(BODY_OPEN_CLASS);
 
@@ -152,7 +150,6 @@ export function createBurgerMenu(): BurgerMenuController {
       }
 
       menu.classList.remove(OPEN_CLASS);
-      menu.setAttribute('aria-hidden', 'true');
       document.documentElement.classList.remove(BODY_OPEN_CLASS);
       document.body.classList.remove(BODY_OPEN_CLASS);
     },

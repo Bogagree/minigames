@@ -29,5 +29,5 @@ SPA (D-005): View Page Source — оболочка `index.html`. Для Home / A
 
 - Оболочка: `html lang="en"`, charset, viewport, title, favicon, входной script.
 - Семантика Home: `header` / `main#main-content` / `footer`; секции с `h2`; карусель — `ul` без лишнего `role="list"`; таблица — `caption` + `th[scope=col]`.
-- `aria-hidden="false"` не ставим (Nu warning): скрытый бургер — `aria-hidden="true"`; открытый — атрибут снят. Неактивная auth-панель — `aria-hidden="true"` + `inert`.
+- `aria-hidden="false"` не ставим (Nu warning). Скрытый бургер — только `hidden` (без дубля `aria-hidden`); открытый — `hidden` снят. Неактивная auth-панель — `aria-hidden="true"` + `inert`. `role="tabpanel"` на обёртке панели, не на `<form>`. Статы карусели — видимое значение + sr-only подпись, без `aria-label` на generic `<span>`.
 - Нативный `<dialog>` без лишнего `aria-modal`.

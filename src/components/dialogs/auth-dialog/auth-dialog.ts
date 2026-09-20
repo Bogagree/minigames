@@ -13,8 +13,8 @@ type AuthDialogReferences = {
   dialog: HTMLDialogElement;
   loginTab: HTMLButtonElement;
   registerTab: HTMLButtonElement;
-  loginPanel: HTMLFormElement;
-  registerPanel: HTMLFormElement;
+  loginPanel: HTMLDivElement;
+  registerPanel: HTMLDivElement;
 };
 
 const authDialogState: {
@@ -116,12 +116,23 @@ function createSubmitButton(label: string): HTMLButtonElement {
   return button;
 }
 
+function wrapAuthPanel(
+  form: HTMLFormElement,
+  panelId: string,
+  labelledBy: string,
+): HTMLDivElement {
+  const panel: HTMLDivElement = document.createElement('div');
+  panel.className = 'auth-dialog__panel';
+  panel.id = panelId;
+  panel.setAttribute('role', 'tabpanel');
+  panel.setAttribute('aria-labelledby', labelledBy);
+  form.className = 'auth-dialog__form';
+  panel.append(form);
+  return panel;
+}
+
 function createLoginForm(): HTMLFormElement {
   const form: HTMLFormElement = document.createElement('form');
-  form.className = 'auth-dialog__panel';
-  form.id = 'auth-dialog-panel-login';
-  form.setAttribute('role', 'tabpanel');
-  form.setAttribute('aria-labelledby', 'auth-dialog-tab-login');
   form.noValidate = true;
 
   form.append(
@@ -154,10 +165,6 @@ function createLoginForm(): HTMLFormElement {
 
 function createRegisterForm(): HTMLFormElement {
   const form: HTMLFormElement = document.createElement('form');
-  form.className = 'auth-dialog__panel';
-  form.id = 'auth-dialog-panel-register';
-  form.setAttribute('role', 'tabpanel');
-  form.setAttribute('aria-labelledby', 'auth-dialog-tab-register');
   form.noValidate = true;
 
   form.append(
@@ -274,8 +281,16 @@ function ensureAuthDialog(): AuthDialogReferences {
   const dialog: HTMLDialogElement = document.createElement('dialog');
   dialog.className = 'auth-dialog';
 
-  const loginPanel = createLoginForm();
-  const registerPanel = createRegisterForm();
+  const loginPanel = wrapAuthPanel(
+    createLoginForm(),
+    'auth-dialog-panel-login',
+    'auth-dialog-tab-login',
+  );
+  const registerPanel = wrapAuthPanel(
+    createRegisterForm(),
+    'auth-dialog-panel-register',
+    'auth-dialog-tab-register',
+  );
 
   const loginTab = createTab(
     'Login',
