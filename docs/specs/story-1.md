@@ -20,7 +20,7 @@
 | Carousel       | [layout слайдера](./carousel.md)                 | есть (RSS-QS-1-4-4)      |
 | Leaderboard    | [таблица Home](./leaderboard.md)                 | есть (RSS-QS-1-4-5)      |
 | Game developer | [CTA Home](./game-developer.md)                  | есть (RSS-QS-1-4-6)      |
-| Footer         |                                                  | todo                     |
+| Footer         | [футер Home](./footer.md)                        | есть (RSS-QS-1-4-7)      |
 | Auth dialog    | RSS-QS-1-5-1 … 1-5-5                             | todo                     |
 | Favicon + QA   | pixel-check breakpoints                          | todo                     |
 
