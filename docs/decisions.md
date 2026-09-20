@@ -185,3 +185,13 @@ Story 1 кладёт курс-совместимый mock в `src/data/*.json` �
 - Почему: один UI для header и burger, top-layer + Esc/backdrop без UI-библиотеки
 
 Auth (Story 1) — один `HTMLDialogElement` на `document.body` (`openAuthDialog`). Close — существующий `src/assets/icons/close.svg`. Password visibility / eye SVG не добавляем: в рабочем драфте нет отдельного экспорта. Backend/validation — вне скоупа.
+
+---
+
+## D-017: Auth dialog chrome tokens (own family)
+
+- Status: Accepted
+- Date: 2026-09-20
+- Почему: Dev Mode paste задаёт отдельный хром окна и submit; карусель и CTA — другие семьи
+
+Login и Registration — один chrome панели; Login и Create Account — один chrome submit. Токены: `--border-width-auth-dialog` (3px inside), `--shadow-auth-dialog` (8/8/0/0 `--color-black`), `--shadow-auth-submit` (0/4/0/0 `--color-on-primary`), `--radius-auth-dialog` (`--size-3`). Не копировать `--shadow-card` / `--shadow-cta`. Тень панели не на том же боксе, что `overflow` (скролл — `.auth-dialog__body`).
