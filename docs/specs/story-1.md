@@ -22,7 +22,7 @@
 | Game developer | [CTA Home](./game-developer.md)                  | есть (RSS-QS-1-4-6)      |
 | Footer         | [футер Home](./footer.md)                        | есть (RSS-QS-1-4-7)      |
 | Auth dialog    | [layout](./auth-dialog.md), RSS-QS-1-5-1 … 1-5-5 | есть                     |
-| Favicon + QA   | pixel-check breakpoints                          | todo                     |
+| Favicon + QA   | [favicon + HTML Nu](./favicon-and-qa.md)         | есть (RSS-QS-1-6-1)      |
 
 ## Out of scope (Story 1)
 

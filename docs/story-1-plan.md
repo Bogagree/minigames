@@ -13,10 +13,10 @@
 ## Next (для нового чата / оркестратора)
 
 ```text
-feat/favicon-and-qa    # RSS-QS-1-6-1 + favicon
+none — no more feat steps for story-1
 ```
 
-Оркестратор без явного шага берёт **только** эту строку. После merge шага: пометить его `[done]` ниже и сдвинуть `## Next` на следующую незакрытую `feat/…` (в том же PR фичи или сразу после merge).
+Story 1 feat-шаги закрыты. Дальше: фабрика на `feat/favicon-and-qa` → PR в `story-1` → после merge всех фич — PR `story-1` → `main` на cross-check (**не мержить**).
 
 ---
 
@@ -45,7 +45,7 @@ main
     ├── [done] feat/leaderboard-gamedev       # RSS-QS-1-4-5, RSS-QS-1-4-6
     ├── [done] feat/footer                    # RSS-QS-1-4-7
     ├── [done] feat/auth-dialog               # RSS-QS-1-5-1 … RSS-QS-1-5-5
-    └── feat/favicon-and-qa                   # RSS-QS-1-6-1 + favicon  ← Next
+    └── [done] feat/favicon-and-qa            # RSS-QS-1-6-1 + favicon
 ```
 
 ---

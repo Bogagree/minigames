@@ -95,12 +95,15 @@ function createStat(
   icon.height = 24;
   icon.setAttribute('aria-hidden', 'true');
 
+  const srLabel: HTMLSpanElement = document.createElement('span');
+  srLabel.className = 'slider__stat-label';
+  srLabel.textContent = `${label}: `;
+
   const text: HTMLSpanElement = document.createElement('span');
   text.className = 'slider__stat-value';
   text.textContent = value;
 
-  stat.append(icon, text);
-  stat.setAttribute('aria-label', `${label}: ${value}`);
+  stat.append(icon, srLabel, text);
 
   return stat;
 }
@@ -146,7 +149,6 @@ function createTrack(
 ): HTMLUListElement {
   const track: HTMLUListElement = document.createElement('ul');
   track.className = `slider__track slider__track--${modifier}`;
-  track.setAttribute('role', 'list');
 
   for (const game of games) {
     track.append(createCard(game));

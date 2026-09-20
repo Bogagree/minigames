@@ -12,7 +12,8 @@
 ## Слои
 
 ```text
-index.html          → точка входа (без разметки приложения)
+index.html          → точка входа (без разметки приложения; favicon в head)
+public/             → статическая раздача Vite (favicon.png = Figma logo mark)
 src/app/            → bootstrap, router
 src/pages/          → страницы (собирают компоненты)
 src/components/     → UI-блоки (header, hero, …)

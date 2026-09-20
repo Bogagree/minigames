@@ -14,6 +14,12 @@ dist-ssr/
 *.log
 npm-debug.log*
 
+# Local Figma PNG exports (folder stays in git via README; rasters stay out — D-011)
+tmp/pixel-perfect/*.png
+tmp/pixel-perfect/*.jpg
+tmp/pixel-perfect/*.jpeg
+tmp/pixel-perfect/*.webp
+
 # Editor / OS
 .DS_Store
 Thumbs.db

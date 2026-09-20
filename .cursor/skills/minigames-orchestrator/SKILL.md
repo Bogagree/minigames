@@ -95,7 +95,7 @@ Triggers (examples): «докидывай правки», «после ревь�
 - Copying chrome (stroke/shadow) from a neighbor family (carousel card vs table vs CTA)
 - Measuring clipped `box-shadow` (`overflow: hidden`) as a visible-shadow PASS
 - Reusing `docs/qa/<slug>.md` PASS after live or user-review changed
-- Inventing Figma rasters/SVGs when MCP export fails (402 / rate-limit) — **BLOCKED**, ask the user to download; invented asset is **FAIL**, not non-blocking
-- QA PASS «from guidebook memory» while MCP is rate-limited
+- Inventing Figma rasters/SVGs when MCP export fails (402 / rate-limit) — **BLOCKED**, ask the user to put PNG 1× frames in `tmp/pixel-perfect/` (`home-375.png`, `home-768.png`, `home-1920.png`); invented asset is **FAIL**, not non-blocking
+- QA PASS «from guidebook memory» while MCP is rate-limited **and** `tmp/pixel-perfect/home-{375,768,1920}.png` are missing. If those files exist, QA uses them (`user-export-png`); empty folder + MCP 402 is still BLOCKED
 - Ignoring user post-PR feedback until the next story step
 - Merging the PR
