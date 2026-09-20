@@ -6,18 +6,21 @@ body.is-auth-dialog-open {
 }
 
 .auth-dialog {
+  box-sizing: border-box;
   position: relative;
   width: calc(100% - var(--size-4));
   max-width: var(--auth-dialog-width);
   margin: auto;
   padding: var(--auth-dialog-padding);
   overflow: visible;
-  border: var(--border-width-auth-dialog) solid var(--color-on-primary);
+  border: none;
   border-radius: var(--radius-auth-dialog);
   background-color: var(--color-bg);
   color: var(--color-on-primary);
   font-family: var(--font-family-base);
-  box-shadow: var(--shadow-auth-dialog);
+  box-shadow:
+    var(--shadow-auth-dialog),
+    inset 0 0 0 var(--border-width-auth-dialog) var(--color-on-primary);
   opacity: 0;
   transform: translateY(var(--size-2));
   transition:
@@ -62,56 +65,28 @@ body.is-auth-dialog-open {
     overflow-y: auto;
   }
 
-  &__close {
-    position: absolute;
-    top: var(--size-2);
-    right: var(--size-2);
-    z-index: 1;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: var(--size-4);
-    height: var(--size-4);
-    padding: 0;
-    border: none;
-    border-radius: var(--radius-sm);
-    background-color: transparent;
-    cursor: pointer;
-
-    &:hover,
-    &:focus-visible {
-      filter: brightness(1.1);
-    }
-
-    &:active {
-      filter: brightness(0.95);
-    }
-  }
-
-  &__close-icon {
-    display: block;
-    width: var(--size-4);
-    height: var(--size-4);
-  }
-
   &__switcher {
     display: flex;
+    box-sizing: border-box;
     flex-shrink: 0;
     gap: 0;
-    padding: calc(var(--size-1) / 2);
-    margin: 0 var(--size-5) 0 0;
+    width: 100%;
+    height: var(--auth-dialog-switcher-height);
+    padding: 0;
     overflow: hidden;
-    border: var(--border-width-md) solid var(--color-on-primary);
-    border-radius: var(--radius-full);
+    border: none;
+    border-radius: var(--radius-auth-switcher);
     background-color: var(--color-white);
+    box-shadow: inset 0 0 0 var(--border-width-card) var(--color-on-primary);
   }
 
   &__tab {
-    flex: 1;
-    min-height: var(--button-height-md);
-    padding: var(--button-padding-y-sm) var(--button-padding-x-sm);
+    flex: 1 1 0;
+    min-width: 0;
+    height: var(--auth-dialog-switcher-height);
+    padding: 0;
     border: none;
-    border-radius: var(--radius-full);
+    border-radius: 0;
     background-color: transparent;
     color: var(--color-on-primary);
     font: inherit;
@@ -235,7 +210,7 @@ body.is-auth-dialog-open {
     padding: var(--button-padding-y-sm) calc(var(--size-4) + var(--size-1) / 2)
       var(--button-padding-y-sm) calc(var(--size-5) + var(--size-1) / 2);
     border: var(--border-width-md) solid var(--color-on-primary);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-md);
     background-color: var(--color-white);
     color: var(--color-on-primary);
     font: inherit;
@@ -303,7 +278,7 @@ body.is-auth-dialog-open {
     padding: var(--button-padding-y-md) var(--button-padding-x-md);
     overflow: visible;
     border: none;
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-md);
     background-color: var(--color-primary);
     color: var(--color-on-primary);
     font: inherit;
@@ -358,7 +333,7 @@ body.is-auth-dialog-open {
     min-height: var(--auth-dialog-submit-height);
     padding: var(--button-padding-y-md) var(--button-padding-x-md);
     border: var(--border-width-md) solid var(--color-on-primary);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-md);
     background-color: var(--color-white);
     color: var(--color-on-primary);
     font: inherit;

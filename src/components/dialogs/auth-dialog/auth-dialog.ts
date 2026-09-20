@@ -1,4 +1,3 @@
-import closeIconUrl from '../../../assets/icons/close.svg';
 import eyeOffIconUrl from '../../../assets/icons/eye-off.svg';
 import eyeIconUrl from '../../../assets/icons/eye.svg';
 import googleIconUrl from '../../../assets/icons/google.svg';
@@ -43,16 +42,6 @@ function createIcon(source: string, className: string): HTMLImageElement {
   icon.width = 20;
   icon.height = 20;
   return icon;
-}
-
-function createCloseButton(onClose: () => void): HTMLButtonElement {
-  const button: HTMLButtonElement = document.createElement('button');
-  button.type = 'button';
-  button.className = 'auth-dialog__close';
-  button.setAttribute('aria-label', 'Close dialog');
-  button.append(createIcon(closeIconUrl, 'auth-dialog__close-icon'));
-  button.addEventListener('click', onClose);
-  return button;
 }
 
 function createTab(
@@ -473,7 +462,7 @@ function ensureAuthDialog(): AuthDialogReferences {
   body.className = 'auth-dialog__body';
   body.append(switcher, panels);
 
-  dialog.append(createCloseButton(requestClose), body);
+  dialog.append(body);
   document.body.append(dialog);
 
   dialog.addEventListener('cancel', (event: Event) => {

@@ -184,7 +184,7 @@ Story 1 кладёт курс-совместимый mock в `src/data/*.json` �
 - Date: 2026-09-20
 - Почему: один UI для header и burger, top-layer + Esc/backdrop без UI-библиотеки
 
-Auth (Story 1) — один `HTMLDialogElement` на `document.body` (`openAuthDialog`). Close — `src/assets/icons/close.svg`. Password visibility — layout-only toggle (`eye.svg` / `eye-off.svg`), без API. Google / Forgot Password — кнопки без OAuth и без reset flow. Backend/validation — вне скоупа.
+Auth (Story 1) — один `HTMLDialogElement` на `document.body` (`openAuthDialog`). Отдельной кнопки close на кадре Login/Register нет — dismiss: Esc и клик по backdrop. Password visibility — layout-only toggle (`eye.svg` / `eye-off.svg`), без API. Google / Forgot Password — кнопки без OAuth и без reset flow. Backend/validation — вне скоупа.
 
 ---
 
@@ -194,7 +194,7 @@ Auth (Story 1) — один `HTMLDialogElement` на `document.body` (`openAuthD
 - Date: 2026-09-20
 - Почему: Dev Mode paste задаёт отдельный хром окна и submit; карусель и CTA — другие семьи
 
-Login и Registration — один chrome панели; Login и Create Account — один chrome submit. Токены: `--border-width-auth-dialog` (3px inside), `--shadow-auth-dialog` (8/8/0/0 `--color-black`), `--shadow-auth-submit` (0/4/0/0 `--color-on-primary`), `--radius-auth-dialog` (`--size-3`). Не копировать `--shadow-card` / `--shadow-cta`. Тень панели не на том же боксе, что `overflow` (скролл — `.auth-dialog__body`). Submit 2.5px: не CSS `border` (Chromium округляет used-value до 2px); inside stroke — `inset` spread `--border-width-card` в том же `box-shadow`, что drop shadow.
+Login и Registration — один chrome панели; Login и Create Account — один chrome submit. Токены: `--border-width-auth-dialog` (3px inside), `--shadow-auth-dialog` (8/8/0/0 `--color-black`), `--shadow-auth-submit` (0/4/0/0 `--color-on-primary`), `--radius-auth-dialog` (`--size-3`). Сегмент Login/Register (Dev Mode paste 2026-09-20): **356×48**, radius **12**, inside **2.5** `on-primary`, padding/gap 0, clip — `--auth-dialog-switcher-height`, `--radius-auth-switcher`. Не копировать `--shadow-card` / `--shadow-cta`. Тень панели не на том же боксе, что `overflow` (скролл — `.auth-dialog__body`). Submit и switcher 2.5px: не CSS `border`; inside stroke — `inset` spread `--border-width-card`.
 
 ---
 

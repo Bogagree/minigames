@@ -52,6 +52,8 @@ $breakpoint-desktop: 1920px;
   --auth-dialog-padding: var(--size-4);
   --auth-dialog-gap: var(--size-3);
   --auth-dialog-submit-height: 52px;
+  /* Login/Register switcher: Dev Mode paste 356×48, radius 12, inside 2.5 */
+  --auth-dialog-switcher-height: var(--button-height-lg);
 
   /* Figma Hero Section frame heights (draft nodes 2:376 / 2:127 / 1:29) */
   --hero-height-mobile: 331px;
@@ -157,8 +159,9 @@ $breakpoint-desktop: 1920px;
   --radius-md: 12px;
   --radius-lg: 16px;
   --radius-full: 999px;
-  /* Auth dialog Hug frame corner radius 24 */
+  /* Auth dialog Hug frame corner radius 24; Login/Register track 12 */
   --radius-auth-dialog: var(--size-3);
+  --radius-auth-switcher: var(--radius-md);
 
   --button-padding-x-sm: var(--size-2);
   --button-padding-y-sm: var(--size-1);
