@@ -19,21 +19,21 @@ Per QA skill: paint expected column must come from **this node-id** (fill + stro
 
 Expected fill / stroke / effect: **missing** (no MCP-child, no cache-with-paint, no user-paste). Live column is `getComputedStyle` only — **not** a color PASS vs tokens.
 
-| Surface | node-id | Family | Fill | Stroke (weight + inside/outside + hex) | Effect / shadow (X/Y/blur/spread/color/opacity) | Live computed | Match |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| Dialog panel `.auth-dialog` | unresolved | dialog chrome | BLOCKED | BLOCKED | BLOCKED | bg `rgb(249, 248, 243)`; color `rgb(36, 33, 69)`; border `2px solid rgb(36, 33, 69)`; radius `12px`; padding `24px`; `box-shadow: rgb(36, 33, 69) 4px 4px 0px 0px` | BLOCKED |
-| Backdrop `::backdrop` | unresolved | overlay | BLOCKED | n/a | n/a | `color(srgb 0.141176 0.129412 0.270588 / 0.4)` opacity `1` | BLOCKED |
-| Close control `.auth-dialog__close` | unresolved | icon button | BLOCKED | BLOCKED | BLOCKED | fill `rgba(0,0,0,0)`; border `none`; `box-shadow: none`; 32×32 | BLOCKED |
-| Close icon `close.svg` | n/a (existing export) | asset | n/a (user: no new icons; do not FAIL missing eye) | n/a | n/a | 32×32 data URL of `src/assets/icons/close.svg` (`#2A264F` rect + white X) | n/a (asset reuse) |
-| Tab Login (inactive when on Registration) | unresolved | tab | BLOCKED | BLOCKED | BLOCKED | fill transparent; color `rgb(95, 93, 117)`; weight 500; bottom `2px solid rgb(229, 231, 235)` | BLOCKED |
-| Tab Login (active) | unresolved | tab | BLOCKED | BLOCKED | BLOCKED | fill transparent; color `rgb(36, 33, 69)`; weight 700; bottom `2px solid rgb(255, 208, 43)` | BLOCKED |
-| Tab Registration (inactive) | unresolved | tab | BLOCKED | BLOCKED | BLOCKED | same family as inactive Login | BLOCKED |
-| Tab Registration (active) | unresolved | tab | BLOCKED | BLOCKED | BLOCKED | same family as active Login | BLOCKED |
-| Label `.auth-dialog__label` | unresolved | text | BLOCKED | none live | none | fill transparent; color `rgb(36, 33, 69)`; 14px / 500 | BLOCKED |
-| Input default `.auth-dialog__input` | unresolved | field | BLOCKED | BLOCKED | BLOCKED | bg `rgb(255, 255, 255)`; color `rgb(36, 33, 69)`; border `2px solid rgb(229, 231, 235)`; radius `8px`; `box-shadow: none`; 40px min-height | BLOCKED |
-| Submit `.auth-dialog__submit` | unresolved | CTA | BLOCKED | BLOCKED | BLOCKED | bg `rgb(255, 208, 43)`; color `rgb(36, 33, 69)`; border `2px solid rgb(36, 33, 69)`; radius `8px`; `box-shadow: none`; ~41px height | BLOCKED |
-| Hint `.auth-dialog__hint` | unresolved | text | BLOCKED | none | none | fill transparent; color `rgb(95, 93, 117)`; 14px / 400 | BLOCKED |
-| Inline link `.auth-dialog__link` | unresolved | text button | BLOCKED | none | none | fill transparent; color `rgb(58, 46, 191)`; weight 700; underline | BLOCKED |
+| Surface                                   | node-id               | Family        | Fill                                              | Stroke (weight + inside/outside + hex) | Effect / shadow (X/Y/blur/spread/color/opacity) | Live computed                                                                                                                                                      | Match             |
+| ----------------------------------------- | --------------------- | ------------- | ------------------------------------------------- | -------------------------------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------- |
+| Dialog panel `.auth-dialog`               | unresolved            | dialog chrome | BLOCKED                                           | BLOCKED                                | BLOCKED                                         | bg `rgb(249, 248, 243)`; color `rgb(36, 33, 69)`; border `2px solid rgb(36, 33, 69)`; radius `12px`; padding `24px`; `box-shadow: rgb(36, 33, 69) 4px 4px 0px 0px` | BLOCKED           |
+| Backdrop `::backdrop`                     | unresolved            | overlay       | BLOCKED                                           | n/a                                    | n/a                                             | `color(srgb 0.141176 0.129412 0.270588 / 0.4)` opacity `1`                                                                                                         | BLOCKED           |
+| Close control `.auth-dialog__close`       | unresolved            | icon button   | BLOCKED                                           | BLOCKED                                | BLOCKED                                         | fill `rgba(0,0,0,0)`; border `none`; `box-shadow: none`; 32×32                                                                                                     | BLOCKED           |
+| Close icon `close.svg`                    | n/a (existing export) | asset         | n/a (user: no new icons; do not FAIL missing eye) | n/a                                    | n/a                                             | 32×32 data URL of `src/assets/icons/close.svg` (`#2A264F` rect + white X)                                                                                          | n/a (asset reuse) |
+| Tab Login (inactive when on Registration) | unresolved            | tab           | BLOCKED                                           | BLOCKED                                | BLOCKED                                         | fill transparent; color `rgb(95, 93, 117)`; weight 500; bottom `2px solid rgb(229, 231, 235)`                                                                      | BLOCKED           |
+| Tab Login (active)                        | unresolved            | tab           | BLOCKED                                           | BLOCKED                                | BLOCKED                                         | fill transparent; color `rgb(36, 33, 69)`; weight 700; bottom `2px solid rgb(255, 208, 43)`                                                                        | BLOCKED           |
+| Tab Registration (inactive)               | unresolved            | tab           | BLOCKED                                           | BLOCKED                                | BLOCKED                                         | same family as inactive Login                                                                                                                                      | BLOCKED           |
+| Tab Registration (active)                 | unresolved            | tab           | BLOCKED                                           | BLOCKED                                | BLOCKED                                         | same family as active Login                                                                                                                                        | BLOCKED           |
+| Label `.auth-dialog__label`               | unresolved            | text          | BLOCKED                                           | none live                              | none                                            | fill transparent; color `rgb(36, 33, 69)`; 14px / 500                                                                                                              | BLOCKED           |
+| Input default `.auth-dialog__input`       | unresolved            | field         | BLOCKED                                           | BLOCKED                                | BLOCKED                                         | bg `rgb(255, 255, 255)`; color `rgb(36, 33, 69)`; border `2px solid rgb(229, 231, 235)`; radius `8px`; `box-shadow: none`; 40px min-height                         | BLOCKED           |
+| Submit `.auth-dialog__submit`             | unresolved            | CTA           | BLOCKED                                           | BLOCKED                                | BLOCKED                                         | bg `rgb(255, 208, 43)`; color `rgb(36, 33, 69)`; border `2px solid rgb(36, 33, 69)`; radius `8px`; `box-shadow: none`; ~41px height                                | BLOCKED           |
+| Hint `.auth-dialog__hint`                 | unresolved            | text          | BLOCKED                                           | none                                   | none                                            | fill transparent; color `rgb(95, 93, 117)`; 14px / 400                                                                                                             | BLOCKED           |
+| Inline link `.auth-dialog__link`          | unresolved            | text button   | BLOCKED                                           | none                                   | none                                            | fill transparent; color `rgb(58, 46, 191)`; weight 700; underline                                                                                                  | BLOCKED           |
 
 Shadow note: live `box-shadow` is on `.auth-dialog`, which also has `overflow-x: hidden` and `overflow-y: auto`. Visible-shadow PASS is not possible this run (no instance + possible clip). Do not treat `getComputedStyle` shadow as instance match.
 
@@ -43,11 +43,11 @@ Eye / password-visibility icon: not in draft per spec + user; **not a FAIL**.
 
 Cannot compute Δ vs canvas without node geometry. Spec-shaped live sizes (not used as paint expected):
 
-| Viewport | Dialog width | Dialog height | Position | H-scroll |
-| --- | ---: | ---: | --- | --- |
-| 375 | 343 (`100% − 32`) | 445 | x=16, centered vertically | none (`scrollWidth` 375) |
-| 768 | 420 | 445 | x=174 = (768−420)/2 | none |
-| ~1920 (innerWidth 2000) | 420 | 445 | x=790 = (2000−420)/2 | none on `#app` 1920 track |
+| Viewport                |      Dialog width | Dialog height | Position                  | H-scroll                  |
+| ----------------------- | ----------------: | ------------: | ------------------------- | ------------------------- |
+| 375                     | 343 (`100% − 32`) |           445 | x=16, centered vertically | none (`scrollWidth` 375)  |
+| 768                     |               420 |           445 | x=174 = (768−420)/2       | none                      |
+| ~1920 (innerWidth 2000) |               420 |           445 | x=790 = (2000−420)/2      | none on `#app` 1920 track |
 
 Tablet/desktop **420px** matches spec; mobile **343px** matches `100% − 32px`, max 420.
 
