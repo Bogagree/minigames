@@ -70,6 +70,9 @@ function createTextCell(
   const cell: HTMLTableCellElement = document.createElement(tagName);
   cell.className = className;
   cell.textContent = text;
+  if (tagName === 'th') {
+    cell.scope = 'col';
+  }
   return cell;
 }
 
@@ -80,6 +83,7 @@ function createLabeledHeaderCell(
 ): HTMLTableCellElement {
   const cell: HTMLTableCellElement = document.createElement('th');
   cell.className = className;
+  cell.scope = 'col';
 
   const full: HTMLSpanElement = document.createElement('span');
   full.className = 'leaderboard__label leaderboard__label--full';

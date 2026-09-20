@@ -250,8 +250,13 @@ function setAuthMode(mode: AuthDialogMode): void {
 
   references.loginPanel.classList.toggle(PANEL_ACTIVE_CLASS, isLogin);
   references.registerPanel.classList.toggle(PANEL_ACTIVE_CLASS, !isLogin);
-  references.loginPanel.setAttribute('aria-hidden', String(!isLogin));
-  references.registerPanel.setAttribute('aria-hidden', String(isLogin));
+  if (isLogin) {
+    references.loginPanel.removeAttribute('aria-hidden');
+    references.registerPanel.setAttribute('aria-hidden', 'true');
+  } else {
+    references.registerPanel.removeAttribute('aria-hidden');
+    references.loginPanel.setAttribute('aria-hidden', 'true');
+  }
   references.loginPanel.inert = !isLogin;
   references.registerPanel.inert = isLogin;
 
@@ -268,7 +273,6 @@ function ensureAuthDialog(): AuthDialogReferences {
 
   const dialog: HTMLDialogElement = document.createElement('dialog');
   dialog.className = 'auth-dialog';
-  dialog.setAttribute('aria-modal', 'true');
 
   const loginPanel = createLoginForm();
   const registerPanel = createRegisterForm();

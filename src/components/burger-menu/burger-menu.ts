@@ -136,7 +136,7 @@ export function createBurgerMenu(): BurgerMenuController {
       }
 
       menu.hidden = false;
-      menu.setAttribute('aria-hidden', 'false');
+      menu.removeAttribute('aria-hidden');
       document.documentElement.classList.add(BODY_OPEN_CLASS);
       document.body.classList.add(BODY_OPEN_CLASS);
 

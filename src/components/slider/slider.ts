@@ -146,7 +146,6 @@ function createTrack(
 ): HTMLUListElement {
   const track: HTMLUListElement = document.createElement('ul');
   track.className = `slider__track slider__track--${modifier}`;
-  track.setAttribute('role', 'list');
 
   for (const game of games) {
     track.append(createCard(game));
