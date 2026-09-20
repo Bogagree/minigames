@@ -37,11 +37,17 @@ $breakpoint-desktop: 1920px;
   --color-muted: var(--color-on-bg);
 
   --duration-menu: 300ms;
+  --duration-dialog: var(--duration-menu);
   --easing-menu: ease;
+  --easing-dialog: var(--easing-menu);
 
   --z-index-burger-menu: 100;
   --z-index-header-burger: 110;
   --z-index-hero-content: 1;
+
+  /* Course AC RSS-QS-1-5-5: desktop/tablet dialog width 420px */
+  --auth-dialog-width: 420px;
+  --auth-dialog-max-height: calc(100vh - var(--size-5) * 2);
 
   /* Figma Hero Section frame heights (draft nodes 2:376 / 2:127 / 1:29) */
   --hero-height-mobile: 331px;
@@ -105,6 +111,7 @@ $breakpoint-desktop: 1920px;
   --game-dev-card-height-desktop: calc(var(--size-10) * 4 + var(--size-3));
   --game-dev-button-height-desktop: calc(var(--size-5) + var(--size-2));
   --opacity-pattern: 0.08;
+  --opacity-backdrop: 40%;
 
   --line-height-body: 1.5;
 
