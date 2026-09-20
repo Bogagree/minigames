@@ -48,6 +48,10 @@ $breakpoint-desktop: 1920px;
   /* Course AC RSS-QS-1-5-5: desktop/tablet dialog width 420px */
   --auth-dialog-width: 420px;
   --auth-dialog-max-height: calc(100vh - var(--size-5) * 2);
+  /* Dev Mode Hug 420×623: padding 32, gap 24, radius 24, submit 356×52 */
+  --auth-dialog-padding: var(--size-4);
+  --auth-dialog-gap: var(--size-3);
+  --auth-dialog-submit-height: 52px;
 
   /* Figma Hero Section frame heights (draft nodes 2:376 / 2:127 / 1:29) */
   --hero-height-mobile: 331px;
@@ -127,6 +131,8 @@ $breakpoint-desktop: 1920px;
   --border-width-md: 2px;
   /* Figma Game Card stroke: inside, weight 2.5, color on-primary */
   --border-width-card: 2.5px;
+  /* Auth dialog panel stroke: inside, weight 3, color on-primary */
+  --border-width-auth-dialog: 3px;
 
   --shadow-none: none;
   --shadow-sm: 0 1px 2px rgb(0 0 0 / 10%);
@@ -136,12 +142,18 @@ $breakpoint-desktop: 1920px;
     var(--color-on-primary);
   /* Figma cta-card Drop shadow: X 0, Y 14, blur 30, spread -10, #000 7.84% */
   --shadow-cta: 0 14px 30px -10px rgb(0 0 0 / 7.84%);
+  /* Auth dialog: X/Y 8, blur 0, spread 0, guidebook black (#111111) */
+  --shadow-auth-dialog: var(--size-1) var(--size-1) 0 0 var(--color-black);
+  /* Auth submit: X 0, Y 4, blur 0, spread 0, color on-primary */
+  --shadow-auth-submit: 0 calc(var(--size-1) / 2) 0 0 var(--color-on-primary);
 
   --radius-none: 0;
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
   --radius-full: 999px;
+  /* Auth dialog Hug frame corner radius 24 */
+  --radius-auth-dialog: var(--size-3);
 
   --button-padding-x-sm: var(--size-2);
   --button-padding-y-sm: var(--size-1);

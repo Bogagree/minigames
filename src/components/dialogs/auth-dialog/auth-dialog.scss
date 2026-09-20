@@ -6,24 +6,29 @@ body.is-auth-dialog-open {
 }
 
 .auth-dialog {
+  position: relative;
   width: calc(100% - var(--size-4));
   max-width: var(--auth-dialog-width);
-  max-height: var(--auth-dialog-max-height);
   margin: auto;
-  padding: var(--size-3);
-  overflow-x: hidden;
-  overflow-y: auto;
-  border: var(--border-width-md) solid var(--color-on-primary);
-  border-radius: var(--radius-md);
+  padding: var(--auth-dialog-padding);
+  overflow: visible;
+  border: var(--border-width-auth-dialog) solid var(--color-on-primary);
+  border-radius: var(--radius-auth-dialog);
   background-color: var(--color-bg);
   color: var(--color-on-primary);
   font-family: var(--font-family-base);
-  box-shadow: var(--shadow-card);
+  box-shadow: var(--shadow-auth-dialog);
   opacity: 0;
   transform: translateY(var(--size-2));
   transition:
     opacity var(--duration-dialog) var(--easing-dialog),
     transform var(--duration-dialog) var(--easing-dialog);
+
+  &[open] {
+    display: flex;
+    flex-direction: column;
+    gap: var(--auth-dialog-gap);
+  }
 
   &::backdrop {
     background-color: color-mix(
@@ -42,6 +47,19 @@ body.is-auth-dialog-open {
 
   &--open::backdrop {
     opacity: 1;
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--auth-dialog-gap);
+    min-width: 0;
+    max-height: calc(
+      var(--auth-dialog-max-height) - var(--auth-dialog-padding) * 2
+    );
+    padding-bottom: calc(var(--size-1) / 2);
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 
   &__close {
@@ -78,7 +96,7 @@ body.is-auth-dialog-open {
   &__switcher {
     display: flex;
     gap: var(--size-2);
-    margin: 0 var(--size-5) var(--size-3) 0;
+    margin: 0 var(--size-5) 0 0;
   }
 
   &__tab {
@@ -118,7 +136,7 @@ body.is-auth-dialog-open {
     display: flex;
     grid-area: 1 / 1;
     flex-direction: column;
-    gap: var(--size-2);
+    gap: var(--auth-dialog-gap);
     min-width: 0;
     opacity: 0;
     transform: translateX(var(--size-2));
@@ -179,13 +197,15 @@ body.is-auth-dialog-open {
 
   &__submit {
     display: inline-flex;
+    box-sizing: border-box;
+    flex-shrink: 0;
     align-items: center;
     justify-content: center;
     width: 100%;
-    min-height: var(--button-height-md);
-    margin-top: var(--size-1);
+    height: var(--auth-dialog-submit-height);
     padding: var(--button-padding-y-md) var(--button-padding-x-md);
-    border: var(--border-width-md) solid var(--color-on-primary);
+    overflow: visible;
+    border: var(--border-width-card) solid var(--color-on-primary);
     border-radius: var(--radius-sm);
     background-color: var(--color-primary);
     color: var(--color-on-primary);
@@ -194,6 +214,7 @@ body.is-auth-dialog-open {
     font-weight: var(--font-weight-bold);
     line-height: normal;
     cursor: pointer;
+    box-shadow: var(--shadow-auth-submit);
 
     &:hover,
     &:focus-visible {

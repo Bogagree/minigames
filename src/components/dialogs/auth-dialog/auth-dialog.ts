@@ -300,7 +300,11 @@ function ensureAuthDialog(): AuthDialogReferences {
   panels.className = 'auth-dialog__panels';
   panels.append(loginPanel, registerPanel);
 
-  dialog.append(createCloseButton(requestClose), switcher, panels);
+  const body: HTMLDivElement = document.createElement('div');
+  body.className = 'auth-dialog__body';
+  body.append(switcher, panels);
+
+  dialog.append(createCloseButton(requestClose), body);
   document.body.append(dialog);
 
   dialog.addEventListener('cancel', (event: Event) => {
