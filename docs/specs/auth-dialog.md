@@ -43,6 +43,8 @@ Selected **356×52** (full content width minus padding):
 | Drop shadow | X **0**, Y **4**, Blur **0**, Spread **0**, Color `on-primary` (`--shadow-auth-submit`) |
 | Size        | `--auth-dialog-submit-height` 52px; width 100% of content                               |
 
+Chromium snaps CSS `border: 2.5px` used-value to **2px**. Do **not** use `border: var(--border-width-card)` on this button (carousel trap). Stroke is `border: none` plus combined `box-shadow`: `--shadow-auth-submit` and `inset 0 0 0 var(--border-width-card) var(--color-on-primary)`. Do not `overflow: hidden` on the button (clips Y=4). Panel chrome stays CSS `border` 3px.
+
 ## Scope
 
 - Один и тот же singleton `<dialog>` с header (desktop Log In / Sign Up) и burger (меню закрывается).
