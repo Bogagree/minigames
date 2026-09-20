@@ -175,3 +175,13 @@ Story 1 кладёт курс-совместимый mock в `src/data/*.json` �
 4. Тень мерить **видимую** (обёртка/секция), не `getComputedStyle` у `overflow: hidden`.
 5. Выдуманный ассет → **FAIL**; MCP 402/rate-limit → **BLOCKED**, не PASS по памяти.
 6. Post-user-review без **перезаписанного** `docs/qa/<slug>.md` в этом прогоне ≠ зелёный PR; старый PASS не переиспользовать.
+
+---
+
+## D-016: Auth dialog — native `<dialog>` singleton
+
+- Status: Accepted
+- Date: 2026-09-20
+- Почему: один UI для header и burger, top-layer + Esc/backdrop без UI-библиотеки
+
+Auth (Story 1) — один `HTMLDialogElement` на `document.body` (`openAuthDialog`). Close — существующий `src/assets/icons/close.svg`. Password visibility / eye SVG не добавляем: в рабочем драфте нет отдельного экспорта. Backend/validation — вне скоупа.

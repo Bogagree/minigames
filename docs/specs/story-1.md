@@ -21,7 +21,7 @@
 | Leaderboard    | [таблица Home](./leaderboard.md)                 | есть (RSS-QS-1-4-5)      |
 | Game developer | [CTA Home](./game-developer.md)                  | есть (RSS-QS-1-4-6)      |
 | Footer         |                                                  | todo                     |
-| Auth dialog    | RSS-QS-1-5-1 … 1-5-5                             | todo                     |
+| Auth dialog    | [layout](./auth-dialog.md), RSS-QS-1-5-1 … 1-5-5 | есть                     |
 | Favicon + QA   | pixel-check breakpoints                          | todo                     |
 
 ## Out of scope (Story 1)

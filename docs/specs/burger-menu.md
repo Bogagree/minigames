@@ -7,9 +7,9 @@
 - Guest-вариант полноэкранного mobile menu (≤ desktop breakpoint; burger виден до 1920).
 - Открытие по burger; плавная анимация open/close без горизонтального скролла.
 - Burger → close (×) с анимацией иконки; close внутри панели; закрытие по `Esc`.
-- Nav-ссылки → Home (`BASE_URL`); Log In / Sign Up → Auth dialog (каркас).
+- Nav-ссылки → Home (`BASE_URL`); Log In / Sign Up → [Auth dialog](./auth-dialog.md); меню закрывается.
 
 ## Out of scope
 
 - Authenticated menu variant
-- Полный Auth dialog UI (RSS-QS-1-5-*)
+- Вёрстка содержимого Auth dialog (RSS-QS-1-5-*)
