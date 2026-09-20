@@ -52,7 +52,7 @@ body.is-auth-dialog-open {
   &__body {
     display: flex;
     flex-direction: column;
-    gap: var(--auth-dialog-gap);
+    gap: var(--size-2);
     min-width: 0;
     max-height: calc(
       var(--auth-dialog-max-height) - var(--auth-dialog-padding) * 2
@@ -108,7 +108,7 @@ body.is-auth-dialog-open {
 
   &__tab {
     flex: 1;
-    min-height: var(--button-height-lg);
+    min-height: var(--button-height-md);
     padding: var(--button-padding-y-sm) var(--button-padding-x-sm);
     border: none;
     border-radius: var(--radius-full);
@@ -155,12 +155,16 @@ body.is-auth-dialog-open {
     transform: translateX(var(--size-2));
     pointer-events: none;
     visibility: hidden;
+    height: 0;
+    overflow: hidden;
     transition:
       opacity var(--duration-dialog) var(--easing-dialog),
       transform var(--duration-dialog) var(--easing-dialog),
       visibility var(--duration-dialog) var(--easing-dialog);
 
     &--active {
+      height: auto;
+      overflow: visible;
       opacity: 1;
       transform: none;
       pointer-events: auto;

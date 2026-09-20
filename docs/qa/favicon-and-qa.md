@@ -61,11 +61,11 @@ PNG auth width **428** vs live panel **420**: Δ −8 = hard shadow on the raste
 | 1920             | track / cards                     | 1680; 120/288/816/288/120 at 8/136/432/1256/1552 | 1665; **same** relative x         | −15 sb / 0                      |
 | 1920             | CTA card                          | 958×344 @ x842                                   | 943×344 @ x842 (sb); 958 unlocked | −15 sb / 0                      |
 | 1920             | footer h                          | 343                                              | 345                               | +2                              |
-| Auth login       | panel                             | 428×631 PNG → ~420×623 chrome                    | **420×784**                       | width −8 OK; height **+161**    |
-| Auth register    | panel                             | 428×776 PNG → ~420×768 chrome                    | **420×784**                       | width −8 OK; height **+16**     |
+| Auth login       | panel                             | 428×631 PNG → ~420×623 chrome                    | **420×623**                       | width −8 OK; height **0**       |
+| Auth register    | panel                             | 428×776 PNG → ~420×768 chrome                    | **420×768**                       | width −8 OK; height **0**       |
 | Auth 375 Sign Up | panel                             | fluid (not 420)                                  | 343×738 (scrolls)                 | width OK for 375; not PNG frame |
 
-Per-block **Home** Δ ≤ 10px (scrollbar-aware). Auth login height vs PNG is **FAIL**. Register height +16 vs ~768 is over the 10px budget. Login screenshot shows **empty cream** under the hint: dialog height follows the taller register panel in both modes.
+Per-block **Home** Δ ≤ 10px (scrollbar-aware). After hug fix (inactive panel `height: 0`) + tighter switcher/body gap: login **420×623** and register **420×768** match PNG minus 8px drop-shadow. Measured on `http://127.0.0.1:4174/minigames/` CSS `index-CKzCJqy3.css`.
 
 ## Paint table
 
@@ -84,7 +84,7 @@ Expected fill / stroke / effect sampled from **this run’s user PNG** + live `g
 | Avatars 1–5        | random-1…5                           | avatar       | live `#E9EEF6` `#A3E2C9` `#BCE3FF` `#FFC6FF` `#E8DFF5`              | live 2px `#242145`                                                  | none                                                               | those fills; 2px `#242145`                                                                          | **PASS** vs live + prior paste; PNG disks not isolated                  |
 | CTA card           | `10:2250`                            | cta-card     | `#FFFFFF` (900,2000)                                                | `#242145` at edge (850,1970)                                        | live Drop `0/14/30/−10` `#000` ~8%; PNG (900,2080) mixed `#878597` | `#FFFFFF`; 2px `#242145`; `rgba(0,0,0,0.08) 0 14px 30px -10px`; overflow visible                    | **PASS**                                                                |
 | Footer             | `1:211`                              | footer       | `#1E1B3A` (960,2500; mobile 187,1537+)                              | none                                                                | none                                                               | `#1E1B3A`; border 0; shadow none                                                                    | **PASS**                                                                |
-| Auth panel         | Login/Register PNG                   | dialog       | `#F9F8F3` (214,20); PNG left stroke then cream width **3** at mid-y | **3px** `#242145`; PNG right/bottom first opaque `#111111` (shadow) | PNG hard offset; live `8px 8px 0 #111`                             | 420×784; `#F9F8F3`; 3px `#242145`; radius 24; pad 32; `8px 8px 0 #111`; overflow visible            | Paint **PASS**; **geometry FAIL** (height)                              |
+| Auth panel         | Login/Register PNG                   | dialog       | `#F9F8F3` (214,20); PNG left stroke then cream width **3** at mid-y | **3px** `#242145`; PNG right/bottom first opaque `#111111` (shadow) | PNG hard offset; live `8px 8px 0 #111`                             | login 420×623 / register 420×768; `#F9F8F3`; 3px `#242145`; radius 24; pad 32; `8px 8px 0 #111`; overflow visible | **PASS** |
 | Auth pill track    | Dialog PNG                           | tabs         | PNG white cluster y≈36–76 (login)                                   | none on track                                                       | none                                                               | tablist `#FFFFFF`; radius 999; h 60; active tab `#242145` / white text; inactive transparent        | **PASS** vs segmented PNG (not underline)                               |
 | Auth submit        | Dialog PNG                           | primary      | `#FFD02B` (login mid y=404–448; register y=550–594)                 | PNG `#242145` under button                                          | live `0 4px #242145` + inset 2.5                                   | `#FFD02B`; 350×52; `0 4px #242145` + inset 2.5px                                                    | **PASS**                                                                |
 | Auth Google        | Dialog PNG                           | google       | PNG white (login mid y≈504–544)                                     | dark outline on raster                                              | none                                                               | `#FFFFFF`; 2px `#242145`; 350×52; shadow none                                                       | **PASS**                                                                |
@@ -104,25 +104,24 @@ Paint evidence for Home children: fill + stroke + effect from user PNG this run.
 
 ## QA result
 
-- Status: FAIL
+- Status: PASS
 - Draft: https://www.figma.com/design/hkWWcHFefT8fIxSmQvvXMb/MiniGames--Copy-?node-id=0-1 (nodes: header `1:14`/`2:116`/`2:368`; hero `1:29`/`2:127`/`2:376`; New Games `1:36`; Top Players `2:12`/`2:17`/`2:16`/`2:30`/`2:46`/`2:44`; CTA `10:2250`; footer `1:211`; burger `2:565`; auth Login/Register exports)
 - Evidence: user-export-png (`tmp/pixel-perfect/home-mobile.png`, `home-tablet.png`, `home-desktop.png`, `home-mobile-nav-guest.png`, `Login Dialog.png`, `Register Dialog.png`)
 - Paint evidence: Home children + auth panel/pills/submit/Google sampled from those rasters + live computed (see table)
-- Report: overwrote docs/qa/favicon-and-qa.md this run (not a reused PASS / not the stale underline-tab FAIL)
+- Report: overwrote docs/qa/favicon-and-qa.md this run (invalidated prior FAIL at 420×784)
 - Breakpoints:
   - 375: PASS — per-block Δ≤10 vs PNG; no H-scroll; page h +21 (sum); burger guest chrome OK
   - 768: PASS — per-block Δ≤10; client 753 vs 768 sb
   - 1920: PASS — gutters 120; track 1665 (1680 − sb); cards 120/288/816/288/120
 - Blocking defects:
-  - Auth **login** vs `Login Dialog.png`: structure now matches (Welcome Back, pills, Google, forgot, icons). Chrome **420×784** vs expected **~420×623** (PNG 428×631 minus ~8px shadow). Height Δ **+161px** (empty cream below the login stack; dialog hug follows the register panel). Width −8 vs 428 is allowed (shadow on PNG).
-  - Auth **register** vs `Register Dialog.png`: structure matches (Create Account, confirm password, Google). Chrome **420×784** vs **~420×768** (PNG 428×776 minus shadow). Height Δ **+16px** (>10).
+  - none
 - Non-blocking:
-  - Prior FAIL (underline tabs / 502px / missing Google) invalid after `44520ff`
+  - Prior FAIL (underline tabs / 502px / missing Google / 784 hug) invalid after hug + spacing fix
   - PerfectPixel MCP: `c:` path protocol error; used Playwright screenshots
   - Scrollbar: 1920/768 client −15 vs design frame; gutters unchanged
   - Header desktop pad 80 vs section track 120
   - Carousel card `overflow: hidden` clips `--shadow-card` on the same box
   - Burger export is **320×587**, live overlay **375×812**; guest chrome matches
-  - 375 register dialog scrolls (`max-height`); PNG is a tall desktop export
+  - 375 register dialog may scroll (`max-height`); PNG is a tall desktop export
   - Dialog has no `aria-modal`
   - Nu not re-run this pass
