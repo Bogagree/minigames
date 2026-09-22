@@ -21,7 +21,7 @@
 | Story | План шагов | Спека |
 | --- | --- | --- |
 | Story 1 | [story-1-plan.md](./story-1-plan.md) | [specs/story-1.md](./specs/story-1.md) |
-| Story 2 | [story-2-plan.md](./story-2-plan.md) | появится, когда курс откроет детали |
+| Story 2 | [story-2-plan.md](./story-2-plan.md) | [specs/story-2.md](./specs/story-2.md) |
 | Story 3 | [story-3-plan.md](./story-3-plan.md) | появится, когда курс откроет детали |
 | Story 4 | [story-4-plan.md](./story-4-plan.md) | появится, когда курс откроет детали |
 
@@ -59,7 +59,8 @@ main
       └── PR story-1 → main     ← cross-check, НЕ мержить
 
  story-2 от story-1
- └── PR story-2 → story-1       ← сдать, НЕ мержить
+      ├── feat/...              ← мержим в story-2
+      └── PR story-2 → story-1  ← сдать, НЕ мержить
 
  story-3 от story-2
  story-4 от story-3

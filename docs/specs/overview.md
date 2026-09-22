@@ -11,7 +11,7 @@ MiniGames — SPA каталога мини-игр (RS School qualifying stage):
 | Home               | Лендинг: hero, карусель игр, leaderboard, блок game developer | `src/pages/home/` + компоненты            |
 | Library            | Список/каталог игр                                            | `src/pages/library/` (контент со Story 2) |
 | Auth               | Логин / регистрация (диалог)                                  | `src/components/dialogs/auth-dialog/`     |
-| Game Details       | Карточка/детали игры (диалог)                                 | позже по story                            |
+| Game Details       | Диалог деталей; в Story 2 всегда статичный Tukoni             | `src/components/dialogs/` (со Story 2)    |
 | Session / UI state | auth, открытые диалоги                                        | `src/state/` (по мере надобности)         |
 | Data               | mock / позже API                                              | `src/services/`                           |
 
