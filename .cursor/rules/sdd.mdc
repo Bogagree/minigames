@@ -1,0 +1,32 @@
+---
+description: MiniGames — Spec-Driven Development
+alwaysApply: true
+---
+
+# SDD в MiniGames
+
+Этот репозиторий ведётся по Spec-Driven Development. Глобальное правило SDD тоже действует.
+
+## Где что лежит
+
+| Артефакт | Путь |
+| --- | --- |
+| Индекс SDD | `docs/README.md` |
+| Закрытые решения | `docs/decisions.md` |
+| Спеки | `docs/specs/` |
+| Конвенции | `docs/conventions/` |
+| Общий план | `docs/implementation-plan.md` |
+| План story | `docs/story-N-plan.md` (`## Next` + `[done]`) |
+| QA отчёты | `docs/qa/<feat-slug>.md` |
+| Agent factory | `.cursor/skills/minigames-orchestrator` (+ developer / reviewer / qa) |
+
+## Перед кодом
+
+1. Прочитать спеку области (`docs/specs/…`) и `docs/decisions.md`.
+2. Одна задача = одна feature-ветка = один короткий контекст чата.
+3. Меняется поведение — сначала спека или decision, потом код.
+4. Новое архитектурное решение — сразу `Accepted` в `docs/decisions.md`, не оставлять только в чате.
+
+Полный шаг с ревью и QA → skill оркестратора (developer → reviewer → QA → PR). Не мержить PR без пользователя.
+
+Не дублировать длинные ТЗ курса в чат: ссылаться на `docs/specs/` и внешние Story-ссылки из спек.

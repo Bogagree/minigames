@@ -1,0 +1,25 @@
+@use 'tokens' as *;
+
+@mixin mobile-up {
+  @media (width >= $breakpoint-mobile) {
+    @content;
+  }
+}
+
+@mixin tablet-up {
+  @media (width >= $breakpoint-tablet) {
+    @content;
+  }
+}
+
+@mixin desktop-up {
+  @media (width >= $breakpoint-desktop) {
+    @content;
+  }
+}
+
+@mixin below-tablet {
+  @media (width <= $breakpoint-tablet) {
+    @content;
+  }
+}

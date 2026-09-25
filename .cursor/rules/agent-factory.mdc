@@ -1,0 +1,23 @@
+---
+description: MiniGames agent factory — developer → reviewer → QA → PR
+alwaysApply: false
+---
+
+# Agent factory
+
+When the user asks for the **factory / orchestrator / полный пайплайн / разработчик+ревьюер+QA** for a story step:
+
+1. Read and follow `.cursor/skills/minigames-orchestrator/SKILL.md`.
+2. Do not skip stages or open a PR until Developer PASS, Reviewer Approve, and QA PASS (or QA SKIPPED for non-UI). QA **BLOCKED** (no Figma evidence) is not green.
+3. Health-check background stage subagents per `.cursor/rules/subagent-health-check.mdc` (60s ping / 3 min stuck → interrupt → takeover or 1 restart).
+
+When the user gives **post-PR / post-review** layout or UI feedback on an open `feat/*` (screenshots, Figma panels, node-ids, «докидывай правки»):
+
+1. Same orchestrator skill → section **Post-user-review fix**.
+2. Fix on the existing branch, re-run Reviewer + QA, commit, push to the open PR — do not open a second PR.
+
+Individual roles (only when asked for that role alone):
+
+- `.cursor/skills/minigames-developer/SKILL.md`
+- `.cursor/skills/minigames-reviewer/SKILL.md`
+- `.cursor/skills/minigames-qa/SKILL.md`

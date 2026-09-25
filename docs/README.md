@@ -1,0 +1,46 @@
+# Docs — Spec-Driven Development
+
+MiniGames ведётся по **SDD**: требования и решения живут в репозитории и эволюционируют вместе с кодом.
+
+## Карта
+
+| Файл / папка                                                                | Назначение                                                      |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| [decisions.md](./decisions.md)                                              | Закрытые архитектурные решения (`Accepted`)                     |
+| [specs/](./specs/)                                                          | Спеки продукта, доменов и фич                                   |
+| [conventions/](./conventions/)                                              | Как пишем код, git, PR                                          |
+| [implementation-plan.md](./implementation-plan.md)                          | Общий порядок работ (все story)                                 |
+| [story-1-plan.md](./story-1-plan.md) … [story-4-plan.md](./story-4-plan.md) | Чеклисты шагов по каждой story                                  |
+| [qa/](./qa/)                                                                | Pixel-check отчёты; [локальные PNG при MCP 402](./qa/README.md) |
+| [qa-agent-improvement-brief.md](./qa-agent-improvement-brief.md)            | Бриф дыр QA (effects, children, stale PASS)                     |
+| Agent factory (Cursor)                                                      | `.cursor/skills/minigames-*/` + rule `agent-factory`            |
+
+## Agent factory
+
+Один шаг плана → пайплайн (не мержить без тебя):
+
+1. **Developer** — `.cursor/skills/minigames-developer/SKILL.md`
+2. **Reviewer** — `.cursor/skills/minigames-reviewer/SKILL.md`
+3. **QA** (pixel 375/768/1920) — `.cursor/skills/minigames-qa/SKILL.md` → артефакт `docs/qa/<feat-slug>.md`
+4. **PR** в ветку story — только если все стадии зелёные (оркестратор); Screenshot = ссылка на QA-отчёт
+
+Запуск: «factory / оркестратор / полный пайплайн» + шаг `feat/…` → skill `minigames-orchestrator`.
+
+## Как работать
+
+1. **Задача** → короткая сессия агента / чата, одна feature-ветка.
+2. **Перед кодом** → открыть нужную спеку и `decisions.md`.
+3. **Решение принято** → записать в `decisions.md` со статусом `Accepted` (дата, кратко «почему»).
+4. **Поведение изменилось** → обновить спеку в том же PR, что и код.
+5. **Задача закрыта** → итог в спеке/decision/PR, контекст чата не нужен дальше.
+
+## Источники курса (вне репо)
+
+Канонические критерии баллов — у RS School. Локальные спеки их резюмируют и фиксируют _наши_ договорённости по реализации:
+
+- [Story 1](https://github.com/rolling-scopes-school/qualifying-stage/blob/main/tasks/minigames/story-1.md)
+- [Overview](https://github.com/rolling-scopes-school/qualifying-stage/blob/main/tasks/minigames/README.md)
+- [Common project requirements](https://github.com/rolling-scopes-school/qualifying-stage/blob/main/tasks/minigames/common-project-requirements.md)
+- [Common layout requirements](https://github.com/rolling-scopes-school/qualifying-stage/blob/main/tasks/minigames/common-layout-requirements.md)
+- [Figma (канон курса)](https://www.figma.com/design/4MnLizE59gZI2DDxaSgZqi/MiniGames)
+- Рабочий макет для вёрстки: [наш драфт](https://www.figma.com/design/hkWWcHFefT8fIxSmQvvXMb/MiniGames--Copy-?node-id=0-1) — см. [specs/overview.md](./specs/overview.md)
