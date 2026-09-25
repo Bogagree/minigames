@@ -1,3 +1,4 @@
+import type { ChromeContext } from '../../app/navigation';
 import { createHeader } from '../../components/header/header';
 import { createHero } from '../../components/hero/hero';
 import { createSlider } from '../../components/slider/slider';
@@ -6,7 +7,7 @@ import { createGameDeveloper } from '../../components/game-dev/game-developer';
 import { createFooter } from '../../components/footer/footer';
 import './home-page.scss';
 
-export function createHomePage(): HTMLElement {
+export function createHomePage(context: ChromeContext): HTMLElement {
   const page: HTMLElement = document.createElement('div');
   page.className = 'home-page';
 
@@ -25,7 +26,7 @@ export function createHomePage(): HTMLElement {
     createGameDeveloper(),
   );
 
-  page.append(createHeader(), main, createFooter());
+  page.append(createHeader(context), main, createFooter(context));
 
   return page;
 }
