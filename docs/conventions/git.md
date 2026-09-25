@@ -6,16 +6,19 @@
 
 ```text
 main
- └── story-1                 ← база Story 1; сюда мержим фичи
+ └── story-1                      ← база Story 1; сюда мержим фичи
       ├── feat/...
-      └── PR story-1 → main  ← сдать на cross-check, НЕ мержить (−30 если смержен)
+      └── PR story-1 → main       ← сдать на cross-check, НЕ мержить (−30 если смержен)
 
- story-2 от story-1
- └── PR story-2 → story-1    ← сдать, НЕ мержить
+ story-2 от story-1               ← не от main, пока story-1 не влит
+      ├── feat/...                ← мержим в story-2
+      └── PR story-2 → story-1    ← сдать на cross-check, НЕ мержить
 ```
 
+Имена баз: `story-1`, `story-2`, `story-3`, `story-4`. Источник: [Working with the Repository](https://github.com/rolling-scopes-school/qualifying-stage/blob/main/tasks/minigames/common-project-requirements.md).
+
 - Feature: `feat/<kebab-case>` (D-009).
-- Один шаг плана ≈ одна ветка ≈ один PR в `story-1`.
+- Один шаг плана ≈ одна ветка ≈ один PR в текущую `story-N`.
 
 ## Коммиты
 
@@ -31,12 +34,17 @@ main
 
 Для внутренних SDD-PR (процесс, docs): в описании указать затронутые файлы `docs/specs/…` и `docs/decisions.md`.
 
-## PR `story-1` | `story-2` | `story-3` → `main`
+## PR сдачи story (cross-check)
 
-Только здесь — чеклист курса для cross-check (не мержить в `main`):
+Только финальный PR story, не `feat/*`. Не мержить.
+
+| Story     | Куда PR   | Score     |
+| --------- | --------- | --------- |
+| `story-1` | `main`    | ___ / 294 |
+| `story-2` | `story-1` | ___ / 257 |
 
 1. Task: ссылка на story
 2. Screenshot (можно сводный QA / скрины)
 3. Deployment: https://bogagree.github.io/minigames/
 4. Done / deadline
-5. Score: ___ / 294
+5. Score: по таблице выше
