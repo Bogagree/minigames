@@ -6,9 +6,11 @@
 
 - Только guest-состояние хедера.
 - Breakpoints: 375 (logo + burger), 768 (logo + Sign Up + burger), 1920 (logo + nav + Log In + Sign Up).
-- Nav-ссылки ведут на Home (`BASE_URL`).
+- Home открывает Home; Library открывает Library; Tournaments и Community (страниц в макете нет) открывают Home. Переход без перезагрузки и без History API (D-021).
+- Текущий пункт: `header__nav-link--current` и `aria-current="page"`. На Home это Home, на Library — Library.
+- Логотип открывает Home.
 - Log In / Sign Up открывают [Auth dialog](./auth-dialog.md) (`login` / `register`).
-- Кнопка burger в разметке есть; панель меню — [burger-menu.md](./burger-menu.md) (RSS-QS-1-4-2).
+- Кнопка burger в разметке есть; панель меню — [burger-menu.md](./burger-menu.md) (RSS-QS-1-4-2). Тот же header на [Library](./library.md).
 
 ## Out of scope
 

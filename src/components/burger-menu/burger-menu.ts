@@ -1,13 +1,20 @@
 import logoMarkUrl from '../../assets/icons/logo-mark.png';
 import closeIconUrl from '../../assets/icons/close.svg';
+import {
+  bindInAppNavigation,
+  destinationForLabel,
+  isCurrentNavLabel,
+  type ChromeContext,
+} from '../../app/navigation';
 import { openAuthDialog } from '../dialogs/auth-dialog/auth-dialog';
+import { releaseOnDisconnect } from '../../utils/dom';
 import './burger-menu.scss';
 
-const NAV_LINKS: ReadonlyArray<{ label: string; isCurrent: boolean }> = [
-  { label: 'Home', isCurrent: true },
-  { label: 'Library', isCurrent: false },
-  { label: 'Tournaments', isCurrent: false },
-  { label: 'Community', isCurrent: false },
+const NAV_LINKS: ReadonlyArray<string> = [
+  'Home',
+  'Library',
+  'Tournaments',
+  'Community',
 ];
 
 const OPEN_CLASS = 'burger-menu--open';
@@ -21,11 +28,14 @@ export type BurgerMenuController = {
   isOpen: () => boolean;
 };
 
-function createBrand(): HTMLElement {
+function createBrand(
+  context: ChromeContext,
+  beforeNavigate: () => void,
+): HTMLElement {
   const brand: HTMLAnchorElement = document.createElement('a');
   brand.className = 'burger-menu__brand';
-  brand.href = import.meta.env.BASE_URL;
   brand.setAttribute('aria-label', 'MiniGames home');
+  bindInAppNavigation(brand, 'home', context, beforeNavigate);
 
   const logo: HTMLImageElement = document.createElement('img');
   logo.className = 'burger-menu__logo';
@@ -60,7 +70,10 @@ function createCloseButton(onClose: () => void): HTMLButtonElement {
   return button;
 }
 
-function createNav(onNavigate: () => void): HTMLElement {
+function createNav(
+  context: ChromeContext,
+  beforeNavigate: () => void,
+): HTMLElement {
   const nav: HTMLElement = document.createElement('nav');
   nav.className = 'burger-menu__nav';
   nav.setAttribute('aria-label', 'Mobile');
@@ -68,22 +81,27 @@ function createNav(onNavigate: () => void): HTMLElement {
   const list: HTMLUListElement = document.createElement('ul');
   list.className = 'burger-menu__nav-list';
 
-  for (const item of NAV_LINKS) {
+  for (const label of NAV_LINKS) {
     const listItem: HTMLLIElement = document.createElement('li');
     listItem.className = 'burger-menu__nav-item';
 
+    const isCurrent: boolean = isCurrentNavLabel(label, context.page);
     const link: HTMLAnchorElement = document.createElement('a');
-    link.className = item.isCurrent
+    link.className = isCurrent
       ? 'burger-menu__nav-link burger-menu__nav-link--current'
       : 'burger-menu__nav-link';
-    link.href = import.meta.env.BASE_URL;
-    link.textContent = item.label;
+    link.textContent = label;
+    bindInAppNavigation(
+      link,
+      destinationForLabel(label),
+      context,
+      beforeNavigate,
+    );
 
-    if (item.isCurrent) {
+    if (isCurrent) {
       link.setAttribute('aria-current', 'page');
     }
 
-    link.addEventListener('click', onNavigate);
     listItem.append(link);
     list.append(listItem);
   }
@@ -109,7 +127,7 @@ function createAuthButton(
   return button;
 }
 
-export function createBurgerMenu(): BurgerMenuController {
+export function createBurgerMenu(context: ChromeContext): BurgerMenuController {
   const menu: HTMLElement = document.createElement('div');
   menu.className = 'burger-menu';
   menu.setAttribute('role', 'dialog');
@@ -162,12 +180,13 @@ export function createBurgerMenu(): BurgerMenuController {
     },
   };
 
-  header.append(
-    createBrand(),
-    createCloseButton(() => {
-      controller.close();
-    }),
-  );
+  const closeMenu = (): void => {
+    controller.close();
+    document.documentElement.classList.remove(BODY_OPEN_CLASS);
+    document.body.classList.remove(BODY_OPEN_CLASS);
+  };
+
+  header.append(createBrand(context, closeMenu), createCloseButton(closeMenu));
   actions.append(
     createAuthButton('Log In', 'outline', 'login', () => {
       controller.close();
@@ -176,13 +195,7 @@ export function createBurgerMenu(): BurgerMenuController {
       controller.close();
     }),
   );
-  panel.append(
-    header,
-    createNav(() => {
-      controller.close();
-    }),
-    actions,
-  );
+  panel.append(header, createNav(context, closeMenu), actions);
   menu.append(panel);
 
   menu.addEventListener('transitionend', (event: TransitionEvent) => {
@@ -195,10 +208,15 @@ export function createBurgerMenu(): BurgerMenuController {
     }
   });
 
-  document.addEventListener('keydown', (event: KeyboardEvent) => {
+  const onKeyDown = (event: KeyboardEvent): void => {
     if (event.key === 'Escape' && controller.isOpen()) {
       controller.close();
     }
+  };
+
+  document.addEventListener('keydown', onKeyDown);
+  releaseOnDisconnect(menu, () => {
+    document.removeEventListener('keydown', onKeyDown);
   });
 
   return controller;
