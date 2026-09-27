@@ -40,14 +40,20 @@ function bindChipScroll(track: HTMLElement): () => void {
 
     const delta: number = event.clientX - startX;
 
-    if (Math.abs(delta) > DRAG_THRESHOLD_PX) {
-      shouldSuppressClick = true;
+    if (Math.abs(delta) <= DRAG_THRESHOLD_PX) {
+      return;
+    }
+
+    shouldSuppressClick = true;
+
+    if (!track.hasPointerCapture(event.pointerId)) {
+      track.setPointerCapture(event.pointerId);
     }
 
     track.scrollLeft = startScroll - delta;
   };
 
-  const onPointerUp = (event: PointerEvent): void => {
+  const stopTracking = (event: PointerEvent): void => {
     if (pointerId !== event.pointerId) {
       return;
     }
@@ -58,9 +64,9 @@ function bindChipScroll(track: HTMLElement): () => void {
       track.releasePointerCapture(event.pointerId);
     }
 
-    track.removeEventListener('pointermove', onPointerMove);
-    track.removeEventListener('pointerup', onPointerUp);
-    track.removeEventListener('pointercancel', onPointerUp);
+    document.removeEventListener('pointermove', onPointerMove);
+    document.removeEventListener('pointerup', stopTracking);
+    document.removeEventListener('pointercancel', stopTracking);
   };
 
   const onPointerDown = (event: PointerEvent): void => {
@@ -72,10 +78,9 @@ function bindChipScroll(track: HTMLElement): () => void {
     startX = event.clientX;
     startScroll = track.scrollLeft;
     shouldSuppressClick = false;
-    track.setPointerCapture(event.pointerId);
-    track.addEventListener('pointermove', onPointerMove);
-    track.addEventListener('pointerup', onPointerUp);
-    track.addEventListener('pointercancel', onPointerUp);
+    document.addEventListener('pointermove', onPointerMove);
+    document.addEventListener('pointerup', stopTracking);
+    document.addEventListener('pointercancel', stopTracking);
   };
 
   const onClick = (event: MouseEvent): void => {
@@ -94,9 +99,9 @@ function bindChipScroll(track: HTMLElement): () => void {
   return (): void => {
     track.removeEventListener('pointerdown', onPointerDown);
     track.removeEventListener('click', onClick, { capture: true });
-    track.removeEventListener('pointermove', onPointerMove);
-    track.removeEventListener('pointerup', onPointerUp);
-    track.removeEventListener('pointercancel', onPointerUp);
+    document.removeEventListener('pointermove', onPointerMove);
+    document.removeEventListener('pointerup', stopTracking);
+    document.removeEventListener('pointercancel', stopTracking);
   };
 }
 
