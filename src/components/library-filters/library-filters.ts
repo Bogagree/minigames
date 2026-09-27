@@ -1,3 +1,4 @@
+import checkIconUrl from '../../assets/icons/check.svg';
 import { releaseOnDisconnect } from '../../utils/dom';
 import './library-filters.scss';
 
@@ -165,22 +166,37 @@ function createSort(): { root: HTMLElement; release: () => void } {
     const option: HTMLButtonElement = document.createElement('button');
     const isSelected: boolean = method === DEFAULT_SORT;
 
+    const check: HTMLImageElement = document.createElement('img');
+    check.className = 'library-filters__sort-check';
+    check.src = checkIconUrl;
+    check.alt = '';
+    check.width = 14;
+    check.height = 14;
+    check.hidden = !isSelected;
+
     option.type = 'button';
     option.className = isSelected
       ? 'library-filters__sort-option library-filters__sort-option--current'
       : 'library-filters__sort-option';
-    option.textContent = method;
     option.setAttribute('role', 'option');
     option.setAttribute('aria-selected', isSelected ? 'true' : 'false');
+    option.append(method, check);
 
     option.addEventListener('click', () => {
       for (const item of options) {
         const isSelected: boolean = item === option;
+        const itemCheck: Element | null = item.querySelector(
+          '.library-filters__sort-check',
+        );
         item.classList.toggle(
           'library-filters__sort-option--current',
           isSelected,
         );
         item.setAttribute('aria-selected', isSelected ? 'true' : 'false');
+
+        if (itemCheck instanceof HTMLImageElement) {
+          itemCheck.hidden = !isSelected;
+        }
       }
 
       trigger.textContent = sortLabel(method);

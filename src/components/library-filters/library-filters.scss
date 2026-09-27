@@ -141,6 +141,7 @@
   &__sort-option {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     width: 100%;
     min-height: var(--library-sort-option-height);
     margin: 0;
@@ -173,6 +174,17 @@
       &:focus-visible {
         background-color: var(--color-primary-high);
       }
+    }
+  }
+
+  &__sort-check {
+    display: block;
+    flex: 0 0 auto;
+    width: var(--library-sort-check-size);
+    height: var(--library-sort-check-size);
+
+    &[hidden] {
+      display: none;
     }
   }
 
