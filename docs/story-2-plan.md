@@ -13,7 +13,7 @@
 ## Next (для нового чата / оркестратора)
 
 ```text
-feat/library-filters    # RSS-QS-2-1-4
+feat/library-game-cards    # RSS-QS-2-1-5, RSS-QS-2-2-1
 ```
 
 ---
@@ -26,7 +26,7 @@ feat/library-filters    # RSS-QS-2-1-4
 story-1
 └── story-2
     ├── feat/library-chrome                 # RSS-QS-2-1-1, RSS-QS-2-1-2, RSS-QS-2-1-3 [done]
-    ├── feat/library-filters                # RSS-QS-2-1-4
+    ├── feat/library-filters                # RSS-QS-2-1-4 [done]
     ├── feat/library-game-cards             # RSS-QS-2-1-5, RSS-QS-2-2-1
     ├── feat/game-details-motion            # RSS-QS-2-2-2
     ├── feat/game-details-hero-info         # RSS-QS-2-2-3, RSS-QS-2-2-4
@@ -49,7 +49,7 @@ story-1
 
 ## Пока не делать (вне текущего Next)
 
-- Карточки, диалог, пагинация, слайдер и Nu — пока не закрыт текущий `## Next`
+- Диалог, пагинация, слайдер и Nu — пока не закрыт текущий `## Next`
 - Реальную фильтрацию, сортировку и смену страницы данных
 - History API
 - API / Firebase
