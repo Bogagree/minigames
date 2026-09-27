@@ -1,128 +1,107 @@
 # QA — library filters (RSS-QS-2-1-4)
 
-- Branch: `feat/library-filters` @ `cba8cdd` (`fix: size the desktop library lead so its ink matches the frame`)
+- Branch: `feat/library-filters` @ `a2222f0` (`fix: show the exported check on the selected sort option`), which includes `cba8cdd` (desktop lead size)
 - Base URL: `http://127.0.0.1:5173/minigames/`
-- Scope: Library title, category chips, sort control. Header, burger, and footer are out of scope unless this step broke them.
-- Draft: [MiniGames (Copy)](https://www.figma.com/design/hkWWcHFefT8fIxSmQvvXMb/MiniGames--Copy-?node-id=0-1) `fileKey` `hkWWcHFefT8fIxSmQvvXMb`. Course file not used.
-- This run overwrites the report committed in `2da0b2f`. That report measured lead ink **330.8px** at `71163bc` and is stale after `cba8cdd`. A previous FAIL is not a PASS.
+- Scope: Library title, lead, category chips, sort trigger, selected-option check. Game cards, pagination, and Game Details are the next plan steps. The reference frames show them. Their absence on the live page is not a defect for this step.
+- Opened from the header primary nav (`a.header__nav-link` “Library”). URL stayed `http://127.0.0.1:5173/minigames/`.
+
+This file replaces the report that said paint was unread and `check.svg` was not exported. That verdict is stale after the user frame exports and `a2222f0`. It is not reused.
 
 ## Evidence this run
 
-Figma MCP `get_design_context` on lead `2:629` returned the Starter rate limit. No further Figma MCP calls. No fills, strokes, or effects were read from any child.
+No Figma MCP calls. Expected fill, stroke, and effect are pixel samples of the user exports:
 
-`tmp/pixel-perfect/` has `README.md` and `diffs/` only. No reference PNG for the library frames (or `home-375.png` / `home-768.png` / `home-1920.png`). Diff rasters are not the draft.
+- `tmp/pixel-perfect/library-375.png` (375×3315)
+- `tmp/pixel-perfect/library-768.png` (768×1893)
+- `tmp/pixel-perfect/library-1920.png` (1920×1450)
 
-No user Dev Mode paste. No cache with fills, strokes, and effects. Geometry figures in the frame column are the prior metadata cache of these node-ids (layout only: `x` / `width` / `height`). That cache was not re-fetched this run. It is not a color or effect PASS. `docs/specs/library-filters.md` and `tokens.scss` were not used as the expected paint column.
+Page background in all three rasters is `#F9F8F3` `rgb(249, 248, 243)`. Pixels outside a control that match that color are recorded as effect **none** (no halo). `rgba(0, 0, 0, 0)` is transparent. Live ink width is `Range.getBoundingClientRect()` on the text node. Live page background is `rgb(249, 248, 243)`.
 
-`rgba(0, 0, 0, 0)` is transparent.
+Samples (equator of the control, solid pixels, not anti-aliased corners):
 
-Live ink is `Range.getBoundingClientRect()` on the text node (one line). The element box is `getBoundingClientRect()`.
+| Sample | Raster pixel | Color |
+| --- | --- | --- |
+| Current chip fill | 375 `(30, 172)`; 1920 `(122, 300)` | `#FFD02B` |
+| Current chip stroke | 375 `(16–17, 181)` and `(166–167, 30)`; 768 `(40–41, 223)`; 1920 `(120–121, 300)` | `#242145` ×2, then fill. Pixel outside is `#F9F8F3` |
+| Default chip fill | 375 `(140, 170)`; 1920 `(250, 290)` | `#FFFFFF` |
+| Default chip stroke | 375 `(116–117, 181)`; 1920 `(238, 300)` | `#242145` ×2 |
+| Default chip glyphs | 375 `(133, 181)`, `(145, 181)` | `#242145` |
+| Title glyphs | 375 `(18, 94)` | `#242145` on `#F9F8F3` |
+| Lead glyphs | 375 `(43, 125)`; 1920 `(122, 212)` | `#5F5D75` |
+| Sort fill / stroke | 375 `(18, 232)` / `(16–17, 232)`; 1920 `(1612, 300)` / `(1610–1611, 300)` | `#FFFFFF` / `#242145` ×2. Outside `#F9F8F3` |
+
+The closed frames do not show the open menu. The check is compared to `src/assets/icons/check.svg`, not to a drawing invented for this run.
 
 ## Paint table
 
-Instance fill, stroke (weight + inside/outside + hex), and effect were not read for any child. Live computed values are recorded. Match is not PASS.
+Stroke “inside” means the 2px ring is the outer pixels of the painted box and the next pixel outside is the page background.
 
-| Surface                         | node-id                                                                  | Family  | Fill   | Stroke (weight + inside/outside + hex) | Effect / shadow | Live computed                                                                                                                                                                 | Match                                                     |
-| ------------------------------- | ------------------------------------------------------------------------ | ------- | ------ | -------------------------------------- | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
-| Title “Game Library”            | `2:628` (tablet `2:834`, mobile `2:1034`)                                | text    | unread | unread                                 | unread          | transparent; `rgb(36, 33, 69)`; shadow none; 700                                                                                                                              | BLOCKED                                                   |
-| Lead                            | `2:629` (tablet `2:835`, mobile `2:1035`)                                | text    | unread | unread                                 | unread          | transparent; `rgb(95, 93, 117)`; 18px / 400 / line 22px at 1920; shadow none                                                                                                  | BLOCKED                                                   |
-| Chip current (page “All Games”) | `2:632` (tablet `2:838`, mobile `2:1038`)                                | chip    | unread | unread                                 | unread          | `rgb(255, 208, 43)`; text `rgb(36, 33, 69)`; 700; radius 999; border 0; inset `1px rgb(255, 208, 43)`; shadow none                                                            | BLOCKED                                                   |
-| Chip default (page “Puzzle”)    | `2:634` (siblings `2:636` `2:638` `2:640` `2:642` `2:644`)               | chip    | unread | unread                                 | unread          | transparent; text `rgb(95, 93, 117)`; 500; inset `1px rgb(210, 210, 210)`; shadow none                                                                                        | BLOCKED                                                   |
-| Chip hover                      | guidebook states `2:1910` / `2:1915` / `2:1920` (labels not in geometry) | chip    | unread | unread                                 | unread          | Default (Puzzle, `aria-pressed=false`): `rgb(240, 238, 255)`, inset `1px rgb(210, 210, 210)`. Current (Puzzle after select): `rgb(229, 187, 0)`, inset `1px rgb(229, 187, 0)` | BLOCKED — instance fill not read, so live is not a match  |
-| Sort trigger                    | `2:646` (tablet `2:853`, mobile `2:1052`)                                | sort    | unread | unread                                 | unread          | `rgb(255, 255, 255)`; `2px solid rgb(36, 33, 69)`; text `rgb(36, 33, 69)`; radius 12; shadow none. Hover `rgb(255, 249, 229)`                                                 | BLOCKED                                                   |
-| Chevron                         | `2:648` / `2:855` / `2:1054` `chevron_right` 24×24                       | icon    | unread | unread                                 | unread          | no SVG in the trigger (`innerHTML` is the label text only)                                                                                                                    | BLOCKED — instance shows the icon; asset was not exported |
-| Sort menu (open state)          | `2:1946`                                                                 | menu    | unread | unread                                 | unread          | white; `2px solid rgb(36, 33, 69)`; radius 12; shadow none; overflow hidden                                                                                                   | BLOCKED                                                   |
-| Sort option default             | `2:1947` / `2:1956` / `2:1960`                                           | option  | unread | unread                                 | unread          | transparent; text `rgb(36, 33, 69)`; 500; `border-bottom` 1px `rgb(229, 231, 235)` (last item none); h 49; shadow none; no check SVG                                          | BLOCKED                                                   |
-| Sort option current             | `2:1951`                                                                 | option  | unread | unread                                 | unread          | `rgb(255, 208, 43)`; 700; h 49; shadow none. Hover `rgb(229, 187, 0)`                                                                                                         | BLOCKED                                                   |
-| Check on selected option        | `2:1952` `check` 14×14                                                   | icon    | unread | unread                                 | unread          | no SVG                                                                                                                                                                        | BLOCKED — instance shows the icon; asset was not exported |
-| Menu divider                    | `2:1950` / `2:1955` / `2:1959`                                           | divider | unread | unread                                 | unread          | option `border-bottom` 1px `rgb(229, 231, 235)`                                                                                                                               | BLOCKED                                                   |
+| Surface | node-id | Family | Fill | Stroke (weight + inside/outside + hex) | Effect / shadow | Live computed | Match |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Title “Game Library” | `2:628` (tablet `2:834`, mobile `2:1034`) | text | transparent (page `#F9F8F3`) | none | none | transparent; `rgb(36, 33, 69)`; border 0; shadow none | PASS |
+| Lead | `2:629` (tablet `2:835`, mobile `2:1035`) | text | transparent (page `#F9F8F3`) | none | none | transparent; `rgb(95, 93, 117)`; border 0; shadow none | PASS |
+| Chip current (“All Games”) | `2:632` | chip | `#FFD02B` | 2px inside `#242145` | none | `rgb(255, 208, 43)`; text `rgb(36, 33, 69)`; border 0; inset `1px rgb(255, 208, 43)`; shadow none | FAIL — stroke is 1px of the fill color, not 2px `#242145` |
+| Chip default (“Puzzle”) | `2:634` | chip | `#FFFFFF` | 2px inside `#242145`; glyphs `#242145` | none | transparent (shows page `rgb(249, 248, 243)`); text `rgb(95, 93, 117)`; inset `1px rgb(210, 210, 210)` | FAIL — fill, stroke weight, stroke color, and label color |
+| Sort trigger | `2:646` (tablet `2:853`, mobile `2:1052`) | sort | `#FFFFFF` | 2px inside `#242145` | none | `rgb(255, 255, 255)`; `2px solid rgb(36, 33, 69)`; text `rgb(36, 33, 69)`; radius 12; shadow none | PASS |
+| Check on selected option | `2:1952` (not in the closed frames) | icon | none | file stroke 3 `#3A2EBF`, 14×14 | none | same path and `#3A2EBF` as `src/assets/icons/check.svg`; 14×14; visible only on the selected option | PASS — compared to the SVG file |
 
-## Layout (live − library frame)
+## Layout (live − raster)
 
-Frame sizes are the prior geometry cache, not a new Figma read. Header height is the previous chrome step (live header 66 / 79 / 91 vs frames 64 / 72 / 85). Filters are measured inside the filters block. Page `clientWidth` at 1920 is 1920 (no scrollbar). At 2000, `#app` is 1920 at x=40; intro and controls padding stay `40px 120px` / `16px 120px`.
+Filters measured inside the filters block. Page `clientWidth` equals the viewport at 375, 768, and 1920 (`scrollWidth` equals that width).
 
-| Breakpoint | Metric                  | Frame                                   | Live                                    | Δ        |
-| ---------- | ----------------------- | --------------------------------------- | --------------------------------------- | -------- |
-| 375        | title section `2:1033`  | 375×86, pad 16                          | 375×86, pad 16                          | 0        |
-| 375        | title box `2:1034`      | x=16, 343×29                            | x=16, 343×29                            | 0        |
-| 375        | lead box `2:1035`       | x=16, 343×17                            | x=16, 343×17 (ink 289.5×17)             | 0        |
-| 375        | filter section `2:1036` | 375×119                                 | 375×119, pad 16, gap 16                 | 0        |
-| 375        | chip track `2:1037`     | x=16, 343×31                            | x=16, 343×31, `flex-wrap: nowrap`       | 0        |
-| 375        | sort `2:1052`           | x=16, y=63, 343×40                      | relative y=63, 343×40                   | 0        |
-| 375        | content width           | 343 (375−32)                            | 343                                     | 0        |
-| 375        | H-scroll                | none                                    | `scrollWidth` 375                       | 0        |
-| 768        | title section `2:833`   | 768×119, pad 24 / 40                    | 768×119, pad 24px 40px                  | 0        |
-| 768        | title / lead            | 688×44 / 688×19                         | 688×44 / 688×19 (lead ink 330.8×20)     | 0        |
-| 768        | filter bar `2:836`      | 768×121                                 | 768×121, pad 16px 40px, gap 16          | 0        |
-| 768        | chip track `2:837`      | x=40, 688×33, gap 8                     | x=40, 688×33, gap 8                     | 0        |
-| 768        | sort `2:853`            | 182×40                                  | 182×40                                  | 0        |
-| 768        | content width           | 688 (768−80)                            | 688                                     | 0        |
-| 768        | H-scroll                | none                                    | `scrollWidth` 768                       | 0        |
-| 1920       | title section `2:627`   | 1920×178, pad 40 / 120                  | 1920×178, pad 40px 120px                | 0        |
-| 1920       | title glyphs `2:628`    | 367×68                                  | 366.4×68 (56px / 700)                   | −0.6     |
-| 1920       | lead glyphs `2:629`     | 375×22                                  | 372.2×21 ink, line box 22 (18px / 400)  | **−2.8** |
-| 1920       | filter bar `2:630`      | 1920×76                                 | 1920×76, pad 16px 120px                 | 0        |
-| 1920       | chips y / sort          | chips y=21.5; sort x=1610, 190×44       | chips y=21.5; sort x=1610, 190×44       | 0        |
-| 1920       | track                   | gutter 120, right edge 1800, track 1680 | gutter 120, sort right 1800, track 1680 | 0        |
-| 1920       | chip gap                | 16 (`2:634` x=118, chip 102)            | 16                                      | 0        |
-| 1920       | H-scroll                | none                                    | `scrollWidth` 1920                      | 0        |
-| 520        | H-scroll                | none                                    | `scrollWidth` 520                       | 0        |
-| 2000       | shell                   | centered, max 1920                      | `#app` 1920 @ x=40; gutter 120          | 0        |
+| Breakpoint | Metric | Frame raster | Live | Δ |
+| --- | --- | --- | --- | --- |
+| 375 | section padding / track | pad 16, track 343 | pad 16, track 343 | 0 |
+| 375 | chip row | y band 166–196, h 31, gap 8, visible width 343 | h 31, gap 8, width 343, `nowrap` | 0 |
+| 375 | sort | 343×40 | 343×40 | 0 |
+| 375 | lead ink | x 17–306, w 290, tight h 12, `#5F5D75` | w 289.5, line box h 17 | width −0.5 |
+| 375 | chip widths | 92 / 72 / 61 / 70 | 91.1 / 70.4 / 59.5 / 67.9 | ≤ 2.1 |
+| 768 | section padding / track | pad 40, track 688 | `24px 40px` intro, controls `16px 40px`, track 688 | 0 |
+| 768 | chip row | h 33, gap 8, union x 40–649 = 610 | h 33, gap 8, union 598.4 | **−11.6** |
+| 768 | sort | 182×40 | 182×40 | 0 |
+| 768 | lead ink | w 331, tight h 14 | w 330.8, line box h 20 | width −0.2 |
+| 1920 | gutter / track | x 120–1799, track 1680 | gutter 120, sort right 1800, track 1680 | 0 |
+| 1920 | intro / controls padding | content inset 120 | intro `40px 120px`, controls `16px 120px` | 0 |
+| 1920 | chip row | h 33, gap 16, union x 120–777 = 658 | h 33, gap 16, union 646.4 | **−11.6** |
+| 1920 | sort | x 1610, 190×44 | x 1610, 190×44 | 0 |
+| 1920 | lead ink | w 373 (x 121–493) | w 372.2, line box h 22 | width −0.8 |
+| 1920 | title ink width | w 364 | w 366.4 | +2.4 |
 
-Desktop lead `2:629` is the text node 375×22. Live ink width is 372.2 (Δ −2.8) and the line box is 22. The prior 330.8px ink at `71163bc` is not this build. The paragraph element itself is the 1680 content track wide; the comparison is the glyph range, not that stretched box. At 375 and 768 the lead **boxes** are 343×17 and 688×19 (Δ 0). Tablet glyph ink is 20px tall inside the 19px line box.
-
-Chip boxes (height matches: 33 at 768/1920, 31 at 375). Width Δ per chip ≤ 3.3.
-
-| Chip      | 375 frame | 375 live | 768/1920 frame | 1920 live |
-| --------- | --------- | -------- | -------------- | --------- |
-| All Games | 92        | 91.1     | 102            | 101       |
-| Puzzle    | 72        | 70.4     | 78             | 76.8      |
-| Card      | 61        | 59.5     | 65             | 64        |
-| Match     | 70        | 67.9     | 76             | 73.9      |
-| Farm      | 62        | 61.1     | 67             | 65.9      |
-| Strategy  | 83        | 80.6     | 92             | 88.7      |
-| Arcade    | 75        | 73.3     | 82             | 80.1      |
-
-Hug width of the desktop chip row `2:631` is 658. Live union of the seven chips plus 16px gaps is 646.4 (Δ −11.6). The flex track itself is 1474 inside the 1680 content track, not 658.
-
-Open menu was measured at 375: 343×200 (trigger width), options 49px tall. Guidebook menu `2:1946` is 200×199 with options 49px. Item height Δ 0. Menu height Δ +1. Width follows the mobile trigger (343), not the guidebook 200 artboard.
+Chip widths at 768 and 1920 (raster / live): All Games 102 / 101, Puzzle 78 / 76.8, Card 65 / 64, Match 76 / 73.9, Farm 67 / 65.9, Strategy 92 / 88.7, Arcade 82 / 80.1. Each chip Δ ≤ 3.3. The union of the seven pills plus gaps is the chip-row width, and that sum is −11.6.
 
 ## Semantics and behavior
 
-Opened from the header primary nav (`Library`), not the footer and not the History API. URL stayed `http://127.0.0.1:5173/minigames/`.
+`section.library-filters` labelled by the visible `h1`. Chips are `role="group"` / `aria-label="Categories"`, each a `button` with `aria-pressed`. Sort trigger `aria-haspopup="listbox"`. Menu `role="listbox"`. Options `role="option"` / `aria-selected`.
 
-`section.library-filters`, visible `h1` “Game Library”, chips `role="group"` / `aria-label="Categories"`, each chip `button` with `aria-pressed`. Sort trigger `aria-haspopup="listbox"` / `aria-expanded` / `aria-controls`. Menu `role="listbox"`. Options `role="option"` / `aria-selected`.
+| Check | Result |
+| --- | --- |
+| Start | one `aria-pressed="true"` (All Games); label `Sort by: Rating ↓` |
+| Click Puzzle | only Puzzle is `aria-pressed="true"`; main text is still title, lead, chips, and sort |
+| Chip row at 375 | `scrollLeft` 0 → 180; `flex-wrap: nowrap`; all chips one y; `scrollbar-width: none`; `clientWidth` 343 = `offsetWidth` 343; `scrollWidth` 551 |
+| Sort open | `aria-expanded="true"`; four options; check visible only on Rating ↓ |
+| Choose Name A→Z | label `Sort by: Name A→Z`; menu `hidden`; `aria-expanded="false"`; check hidden on the other three and shown on Name A→Z |
+| Catalog | no game cards after the chip click or the sort change |
 
-| Check                | Result                                                                                                                     |
-| -------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| Start                | one `aria-pressed="true"` (All Games); label `Sort by: Rating ↓`                                                           |
-| Click Puzzle         | pressed list is only Puzzle (6 others `false`); main text is still title, lead, chips, and sort                            |
-| Drag chip row at 375 | `scrollLeft` 0 → 209; `flex-wrap: nowrap`; all chips one y; `scrollbar-width: none`; `clientWidth` 343 = `offsetWidth` 343 |
-| Sort open            | `aria-expanded="true"`; four options; selected Rating ↓                                                                    |
-| Choose Name A→Z      | label `Sort by: Name A→Z`; menu `hidden`; `aria-expanded="false"`; main still has no game cards                            |
-| Cursor               | chips and sort `pointer`; chip track `grab`                                                                                |
-
-## Assets
-
-Sort frames include `chevron_right` 24×24 (`2:648`, `2:855`, `2:1054`, guidebook `2:1933`). The open menu includes `check` 14×14 (`2:1952`). Neither file is in `src/assets/`. Nothing was invented. Those children are BLOCKED. The label text matches the frame (`Sort by: Rating ↓` and the four method names). Missing the decorative icon is not, by itself, a FAIL.
+The check `src` is the data URI of `src/assets/icons/check.svg` (same `M11.6664 3.5L5.25036 9.9162L2.33398 6.99975` path, `stroke="#3A2EBF"`, 14×14). The trigger has no separate chevron. The desktop frame’s trigger text is `Sort by: Rating ↓`, and the live label matches that, including the arrow inside the words.
 
 ## QA result
 
-- Status: BLOCKED
-- Draft: https://www.figma.com/design/hkWWcHFefT8fIxSmQvvXMb/MiniGames--Copy-?node-id=2-611 (nodes: `library-desktop` `2:611`, `library-tablet` `2:820`, `library-mobile` `2:1023`; title `2:628`; lead `2:629`; chips `2:632`–`2:644`; sort `2:646` / `2:853` / `2:1052`; chevron `2:648` / `2:855` / `2:1054`; check `2:1952`; guidebook chips `2:1902`, sort `2:1923`, menu `2:1946`)
-- Evidence: none of MCP-child / cache-with-paint / user-paste / user-export-png. Layout numbers are live this run against the prior geometry-only cache. Paint was not read (`get_design_context` on `2:629` hit the Starter rate limit; further Figma calls stopped).
-- Paint evidence: missing for every in-scope child → not PASS
-- Report: overwrote docs/qa/library-filters.md this run (not a reused PASS; prior FAIL at `71163bc` is stale)
+- Status: FAIL
+- Draft: user frames `tmp/pixel-perfect/library-375.png`, `library-768.png`, `library-1920.png` (file `hkWWcHFefT8fIxSmQvvXMb`, library frames `2:611` / `2:820` / `2:1023`)
+- Evidence: user-export-png (`tmp/pixel-perfect/library-….png`)
+- Paint evidence: each in-scope child has fill + stroke + effect sampled from those frames. The check is the user SVG, because the closed frames do not show the menu.
+- Report: overwrote docs/qa/library-filters.md this run (not a reused PASS)
 - Breakpoints:
-  - 375: BLOCKED — lead box 343×17 (Δ 0), section 86 and controls 119, track 343, sort 343×40, chip h 31; paint unread
-  - 768: BLOCKED — lead box 688×19 (Δ 0), section 119, bar 121, track 688, sort 182×40; paint unread
-  - 1920: BLOCKED — lead ink 372.2×21 vs `2:629` 375×22 (Δ −2.8 / −1), line box 22; track 1680, sort 190×44, title glyphs 366.4 vs 367; paint unread
+  - 375: FAIL — track 343, pad 16, chip h 31, sort 343×40, lead ink 289.5 vs 290 (Δ −0.5). Chip paint does not match the frame.
+  - 768: FAIL — track 688, sort 182×40, lead ink Δ −0.2. Chip-row union 598.4 vs 610 (Δ −11.6). Chip paint does not match.
+  - 1920: FAIL — track 1680, gutter 120, sort 190×44 at x 1610, lead ink 372.2 vs 373 (Δ −0.8). Chip-row union 646.4 vs 658 (Δ −11.6). Chip paint does not match.
 - Blocking defects:
-  - No fill, stroke (weight + inside/outside + hex), or effect on any painted child (MCP rate limit; no frame PNG; geometry cache only)
-  - Chevron `2:648` / `2:855` / `2:1054` and check `2:1952` are on the instance and were not exported (BLOCKED, not a text-only FAIL)
+  - Current chip: frame stroke is 2px inside `#242145`. Live stroke is inset `1px` `#FFD02B` (the fill).
+  - Default chip: frame fill `#FFFFFF`, stroke 2px inside `#242145`, glyphs `#242145`. Live fill is transparent over `#F9F8F3`, stroke is inset `1px` `#D2D2D2`, glyphs `#5F5D75`.
+  - Chip-row union width is 11.6px short of the raster at 768 (598.4 vs 610) and at 1920 (646.4 vs 658).
 - Non-blocking:
-  - Desktop lead ink is 372.2 vs 375 (Δ −2.8). The 330.8px miss from `71163bc` is gone on `cba8cdd`
-  - Desktop chip-row hug width 646.4 vs `2:631` 658 (Δ −11.6). Each chip Δ ≤ 3.3. Content track is 1680 at gutter 120
-  - Current-chip hover live is `rgb(229, 187, 0)`; default-chip hover live is `rgb(240, 238, 255)`. Instance fills were not read, so this is not a color verdict
-  - Header is taller than the library frames by the previous chrome step; filters’ own boxes match
-  - At 2000 the shell stays 1920 wide and centered; gutters stay 120
+  - Sort trigger paint matches (white, 2px `#242145`, no shadow). Title and lead colors match. No drop shadow on the frame or live for these controls.
+  - The trigger text is `Sort by: Rating ↓` (arrow inside the label). A separate right-chevron icon is not a defect.
+  - `check.svg` matches the selected option’s icon and moves with the selection. The closed frames do not show the menu.
+  - There is still no card list. Filtering and sorting do not change one.
+  - Header is taller than the library frames (live 66 / 79 / 91). Filters’ own padding and track match the rasters.
