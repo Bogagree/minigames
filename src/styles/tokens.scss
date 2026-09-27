@@ -124,6 +124,24 @@ $breakpoint-desktop: 1920px;
   --footer-height-tablet: 429px;
   --footer-height-desktop: 343px;
 
+  /* Figma Library title + filters (2:627 / 2:833 / 2:1033, 2:630 / 2:836 / 2:1036) */
+  --library-title-size-mobile: var(--font-size-xl);
+  --library-title-size-tablet: calc(var(--font-size-2xl) + var(--size-1) / 2);
+  --library-title-size-desktop: calc(var(--font-size-2xl) + var(--size-3));
+  --library-title-line-mobile: 29px;
+  --library-title-line-tablet: 44px;
+  --library-title-line-desktop: 68px;
+  --library-lead-line-mobile: 17px;
+  --library-lead-line-tablet: 19px;
+  --library-lead-line-desktop: 22px;
+  --library-chip-height-mobile: 31px;
+  --library-chip-height: 33px;
+  --library-sort-height-desktop: calc(var(--size-5) + var(--size-1) / 2);
+  --library-sort-width-tablet: 182px;
+  --library-sort-width-desktop: 190px;
+  --library-sort-option-height: 49px;
+  --z-index-library-sort: 30;
+
   --line-height-body: 1.5;
 
   --size-0: 0;

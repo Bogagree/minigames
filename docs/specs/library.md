@@ -8,9 +8,9 @@
 - Home ↔ Library — смена страницы в памяти, без перезагрузки и без History API (D-021).
 - Library-ссылки (header, burger, Explore в footer) открывают Library. Home и ссылки без своей страницы (Tournaments, Community, Categories, Company, соцсети, логотип) открывают Home.
 - Активный пункт в header и в burger — открытая страница. `aria-current="page"` в Explore футера — на Home или Library, в зависимости от страницы.
-- Оболочка страницы: header, `main` с скрытым `h1` «Library», footer. Каталог на этом шаге пустой.
+- Оболочка страницы: header, `main`, footer. Видимый `h1` «Game Library» — в [фильтрах](./library-filters.md).
 
 ## Out of scope
 
-- Фильтры, карточки, Game Details, пагинация, логика слайдера
+- Карточки, Game Details, пагинация, логика слайдера
 - Реальная фильтрация и History API

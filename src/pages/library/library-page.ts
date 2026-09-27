@@ -1,6 +1,7 @@
 import type { ChromeContext } from '../../app/navigation';
 import { createHeader } from '../../components/header/header';
 import { createFooter } from '../../components/footer/footer';
+import { createLibraryFilters } from '../../components/library-filters/library-filters';
 import './library-page.scss';
 
 export function createLibraryPage(context: ChromeContext): HTMLElement {
@@ -10,11 +11,7 @@ export function createLibraryPage(context: ChromeContext): HTMLElement {
   const main: HTMLElement = document.createElement('main');
   main.className = 'library-page__main';
   main.id = 'main-content';
-
-  const title: HTMLHeadingElement = document.createElement('h1');
-  title.className = 'library-page__title';
-  title.textContent = 'Library';
-  main.append(title);
+  main.append(createLibraryFilters());
 
   page.append(createHeader(context), main, createFooter(context));
 
