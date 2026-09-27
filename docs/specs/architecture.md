@@ -32,10 +32,11 @@ src/assets/         → картинки/иконки (только реальн
 - Страница не знает про Vite/деплой; роутер не знает вёрстку секций Home.
 - Mock JSON импортируется в UI-модуль напрямую (`src/data/…`). HTTP/`src/services` — когда появится API.
 
-## Роутинг (сейчас)
+## Роутинг (Story 2)
 
-- `createRouter(routes, fallbackPath)` рендерит fallback-страницу в корень приложения.
-- History API и многостраничный SPA — вне текущей архитектуры Story 1 (D-006).
+- `createRouter(routes, fallbackPath)` рисует страницу в корень. Текущая страница — `home` | `library` в памяти (D-021).
+- `navigate` перерисовывает корень без перезагрузки. History API, hash и deep link — Story 4 (D-006).
+- Какая подпись куда ведёт — `src/app/navigation.ts`. Chrome получает `ChromeContext`, второй копии header/burger/footer нет.
 - Auth dialog — singleton native `<dialog>` на `document.body` (D-016), не страница роутера.
 
 ## Деплой

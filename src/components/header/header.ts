@@ -2,26 +2,33 @@ import logoMarkUrl from '../../assets/icons/logo-mark.png';
 import burgerIconUrl from '../../assets/icons/burger.svg';
 import closeIconUrl from '../../assets/icons/close.svg';
 import {
+  bindInAppNavigation,
+  destinationForLabel,
+  isCurrentNavLabel,
+  type ChromeContext,
+} from '../../app/navigation';
+import {
   createBurgerMenu,
   type BurgerMenuController,
 } from '../burger-menu/burger-menu';
 import { openAuthDialog } from '../dialogs/auth-dialog/auth-dialog';
+import { releaseOnDisconnect } from '../../utils/dom';
 import './header.scss';
 
-const NAV_LINKS: ReadonlyArray<{ label: string; isCurrent: boolean }> = [
-  { label: 'Home', isCurrent: true },
-  { label: 'Library', isCurrent: false },
-  { label: 'Tournaments', isCurrent: false },
-  { label: 'Community', isCurrent: false },
+const NAV_LINKS: ReadonlyArray<string> = [
+  'Home',
+  'Library',
+  'Tournaments',
+  'Community',
 ];
 
 const DESKTOP_MEDIA_QUERY = '(min-width: 1920px)';
 
-function createBrand(): HTMLElement {
+function createBrand(context: ChromeContext): HTMLElement {
   const brand: HTMLAnchorElement = document.createElement('a');
   brand.className = 'header__brand';
-  brand.href = import.meta.env.BASE_URL;
   brand.setAttribute('aria-label', 'MiniGames home');
+  bindInAppNavigation(brand, 'home', context);
 
   const logo: HTMLImageElement = document.createElement('img');
   logo.className = 'header__logo';
@@ -38,7 +45,7 @@ function createBrand(): HTMLElement {
   return brand;
 }
 
-function createNav(): HTMLElement {
+function createNav(context: ChromeContext): HTMLElement {
   const nav: HTMLElement = document.createElement('nav');
   nav.className = 'header__nav';
   nav.setAttribute('aria-label', 'Primary');
@@ -46,18 +53,19 @@ function createNav(): HTMLElement {
   const list: HTMLUListElement = document.createElement('ul');
   list.className = 'header__nav-list';
 
-  for (const item of NAV_LINKS) {
+  for (const label of NAV_LINKS) {
     const listItem: HTMLLIElement = document.createElement('li');
     listItem.className = 'header__nav-item';
 
+    const isCurrent: boolean = isCurrentNavLabel(label, context.page);
     const link: HTMLAnchorElement = document.createElement('a');
-    link.className = item.isCurrent
+    link.className = isCurrent
       ? 'header__nav-link header__nav-link--current'
       : 'header__nav-link';
-    link.href = import.meta.env.BASE_URL;
-    link.textContent = item.label;
+    link.textContent = label;
+    bindInAppNavigation(link, destinationForLabel(label), context);
 
-    if (item.isCurrent) {
+    if (isCurrent) {
       link.setAttribute('aria-current', 'page');
     }
 
@@ -148,7 +156,7 @@ function bindBurgerButtonState(
   };
 }
 
-export function createHeader(): HTMLElement {
+export function createHeader(context: ChromeContext): HTMLElement {
   const header: HTMLElement = document.createElement('header');
   header.className = 'header';
 
@@ -162,22 +170,28 @@ export function createHeader(): HTMLElement {
     createAuthButton('Sign Up', 'primary', 'register'),
   );
 
-  const menu: BurgerMenuController = createBurgerMenu();
+  const menu: BurgerMenuController = createBurgerMenu(context);
   menu.element.id = 'burger-menu';
 
   const burgerButton: HTMLButtonElement = createBurgerButton(menu);
   bindBurgerButtonState(burgerButton, menu);
 
-  actions.append(createNav(), buttons, burgerButton);
-  header.append(createBrand(), actions, menu.element);
-
   const desktopMedia: MediaQueryList =
     globalThis.matchMedia(DESKTOP_MEDIA_QUERY);
-  desktopMedia.addEventListener('change', (event: MediaQueryListEvent) => {
+
+  const onDesktopChange = (event: MediaQueryListEvent): void => {
     if (event.matches && menu.isOpen()) {
       menu.close();
     }
+  };
+
+  desktopMedia.addEventListener('change', onDesktopChange);
+  releaseOnDisconnect(header, () => {
+    desktopMedia.removeEventListener('change', onDesktopChange);
   });
+
+  actions.append(createNav(context), buttons, burgerButton);
+  header.append(createBrand(context), actions, menu.element);
 
   return header;
 }

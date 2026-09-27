@@ -225,3 +225,13 @@ Login и Registration — один chrome панели; Login и Create Account 
 - Почему: QA `feat/favicon-and-qa` FAIL: живой диалог не совпал с экспортами; пользователь велел переделать Login/Register
 
 Канон copy и структуры — `tmp/pixel-perfect/Login Dialog.png` и `Register Dialog.png`, не подчёркнутые табы предыдущего шага. Google / forgot / confirm / eye — только вёрстка. Иконки — SVG в `src/assets/icons/` по этим кадрам (Figma MCP 402, отдельных node-export нет).
+
+---
+
+## D-021: Story 2 — смена страницы в памяти
+
+- Status: Accepted
+- Date: 2026-09-25
+- Почему: Story 2 требует Home ↔ Library без перезагрузки; History API остаётся на Story 4 (D-006)
+
+`createRouter` хранит текущую страницу (`home` | `library`) и по `navigate` заново рисует корень. Header, burger и footer — те же модули; ссылка Library открывает Library, Home и ссылки без своей страницы открывают Home. Активный пункт (`--current`, `aria-current="page"`) совпадает с открытой страницей и в шапке, и в burger. Hash, `history.pushState` и deep link не используем.

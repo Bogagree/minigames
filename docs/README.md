@@ -39,6 +39,7 @@ MiniGames ведётся по **SDD**: требования и решения ж
 Канонические критерии баллов — у RS School. Локальные спеки их резюмируют и фиксируют _наши_ договорённости по реализации:
 
 - [Story 1](https://github.com/rolling-scopes-school/qualifying-stage/blob/main/tasks/minigames/story-1.md)
+- [Story 2](https://github.com/rolling-scopes-school/qualifying-stage/blob/main/tasks/minigames/story-2.md)
 - [Overview](https://github.com/rolling-scopes-school/qualifying-stage/blob/main/tasks/minigames/README.md)
 - [Common project requirements](https://github.com/rolling-scopes-school/qualifying-stage/blob/main/tasks/minigames/common-project-requirements.md)
 - [Common layout requirements](https://github.com/rolling-scopes-school/qualifying-stage/blob/main/tasks/minigames/common-layout-requirements.md)

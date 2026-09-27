@@ -4,9 +4,13 @@ import chatIconUrl from '../../assets/icons/chat.svg';
 import rssIconUrl from '../../assets/icons/rss-feed.svg';
 import githubIconUrl from '../../assets/icons/github-icon.svg';
 import rsLogoUrl from '../../assets/icons/rs-logo-container.svg';
+import {
+  bindInAppNavigation,
+  destinationForLabel,
+  isCurrentNavLabel,
+  type ChromeContext,
+} from '../../app/navigation';
 import './footer.scss';
-
-const HOME_HREF = import.meta.env.BASE_URL;
 const RS_SCHOOL_HREF = 'https://rs.school/';
 const GITHUB_HREF = 'https://github.com/Bogagree';
 const GITHUB_LABEL = '@Bogagree';
@@ -37,15 +41,16 @@ const SOCIAL_LINKS: ReadonlyArray<{
   { label: 'RSS feed', iconUrl: rssIconUrl },
 ];
 
-function createHomeLink(
+function createInAppLink(
   label: string,
   className: string,
-  isCurrent = false,
+  context: ChromeContext,
+  isCurrent: boolean,
 ): HTMLAnchorElement {
   const link: HTMLAnchorElement = document.createElement('a');
   link.className = className;
-  link.href = HOME_HREF;
   link.textContent = label;
+  bindInAppNavigation(link, destinationForLabel(label), context);
 
   if (isCurrent) {
     link.setAttribute('aria-current', 'page');
@@ -57,6 +62,7 @@ function createHomeLink(
 function createNavGroup(
   title: string,
   labels: ReadonlyArray<string>,
+  context: ChromeContext,
 ): HTMLElement {
   const nav: HTMLElement = document.createElement('nav');
   nav.className = 'footer__group';
@@ -73,10 +79,11 @@ function createNavGroup(
     const item: HTMLLIElement = document.createElement('li');
     item.className = 'footer__item';
     item.append(
-      createHomeLink(
+      createInAppLink(
         label,
         'footer__link',
-        title === 'Explore' && label === 'Home',
+        context,
+        title === 'Explore' && isCurrentNavLabel(label, context.page),
       ),
     );
     list.append(item);
@@ -86,11 +93,11 @@ function createNavGroup(
   return nav;
 }
 
-function createBrand(): HTMLElement {
+function createBrand(context: ChromeContext): HTMLElement {
   const brand: HTMLAnchorElement = document.createElement('a');
   brand.className = 'footer__brand';
-  brand.href = HOME_HREF;
   brand.setAttribute('aria-label', 'MiniGames home');
+  bindInAppNavigation(brand, 'home', context);
 
   const logo: HTMLImageElement = document.createElement('img');
   logo.className = 'footer__logo';
@@ -107,7 +114,7 @@ function createBrand(): HTMLElement {
   return brand;
 }
 
-function createSocials(): HTMLElement {
+function createSocials(context: ChromeContext): HTMLElement {
   const group: HTMLDivElement = document.createElement('div');
   group.className = 'footer__group footer__group--community';
 
@@ -126,8 +133,8 @@ function createSocials(): HTMLElement {
 
     const link: HTMLAnchorElement = document.createElement('a');
     link.className = 'footer__social';
-    link.href = HOME_HREF;
     link.setAttribute('aria-label', social.label);
+    bindInAppNavigation(link, 'home', context);
 
     const icon: HTMLImageElement = document.createElement('img');
     icon.className = 'footer__social-icon';
@@ -195,7 +202,7 @@ function createGithubLink(): HTMLAnchorElement {
   return link;
 }
 
-export function createFooter(): HTMLElement {
+export function createFooter(context: ChromeContext): HTMLElement {
   const footer: HTMLElement = document.createElement('footer');
   footer.className = 'footer';
 
@@ -209,14 +216,14 @@ export function createFooter(): HTMLElement {
   tagline.className = 'footer__tagline';
   tagline.textContent = TAGLINE;
 
-  brandBlock.append(createBrand(), tagline);
+  brandBlock.append(createBrand(context), tagline);
 
   const groups: HTMLDivElement = document.createElement('div');
   groups.className = 'footer__nav-groups';
   groups.append(
-    createNavGroup('Explore', EXPLORE_LINKS),
-    createNavGroup('Company', COMPANY_LINKS),
-    createSocials(),
+    createNavGroup('Explore', EXPLORE_LINKS, context),
+    createNavGroup('Company', COMPANY_LINKS, context),
+    createSocials(context),
   );
 
   top.append(brandBlock, groups);

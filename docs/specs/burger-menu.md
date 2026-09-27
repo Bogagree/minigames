@@ -7,7 +7,11 @@
 - Guest-вариант полноэкранного mobile menu (≤ desktop breakpoint; burger виден до 1920).
 - Открытие по burger; плавная анимация open/close без горизонтального скролла.
 - Burger → close (×) с анимацией иконки; close внутри панели; закрытие по `Esc`.
-- Nav-ссылки → Home (`BASE_URL`); Log In / Sign Up → [Auth dialog](./auth-dialog.md); меню закрывается.
+- Home открывает Home; Library открывает Library; Tournaments и Community открывают Home. Переход без перезагрузки и без History API (D-021). Меню закрывается.
+- Текущий пункт: `burger-menu__nav-link--current` и `aria-current="page"`. Совпадает с открытой страницей и с header.
+- Логотип открывает Home и закрывает меню.
+- Log In / Sign Up → [Auth dialog](./auth-dialog.md); меню закрывается.
+- Тот же burger на [Library](./library.md).
 
 ## Out of scope
 
